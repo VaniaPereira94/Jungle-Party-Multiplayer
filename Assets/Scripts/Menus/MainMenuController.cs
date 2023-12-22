@@ -17,6 +17,8 @@ public class MainMenuController : MonoBehaviour
     // referência para o controlador de jogo
     private GameController _game;
 
+    public string MultiplayerGameScene;
+
 
     /* MÉTODOS */
 
@@ -31,6 +33,11 @@ public class MainMenuController : MonoBehaviour
 
         string sceneName = "Level" + _game.CurrentLevelID + "Scene";
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void OnButtonClick()
+    {
+        SceneManager.LoadScene(MultiplayerGameScene);
     }
 
     public void OpenControls()

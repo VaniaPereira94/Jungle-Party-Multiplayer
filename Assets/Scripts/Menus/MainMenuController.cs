@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 /// <summary>
 /// Trata das interações do utilizador com o menu principal.
 /// </summary>
@@ -27,7 +26,7 @@ public class MainMenuController : MonoBehaviour
         _game = GameController.Instance;
     }
 
-    public void Play()
+    public void PlayLocal()
     {
         _game.InitiateGame();
 
@@ -35,7 +34,7 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void OnButtonClick()
+    public void PlayMultiplayer()
     {
         SceneManager.LoadScene(MultiplayerGameScene);
     }

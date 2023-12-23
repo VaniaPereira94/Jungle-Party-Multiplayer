@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 364119705}
   - component: {fileID: 364119704}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 548320094}
   - component: {fileID: 548320093}
   m_Layer: 5
-  m_Name: ButtonMultiplayer
+  m_Name: ButtonPlayMultiplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,7 +624,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1211962487}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: PlayMultiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 644121768}
   - component: {fileID: 644121767}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: DirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1691,7 +1691,7 @@ GameObject:
   - component: {fileID: 1211962488}
   - component: {fileID: 1211962487}
   m_Layer: 0
-  m_Name: MenuController
+  m_Name: MainMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1712,7 +1712,7 @@ MonoBehaviour:
   _mainMenu: {fileID: 1514648989}
   _controls: {fileID: 1198570638}
   _credits: {fileID: 2038884929}
-  MultiplayerGameScene: MultiplayerGameScene
+  MultiplayerGameScene: MultiplayerMenuScene
 --- !u!4 &1211962488
 Transform:
   m_ObjectHideFlags: 0
@@ -2452,7 +2452,7 @@ GameObject:
   - component: {fileID: 1938503969}
   - component: {fileID: 1938503968}
   m_Layer: 5
-  m_Name: ButtonPlay
+  m_Name: ButtonPlayLocal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2522,8 +2522,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1211962487}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: Play
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: PlayLocal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

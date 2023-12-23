@@ -117,7 +117,7 @@ public class FinalSceneController : MonoBehaviour
 
         _gameController.CurrentLevelID = 1;
 
-        string sceneName = "MenuScene";
+        string sceneName = "MainMenuScene";
         SceneManager.LoadScene(sceneName);
     }
 }

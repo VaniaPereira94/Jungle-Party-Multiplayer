@@ -1,23 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Services.Core;
 using UnityEngine;
 
-public class MultiplayerMenuManager : MonoBehaviour
+/// <summary>
+/// Trata das interações do utilizador com o menu de multiplayer.
+/// </summary>
+public class MultiplayerMenuController : MonoBehaviour
 {
+    /* ATRIBUTOS PRIVADOS */
+
+    // referências para objetos de UI
+    [Header("UI")]
     [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _createLobby;
     [SerializeField] private GameObject _score;
     [SerializeField] private GameObject _scorePublic;
     [SerializeField] private GameObject _scorePrivate;
 
-    // referência para o controlador de jogo
-    private GameController _game;
+    // referências para outros controladores
+    [Header("Controllers")]
+    [SerializeField] private AuthenticationController _authenticationController;
+    //[SerializeField] private GameController _gameController;
+    //[SerializeField] private LobbyController _lobbyController;
 
-    // Start is called before the first frame update
-    void Start()
+
+    /* MÉTODOS */
+
+    private void Start()
     {
+        _authenticationController = AuthenticationController.Instance;
+        //_lobbyController = LobbyController.Instance;
+        //_gameController = GameController.Instance;
 
-        _game = GameController.Instance;
+        InitializeMultiplayer();
+    }
+
+    private async void InitializeMultiplayer()
+    {
+        await _authenticationController.Connect();
+        await _authenticationController.AuthenticateAnonymous();
     }
 
     public void OpenCreateLobby()
@@ -49,16 +69,19 @@ public class MultiplayerMenuManager : MonoBehaviour
         _score.SetActive(false);
         _scorePublic.SetActive(true);
     }
+
     public void CloseScorePublic()
     {
         _score.SetActive(true);
         _scorePublic.SetActive(false);
     }
+
     public void OpenScorePrivate()
     {
         _score.SetActive(false);
         _scorePrivate.SetActive(true);
     }
+
     public void CloseScorePrivate()
     {
         _score.SetActive(true);

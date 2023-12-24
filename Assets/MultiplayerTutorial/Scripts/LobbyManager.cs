@@ -31,7 +31,6 @@ public class LobbyManager : MonoBehaviour
         public List<Lobby> lobbyList;
     }
 
-
     public enum GameMode
     {
         CaptureTheFlag,

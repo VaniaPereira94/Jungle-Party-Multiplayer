@@ -1,11 +1,18 @@
-using System.Threading.Tasks;
+using UnityEngine;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using UnityEngine;
+using System.Threading.Tasks;
 
-public class AuthenticationController : MonoBehaviour
+public class AuthController : MonoBehaviour
 {
-    public static AuthenticationController Instance { get; private set; }
+    /* ATRIBUTOS E PROPRIEDADES */
+
+    public static AuthController Instance { get; private set; }
+
+    public string CurrentPlayerId { get; set; }
+
+
+    /* MÉTODOS */
 
     private void Awake()
     {
@@ -17,6 +24,18 @@ public class AuthenticationController : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
+
+            // ao usar um clone do projeto com o package ParrelSync,
+            // é necessário mudar de perfil de autenticação,
+            // para forçar o clone a entrar com um utilizador diferente
+#if UNITY_EDITOR
+            if (ParrelSync.ClonesManager.IsClone())
+            {
+                string customArgument = ParrelSync.ClonesManager.GetArgument();
+                AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
+            }
+#endif
+
             Debug.Log("Utilizador conectado com sucesso!");
         }
         catch (AuthenticationException exception)
@@ -34,7 +53,8 @@ public class AuthenticationController : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Debug.Log("Utilizador anónimo autenticado com sucesso!");
+            CurrentPlayerId = AuthenticationService.Instance.PlayerId;
+            Debug.Log("Utilizador anónimo autenticado com sucesso!" + " Player ID: " + CurrentPlayerId);
         }
         catch (AuthenticationException exception)
         {

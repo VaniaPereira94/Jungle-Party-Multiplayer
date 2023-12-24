@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
@@ -7,6 +8,8 @@ using UnityEngine;
 
 public class LobbyController : MonoBehaviour
 {
+    /* ATRIBUTOS E PROPRIEDADES */
+
     public static LobbyController Instance { get; private set; }
 
     private Lobby _hostLobby;
@@ -15,26 +18,26 @@ public class LobbyController : MonoBehaviour
     private float _heartbeatTimer;
     private float _lobbyUpdateTimer;
 
+    private const int _MAX_PLAYERS_IN_LOOBY = 2;
     private string _playerName;
+
+
+    /* MÉTODOS */
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private async void Start()
+    private void Start()
     {
-        await UnityServices.InitializeAsync();
+        //_playerName = "CodeMonkey" + UnityEngine.Random.Range(10, 99);
+        //Debug.Log("Current player name:" + _playerName);
+    }
 
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-        };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-        _playerName = "CodeMonkey" + UnityEngine.Random.Range(10, 99);
-        Debug.Log("Current player name:" + _playerName);
+    public void GetPlayerId(string playerId)
+    {
+        Debug.Log("Player ID: " + playerId);
     }
 
     private void Update()
@@ -43,32 +46,45 @@ public class LobbyController : MonoBehaviour
         HandleLobbyPollForUpdates();
     }
 
-    public async void CreatePublicLobby()
+    public async Task CreatePrivateLobby(string lobbyName)
     {
         try
         {
-            string lobbyName = "MyLobby";
-            int maxPlayers = 2;
+            CreateLobbyOptions options = new CreateLobbyOptions();
+            options.IsPrivate = true;
+            //options.Player = GetPlayer();
 
-            CreateLobbyOptions options = new CreateLobbyOptions
-            {
-                IsPrivate = false,
-                Player = GetPlayer(),
-                Data = new Dictionary<string, DataObject>
-                {
-                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, "CaptureTheFlag") },
-                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, "Map1") }
-                }
-            };
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
 
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            //ListPlayersOfLobby(lobby);
+
+            _hostLobby = lobby;
+            //_joinedLobby = _hostLobby;
+
+            Debug.Log("Sala privada criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+        }
+    }
+
+    public async Task CreatePublicLobby(string lobbyName)
+    {
+        try
+        {
+            CreateLobbyOptions options = new CreateLobbyOptions();
+            options.IsPrivate = false;
+            options.Player = GetPlayer();
+
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
 
             ListPlayersOfLobby(lobby);
 
             _hostLobby = lobby;
-            _joinedLobby = _hostLobby;
+            //_joinedLobby = _hostLobby;
 
-            Debug.Log("Created public lobby! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
+            Debug.Log("Sala pública criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
         }
         catch (LobbyServiceException exception)
         {
@@ -76,78 +92,15 @@ public class LobbyController : MonoBehaviour
         }
     }
 
-    public async void CreatePrivateLobby()
+    public async Task JoinPrivateLobby(string lobbyCode)
     {
         try
         {
-            //Debug.Log("Created private lobby! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
 
-    public async void ListLobbies()
-    {
-        try
-        {
-            // filtros para ordenar a lista de lobbies
-            QueryLobbiesOptions options = new QueryLobbiesOptions
-            {
-                Count = 25,
-                Filters = new List<QueryFilter>
-                {
-                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT),
-                },
-                Order = new List<QueryOrder>
-                {
-                    new QueryOrder(false,QueryOrder.FieldOptions.Created)
-                }
-            };
-
-            QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
-
-            Debug.Log("Lobbies found: " + response.Results.Count);
-
-            foreach (Lobby lobby in response.Results)
-            {
-                Debug.Log(lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.Data["GameMode"].Value);
-            }
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
-
-    public async void JoinPublicLobby(string lobbyCode)
-    {
-        try
-        {
-            await LobbyService.Instance.QuickJoinLobbyAsync();
-
-            Debug.Log("Lobby public joined");
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
-
-    public async void JoinPrivateLobby(string lobbyCode)
-    {
-        try
-        {
-            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
-            {
-                Player = GetPlayer()
-            };
-
-            Lobby lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
             _joinedLobby = lobby;
 
-            Debug.Log("Lobby private joined: " + lobbyCode);
+            Debug.Log("Entrou na sala privada!");
 
             ListPlayersOfLobby(_joinedLobby);
         }
@@ -157,13 +110,64 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    public async Task JoinPublicLobby(string lobbyCode)
+    {
+        try
+        {
+            //JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
+            //{
+            //    Player = GetPlayer()
+            //};
+
+            await LobbyService.Instance.QuickJoinLobbyAsync();
+
+            Debug.Log("Entrou na sala pública!");
+
+            ListPlayersOfLobby(_joinedLobby);
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+        }
+    }
+
+    public async Task ListPublicLobbies()
+    {
+        try
+        {
+            // filtros para a procura de lobbies
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Filters = new List<QueryFilter>()
+            {
+                new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT),
+            };
+            options.Order = new List<QueryOrder>()
+            {
+                new QueryOrder(false,QueryOrder.FieldOptions.Created)
+            };
+
+            QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
+
+            Debug.Log("Salas encontradas: " + response.Results.Count);
+
+            foreach (Lobby lobby in response.Results)
+            {
+                Debug.Log(lobby.Name + " - " + lobby.MaxPlayers);
+            }
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+        }
+    }
+
     public void ListPlayersOfLobby(Lobby lobby)
     {
-        Debug.Log("Players in lobby: " + lobby.Name + " - " + lobby.Players.Count + " - " + lobby.Data["GameMode"].Value + " - " + lobby.Data["Map"].Value);
+        Debug.Log("Players in sala: " + lobby.Name + " - " + lobby.Players.Count);
 
         foreach (Player player in lobby.Players)
         {
-            Debug.Log("Player: " + player.Id + " - " + player.Data["PlayerName"].Value);
+            Debug.Log("Player: " + player.Id);
         }
     }
 

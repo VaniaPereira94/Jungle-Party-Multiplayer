@@ -18,6 +18,7 @@ public class MultiplayerMenuController : MonoBehaviour
     [SerializeField] private GameObject _leaderboard;
     [SerializeField] private GameObject _scorePublic;
     [SerializeField] private GameObject _scorePrivate;
+    [SerializeField] private GameObject _authentication;
 
     // referências para outros controladores
     [Header("Controllers")]
@@ -128,4 +129,16 @@ public class MultiplayerMenuController : MonoBehaviour
         _leaderboard.SetActive(true);
         _scorePublic.SetActive(false);
     }
+
+    public void OpenAuthentication()
+    {
+        _joinLobby.SetActive(false);
+        _authentication.SetActive(true);
+    }
+    public void CloseAuthentication()
+    {
+        _joinLobby.SetActive(true);
+        _authentication.SetActive(false);
+    }
+
 }

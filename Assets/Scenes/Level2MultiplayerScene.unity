@@ -697,7 +697,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1431884288}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Level2Controller, Assembly-CSharp
         m_MethodName: InitAfterIntro
         m_Mode: 1
@@ -2736,7 +2736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1431884288}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Level2Controller, Assembly-CSharp
         m_MethodName: FinishLevel
         m_Mode: 1
@@ -3134,34 +3134,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1431884289}
-  - component: {fileID: 1431884288}
   - component: {fileID: 1431884291}
   - component: {fileID: 1431884290}
   m_Layer: 0
-  m_Name: Level2Controller
+  m_Name: Level2MultiplayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1431884288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431884287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a06085512b20e3418839631a66945c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _apple: {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
-  _scoreController: {fileID: 1241727150}
-  _introPanel: {fileID: 514900651}
-  _buttonPause: {fileID: 143717836}
-  _finishedLevelPanel: {fileID: 229710538}
-  _finishedLevelDescription: {fileID: 1841477151}
 --- !u!4 &1431884289
 Transform:
   m_ObjectHideFlags: 0
@@ -4997,13 +4978,13 @@ SceneRoots:
   m_Roots:
   - {fileID: 1048526264}
   - {fileID: 1123456139}
-  - {fileID: 26574856}
   - {fileID: 890576842}
   - {fileID: 1431884289}
   - {fileID: 1498130015}
   - {fileID: 1241727151}
   - {fileID: 272519056}
   - {fileID: 2024583855}
+  - {fileID: 26574856}
   - {fileID: 752357172}
   - {fileID: 1908759812}
   - {fileID: 1698417999}

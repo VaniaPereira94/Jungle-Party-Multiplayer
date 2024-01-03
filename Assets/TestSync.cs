@@ -44,7 +44,7 @@ public class TestSync : NetworkBehaviour
     [ServerRpc]
     public void OnStateChangedServerRpc(int newScore)
     {
-        score.Value = newScore;
+        score.Value += newScore;
         Debug.Log("Valor local: " + score.Value);
     }
 

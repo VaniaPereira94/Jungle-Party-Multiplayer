@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private float _halfSpeed;
     private float _doubleSpeed;
 
+
     /* PROPRIEDADES PÚBLICAS */
 
     public int PlayerID

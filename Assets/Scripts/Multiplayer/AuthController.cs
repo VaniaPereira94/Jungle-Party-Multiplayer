@@ -1,15 +1,15 @@
-using UnityEngine;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using System.Threading.Tasks;
+using UnityEngine;
 
 public class AuthController : MonoBehaviour
 {
-    /* ATRIBUTOS E PROPRIEDADES */
+    /* PROPRIEDADES */
 
     public static AuthController Instance { get; private set; }
 
-    public string CurrentPlayerId { get; set; }
+    public string CurrentPlayerId { get; private set; }
 
 
     /* MÉTODOS */

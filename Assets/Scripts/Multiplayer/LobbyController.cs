@@ -1,16 +1,43 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
-using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using UnityEngine;
+
+public class MultiplayerGame
+{
+
+}
+
+public class MultiplayerLobby
+{
+    public string LobbyCode { get; set; }
+    public bool IsPrivate { get; set; }
+    public MultiplayerPlayer PlayerOwner { get; set; }
+    public MultiplayerPlayer PlayerGuest { get; set; }
+}
+
+public class MultiplayerPlayer
+{
+    public string PlayerCode { get; set; }
+    public string Name { get; set; }
+    public string Score { get; set; }
+}
 
 public class LobbyController : MonoBehaviour
 {
     /* ATRIBUTOS E PROPRIEDADES */
 
     public static LobbyController Instance { get; private set; }
+
+    private List<Lobby> _privateLobbies = new();
+    private List<Lobby> _publicLobbies = new();
 
     private Lobby _hostLobby;
     private Lobby _joinedLobby;
@@ -56,9 +83,11 @@ public class LobbyController : MonoBehaviour
 
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
 
+            _privateLobbies.Add(lobby);
+
             //ListPlayersOfLobby(lobby);
 
-            _hostLobby = lobby;
+            //_hostLobby = lobby;
             //_joinedLobby = _hostLobby;
 
             Debug.Log("Sala privada criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
@@ -79,10 +108,12 @@ public class LobbyController : MonoBehaviour
 
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
 
-            ListPlayersOfLobby(lobby);
+            _publicLobbies.Add(lobby);
 
-            _hostLobby = lobby;
+            //_hostLobby = lobby;
             //_joinedLobby = _hostLobby;
+
+            ListPlayersOfLobby(lobby);
 
             Debug.Log("Sala pública criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
         }
@@ -119,7 +150,7 @@ public class LobbyController : MonoBehaviour
             //    Player = GetPlayer()
             //};
 
-            await LobbyService.Instance.QuickJoinLobbyAsync();
+            Lobby lobby = await LobbyService.Instance.QuickJoinLobbyAsync();
 
             Debug.Log("Entrou na sala pública!");
 
@@ -131,11 +162,56 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    public async Task<string> CreateGame()
+    {
+        try
+        {
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+
+            Debug.Log("Criou jogo! Código do jogo: " + joinCode);
+
+            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+
+            NetworkManager.Singleton.StartHost();
+
+            return joinCode;
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+            return null;
+        }
+    }
+
+    public async Task<bool> PlayGame(string relayCode)
+    {
+        try
+        {
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(relayCode);
+
+            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+
+            Debug.Log("Entrou no jogo! Código do jogo: " + relayCode);
+            return true;
+        }
+        catch (LobbyServiceException exception)
+        {
+            MultiplayerMenuController.ShowError(exception.Message);
+            return false;
+        }
+    }
+
     public async Task ListPublicLobbies()
     {
         try
         {
-            // filtros para a procura de lobbies
+            // filtros para a procura e ordem das lobbies
             QueryLobbiesOptions options = new QueryLobbiesOptions();
             options.Filters = new List<QueryFilter>()
             {
@@ -143,16 +219,15 @@ public class LobbyController : MonoBehaviour
             };
             options.Order = new List<QueryOrder>()
             {
-                new QueryOrder(false,QueryOrder.FieldOptions.Created)
+                new QueryOrder(false, QueryOrder.FieldOptions.Created)
             };
 
             QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
 
             Debug.Log("Salas encontradas: " + response.Results.Count);
-
             foreach (Lobby lobby in response.Results)
             {
-                Debug.Log(lobby.Name + " - " + lobby.MaxPlayers);
+                Debug.Log("Sala: " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
             }
         }
         catch (LobbyServiceException exception)
@@ -283,4 +358,3 @@ public class LobbyController : MonoBehaviour
         }
     }
 }
-

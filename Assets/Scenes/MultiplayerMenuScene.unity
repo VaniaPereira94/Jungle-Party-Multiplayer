@@ -325,54 +325,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &59546540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 59546542}
-  - component: {fileID: 59546541}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &59546541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 59546540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a919ec59148465540b762637741be94a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player1Prefab: {fileID: 2457192430609160820, guid: bcf64fd514cf6904cb6b14f63b341284, type: 3}
-  _player2Prefab: {fileID: 6843642465392651978, guid: fd80d993d5e4b864fa75915bed0ffdcd, type: 3}
-  _currentLevelID: 1
-  _numberOfLevels: 4
---- !u!4 &59546542
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 59546540}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.471397, y: 6.5774, z: 69.367744}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &78342088
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +471,7 @@ GameObject:
   - component: {fileID: 120555479}
   - component: {fileID: 120555478}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1262,7 +1214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 305543063}
   m_Layer: 5
-  m_Name: ScorePublicLobby
+  m_Name: PublicScoreLobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1427,50 +1379,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318254375}
   m_CullTransparentMesh: 1
---- !u!1 &327873463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 327873465}
-  - component: {fileID: 327873464}
-  m_Layer: 0
-  m_Name: LobbyController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &327873464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327873463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b932571434ed2d245849496b4df01209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &327873465
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327873463}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &343195598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,7 +2121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 584086535}
   m_Layer: 5
-  m_Name: Leaderboard
+  m_Name: LeaderboardPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3678,7 +3586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 265, y: 0}
+  m_AnchoredPosition: {x: 220, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969096100
@@ -4136,7 +4044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1026960022}
   m_Layer: 5
-  m_Name: ScorePrivateLobby
+  m_Name: PrivateScoreLobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4594,7 +4502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 171.33472}
+  m_AnchoredPosition: {x: 0, y: 155.99998}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113841251
@@ -4897,7 +4805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198570639}
   m_Layer: 5
-  m_Name: CreateLobby
+  m_Name: CreateLobbyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4971,19 +4879,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7199878fc77922244ab6713d131e62a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 1514648989}
-  _createLobby: {fileID: 1198570638}
-  _joinLobby: {fileID: 2075428162}
-  _privateLobbyCode: {fileID: 343195600}
-  _publicLobbyCode: {fileID: 1430327015}
-  _gameLobby: {fileID: 1428068170}
-  _leaderboard: {fileID: 584086534}
-  _scorePublic: {fileID: 305543062}
-  _scorePrivate: {fileID: 1026960021}
-  _authentication: {fileID: 1887006044}
-  _authController: {fileID: 2014027734}
-  _lobbyController: {fileID: 327873464}
-  _gameCode: {fileID: 1798556269}
+  _menuPanel: {fileID: 1514648989}
+  _privateLobbyCodeInput: {fileID: 1798556269}
+  _publicLobbyCodeInput: {fileID: 1430327015}
+  _createLobbyPanel: {fileID: 1198570638}
+  _joinLobbyPanel: {fileID: 2075428162}
+  _joinPrivateLobbyPopup: {fileID: 1887006044}
+  _gameLobbyPanel: {fileID: 1428068170}
+  _gameLobbyCodeText: {fileID: 1537076863}
+  _leaderboardPanel: {fileID: 584086534}
+  _privateScorePanel: {fileID: 1026960021}
+  _publicScorePanel: {fileID: 305543062}
 --- !u!114 &1211962490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5282,7 +5188,7 @@ GameObject:
   - component: {fileID: 1260352720}
   - component: {fileID: 1260352719}
   m_Layer: 5
-  m_Name: Players
+  m_Name: Subtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5304,7 +5210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: -300, y: 186}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1260352719
@@ -5338,8 +5244,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5623,7 +5529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1428068171}
   m_Layer: 5
-  m_Name: GameLobby
+  m_Name: GameLobbyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5642,12 +5548,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1595699241}
-  - {fileID: 1215278835}
   - {fileID: 1919468248}
-  - {fileID: 1537076862}
   - {fileID: 1260352718}
-  - {fileID: 1599596321}
+  - {fileID: 1537076862}
   - {fileID: 1113841250}
+  - {fileID: 1599596321}
+  - {fileID: 1215278835}
   m_Father: {fileID: 1903694378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5668,7 +5574,7 @@ GameObject:
   - component: {fileID: 1430327016}
   - component: {fileID: 1430327015}
   m_Layer: 5
-  m_Name: PublicLobbyCodeInputField (TMP) (1)
+  m_Name: PublicLobbyCodeInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5973,7 +5879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1514648990}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6147,7 +6053,7 @@ GameObject:
   - component: {fileID: 1537076864}
   - component: {fileID: 1537076863}
   m_Layer: 5
-  m_Name: LobbyCode
+  m_Name: LobbyCodeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6169,7 +6075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: 207}
+  m_AnchoredPosition: {x: 242, y: 193.99998}
   m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537076863
@@ -6192,7 +6098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Code: XXXXXX'
+  m_text: "C\xF3digo da sala: XXXXXX"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6226,7 +6132,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6855,8 +6761,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -35}
-  m_SizeDelta: {x: 600, y: 70}
+  m_AnchoredPosition: {x: 290, y: -35}
+  m_SizeDelta: {x: 580, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658714037
 MonoBehaviour:
@@ -7537,7 +7443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -223, y: 0}
+  m_AnchoredPosition: {x: -230, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1764333490
@@ -7938,7 +7844,7 @@ GameObject:
   - component: {fileID: 1798556270}
   - component: {fileID: 1798556269}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: PrivateLobbyCodeInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8244,7 +8150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887006045}
   m_Layer: 5
-  m_Name: Authentication
+  m_Name: JoinPrivateLobbyPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8394,12 +8300,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903694374}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43594d08603a90644b28825cee1b58f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lobbyCode: {fileID: 1537076863}
+  _lobbyCodeText: {fileID: 1537076863}
 --- !u!1 &1908313163
 GameObject:
   m_ObjectHideFlags: 0
@@ -8507,10 +8413,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1428068171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 282.5}
-  m_SizeDelta: {x: -1440, y: -565}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 280}
+  m_SizeDelta: {x: 560, y: 585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1919468249
 MonoBehaviour:
@@ -8532,7 +8438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Lobby
+  m_text: Sala
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8559,8 +8465,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9220,50 +9126,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993205277}
   m_CullTransparentMesh: 1
---- !u!1 &2014027733
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2014027735}
-  - component: {fileID: 2014027734}
-  m_Layer: 0
-  m_Name: AuthController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2014027734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014027733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd8ee0cd77c5d2144af6b91ef6ef4d06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2014027735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014027733}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2027016270
 GameObject:
   m_ObjectHideFlags: 0
@@ -9556,9 +9418,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075428163}
-  - component: {fileID: 2075428164}
   m_Layer: 5
-  m_Name: JoinLobby
+  m_Name: JoinLobbyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9589,18 +9450,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2000, y: 1150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2075428164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075428162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82085364d7c5d424694688eb33f86423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2077833519
 GameObject:
   m_ObjectHideFlags: 0
@@ -10026,8 +9875,5 @@ SceneRoots:
   - {fileID: 644121768}
   - {fileID: 1211962488}
   - {fileID: 978772538}
-  - {fileID: 2014027735}
-  - {fileID: 327873465}
-  - {fileID: 59546542}
   - {fileID: 1903694378}
   - {fileID: 35016720}

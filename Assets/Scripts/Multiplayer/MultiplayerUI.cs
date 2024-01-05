@@ -3,9 +3,9 @@ using TMPro;
 
 namespace Multiplayer
 {
-    public class MultiplayerUI : Singleton<MultiplayerUI>
+    public class MultiplayerUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _lobbyCode;
+        [SerializeField] private TextMeshProUGUI _lobbyCodeText;
 
         private void Start()
         {
@@ -14,7 +14,7 @@ namespace Multiplayer
 
         public void ShowLobbyCode()
         {
-            _lobbyCode.text = $"Code: {LobbyController.Instance.GetLobbyCode()}";
+            _lobbyCodeText.text = $"LobbyCode: {MultiplayerController.Instance.GetLobbyCode()}";
         }
     }
 }

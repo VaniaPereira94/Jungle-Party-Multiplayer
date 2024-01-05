@@ -3,66 +3,57 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 
-public class AuthController : MonoBehaviour
+namespace Multiplayer
 {
-    /* PROPRIEDADES */
-
-    public static AuthController Instance { get; private set; }
-
-    public string CurrentPlayerId { get; private set; }
-
-
-    /* MÉTODOS */
-
-    private void Awake()
+    public class AuthController : Singleton<AuthController>
     {
-        Instance = this;
-    }
+        public string CurrentPlayerId { get; private set; }
 
-    public async Task Connect()
-    {
-        try
+        public async Task Connect()
         {
-            await UnityServices.InitializeAsync();
-
-            // ao usar um clone do projeto com o package ParrelSync,
-            // é necessário mudar de perfil de autenticação,
-            // para forçar o clone a entrar com um utilizador diferente
-#if UNITY_EDITOR
-            if (ParrelSync.ClonesManager.IsClone())
+            try
             {
-                string customArgument = ParrelSync.ClonesManager.GetArgument();
-                AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
-            }
+                await UnityServices.InitializeAsync();
+
+                // ao usar um clone do projeto com o package ParrelSync,
+                // é necessário mudar de perfil de autenticação,
+                // para forçar o clone a entrar com um utilizador diferente
+#if UNITY_EDITOR
+                if (ParrelSync.ClonesManager.IsClone())
+                {
+                    string customArgument = ParrelSync.ClonesManager.GetArgument();
+                    AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
+                }
 #endif
 
-            Debug.Log("Utilizador conectado com sucesso!");
+                Debug.Log("Utilizador conectado com sucesso!");
+            }
+            catch (AuthenticationException exception)
+            {
+                Debug.LogException(exception);
+            }
+            catch (RequestFailedException exception)
+            {
+                Debug.LogException(exception);
+            }
         }
-        catch (AuthenticationException exception)
-        {
-            Debug.LogException(exception);
-        }
-        catch (RequestFailedException exception)
-        {
-            Debug.LogException(exception);
-        }
-    }
 
-    public async Task AuthenticateAnonymous()
-    {
-        try
+        public async Task AuthenticateAnonymous()
         {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            CurrentPlayerId = AuthenticationService.Instance.PlayerId;
-            Debug.Log("Utilizador anónimo autenticado com sucesso!" + " Player ID: " + CurrentPlayerId);
-        }
-        catch (AuthenticationException exception)
-        {
-            Debug.LogException(exception);
-        }
-        catch (RequestFailedException exception)
-        {
-            Debug.LogException(exception);
+            try
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                CurrentPlayerId = AuthenticationService.Instance.PlayerId;
+                Debug.Log("Utilizador anónimo autenticado com sucesso!" + " Player ID: " + CurrentPlayerId);
+            }
+            catch (AuthenticationException exception)
+            {
+                Debug.LogException(exception);
+            }
+            catch (RequestFailedException exception)
+            {
+                Debug.LogException(exception);
+            }
         }
     }
 }

@@ -13,26 +13,6 @@ using UnityEngine;
 
 namespace Multiplayer
 {
-    public class MultiplayerGame
-    {
-
-    }
-
-    public class MultiplayerLobby
-    {
-        public string LobbyCode { get; set; }
-        public bool IsPrivate { get; set; }
-        public MultiplayerPlayer PlayerOwner { get; set; }
-        public MultiplayerPlayer PlayerGuest { get; set; }
-    }
-
-    public class MultiplayerPlayer
-    {
-        public string PlayerCode { get; set; }
-        public string Name { get; set; }
-        public string Score { get; set; }
-    }
-
     public class LobbyController : Singleton<LobbyController>
     {
         /* ATRIBUTOS E PROPRIEDADES */
@@ -40,7 +20,6 @@ namespace Multiplayer
         private List<Lobby> _privateLobbies = new();
         private List<Lobby> _publicLobbies = new();
 
-        private const int _MAX_PLAYERS_IN_LOOBY = 2;
         private string _playerName;
 
         private Lobby _hostLobby;
@@ -55,21 +34,21 @@ namespace Multiplayer
 
         /* MÉTODOS */
 
-        private void Start()
-        {
-            //_playerName = "CodeMonkey" + UnityEngine.Random.Range(10, 99);
-            //Debug.Log("Current player name:" + _playerName);
-        }
-
         public string GetLobbyCode()
         {
             return _hostLobby?.LobbyCode;
         }
 
-        private void Update()
+        public List<Dictionary<string, PlayerDataObject>> GetPlayersData()
         {
-            //HandleLobbyHeartbeat();
-            //HandleLobbyPollForUpdates();
+            List<Dictionary<string, PlayerDataObject>> playerData = new();
+
+            foreach (Player player in _hostLobby.Players)
+            {
+                playerData.Add(player.Data);
+            }
+
+            return playerData;
         }
 
         public async Task CreatePrivateLobby(string lobbyName)
@@ -80,7 +59,7 @@ namespace Multiplayer
                 options.IsPrivate = true;
                 //options.Player = GetPlayer();
 
-                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
+                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, options);
 
                 _privateLobbies.Add(lobby);
 
@@ -97,7 +76,7 @@ namespace Multiplayer
             }
         }
 
-        public async Task CreatePublicLobby(string lobbyName, Dictionary<string, string> data)
+        public async Task<bool> CreatePublicLobby(string lobbyName, int maxPlayers, Dictionary<string, string> data)
         {
             try
             {
@@ -108,23 +87,24 @@ namespace Multiplayer
                 options.IsPrivate = false;
                 options.Player = player;
 
-                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, _MAX_PLAYERS_IN_LOOBY, options);
+                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
 
                 _hostLobby = lobby;
 
                 _hearthbeatLobbyCoroutine = StartCoroutine(HearthbeatLobbyCorroutine(_hostLobby.Id, 6f));
                 _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_hostLobby.Id, 1f));
-                //_publicLobbies.Add(lobby);
 
                 //_joinedLobby = _hostLobby;
 
                 //ListPlayersOfLobby(lobby);
 
                 Debug.Log("Sala pública criada! " + _hostLobby.Id + " - " + _hostLobby.Name + " - " + _hostLobby.MaxPlayers + " - " + _hostLobby.LobbyCode);
+                return true;
             }
             catch (LobbyServiceException exception)
             {
                 Debug.LogError(exception.Message);
+                return false;
             }
         }
 
@@ -155,7 +135,6 @@ namespace Multiplayer
         {
             while (true)
             {
-                Debug.Log("Hearthbeat");
                 LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
                 yield return new WaitForSecondsRealtime(waitTimeSeconds);
             }
@@ -165,14 +144,14 @@ namespace Multiplayer
         {
             while (true)
             {
-                Debug.Log("Refresh");
                 Task<Lobby> task = LobbyService.Instance.GetLobbyAsync(lobbyId);
                 yield return new WaitUntil(() => task.IsCompleted);
-                Lobby newLobby = task.Result;
 
+                Lobby newLobby = task.Result;
                 if (newLobby.LastUpdated > _hostLobby.LastUpdated)
                 {
                     _hostLobby = newLobby;
+                    LobbyEvents.OnLobbyUpdated?.Invoke(newLobby);
                 }
 
                 yield return new WaitForSecondsRealtime(waitTimeSeconds);
@@ -197,7 +176,7 @@ namespace Multiplayer
             }
         }
 
-        public async Task JoinPublicLobby(string lobbyCode, Dictionary<string, string> playerData)
+        public async Task<bool> JoinPublicLobby(string lobbyCode, Dictionary<string, string> playerData)
         {
             try
             {
@@ -216,10 +195,12 @@ namespace Multiplayer
                 Debug.Log("Entrou na sala pública! - " + _hostLobby.LobbyCode);
 
                 //ListPlayersOfLobby(_joinedLobby);
+                return true;
             }
             catch (LobbyServiceException exception)
             {
                 Debug.LogError(exception.Message);
+                return false;
             }
         }
 
@@ -229,9 +210,9 @@ namespace Multiplayer
             {
                 Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
 
-                string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+                string gameCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-                Debug.Log("Criou jogo! Código do jogo: " + joinCode);
+                Debug.Log("Criou jogo! Código do jogo: " + gameCode);
 
                 RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
 
@@ -239,7 +220,7 @@ namespace Multiplayer
 
                 NetworkManager.Singleton.StartHost();
 
-                return joinCode;
+                return gameCode;
             }
             catch (LobbyServiceException exception)
             {
@@ -387,7 +368,6 @@ namespace Multiplayer
             try
             {
                 await LobbyService.Instance.RemovePlayerAsync(_joinLobby.Id, AuthenticationService.Instance.PlayerId);
-
             }
             catch (LobbyServiceException e)
             {
@@ -400,7 +380,6 @@ namespace Multiplayer
             try
             {
                 await LobbyService.Instance.RemovePlayerAsync(_joinLobby.Id, _joinLobby.Players[1].Id);
-
             }
             catch (LobbyServiceException e)
             {

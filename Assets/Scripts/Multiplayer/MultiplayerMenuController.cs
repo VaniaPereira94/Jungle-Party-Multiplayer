@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.Services.Authentication;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,38 +12,40 @@ namespace Multiplayer
     /// <summary>
     /// Trata das interações do utilizador com o menu de multiplayer.
     /// </summary>
-    public class MultiplayerMenuController : NetworkBehaviour
+    //public class MultiplayerMenuController : NetworkBehaviour
+    public class MultiplayerMenuController : MonoBehaviour
     {
         /* ATRIBUTOS */
 
         // referências para objetos de UI
-        [Header("UI")]
-        [SerializeField] private GameObject _menu;
-        [SerializeField] private GameObject _createLobby;
-        [SerializeField] private GameObject _joinLobby;
-        [SerializeField] private TMP_InputField _privateLobbyCode;
-        [SerializeField] private TMP_InputField _publicLobbyCode;
-        [SerializeField] private GameObject _gameLobby;
-        [SerializeField] private GameObject _leaderboard;
-        [SerializeField] private GameObject _scorePublic;
-        [SerializeField] private GameObject _scorePrivate;
-        [SerializeField] private GameObject _authentication;
+        [Header("UI - Menu")]
+        [SerializeField] private GameObject _menuPanel;
+        [SerializeField] private TMP_InputField _privateLobbyCodeInput;
+        [SerializeField] private TMP_InputField _publicLobbyCodeInput;
+
+        [Header("UI - Create Lobby")]
+        [SerializeField] private GameObject _createLobbyPanel;
+
+        [Header("UI - Join Lobby")]
+        [SerializeField] private GameObject _joinLobbyPanel;
+        [SerializeField] private GameObject _joinPrivateLobbyPopup;
+        [SerializeField] private GameObject _gameLobbyPanel;
+        [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
+
+        [Header("UI - Leaderboard")]
+        [SerializeField] private GameObject _leaderboardPanel;
+        [SerializeField] private GameObject _privateScorePanel;
+        [SerializeField] private GameObject _publicScorePanel;
 
         // referências para outros controladores
-        [Header("Controllers")]
-        [SerializeField] private AuthController _authController;
-        [SerializeField] private LobbyController _lobbyController;
+        //[Header("Controllers")]
         //[SerializeField] private GameController _gameController;
-
-        [SerializeField] private TMP_InputField _gameCode;
 
 
         /* MÉTODOS */
 
         private void Start()
         {
-            _authController = AuthController.Instance;
-            _lobbyController = LobbyController.Instance;
             //_gameController = GameController.Instance;
 
             InitializeMultiplayer();
@@ -49,89 +53,96 @@ namespace Multiplayer
 
         private async void InitializeMultiplayer()
         {
-            await _authController.Connect();
-            await _authController.AuthenticateAnonymous();
+            await AuthController.Instance.Connect();
+            await AuthController.Instance.AuthenticateAnonymous();
         }
 
         public void OpenCreateLobby()
         {
-            _menu.SetActive(false);
-            _createLobby.SetActive(true);
+            _menuPanel.SetActive(false);
+            _createLobbyPanel.SetActive(true);
         }
 
         public void CloseCreateLobby()
         {
-            _menu.SetActive(true);
-            _createLobby.SetActive(false);
+            _menuPanel.SetActive(true);
+            _createLobbyPanel.SetActive(false);
         }
 
         public async void CreatePrivateLobby()
         {
             string lobbyName = "abcde";
-            await _lobbyController.CreatePrivateLobby(lobbyName);
+            await LobbyController.Instance.CreatePrivateLobby(lobbyName);
             OpenGameLobby();
         }
 
         public async void CreatePublicLobby()
         {
-            string lobbyName = "lobby1";
-            Dictionary<string, string> playerData = new()
+            bool isSuccess = await MultiplayerController.Instance.CreatePublicLobby();
+
+            if (isSuccess)
             {
-                { "GameTag", "HostPlayer" }
-            };
+                string gameCode = await MultiplayerController.Instance.CreateGame();
 
-            await _lobbyController.CreatePublicLobby(lobbyName, playerData);
-
-            string a = await _lobbyController.CreateGame();
-            _gameCode.text = a;
-
-            MultiplayerUI.Instance.ShowLobbyCode();
-
-            OpenGameLobby();
+                if (gameCode != null)
+                {
+                    OpenGameLobby();
+                }
+            }
         }
 
-        public async void OpenJoinLobby()
+        public void OpenJoinLobby()
         {
-            _menu.SetActive(false);
-            _joinLobby.SetActive(true);
+            _menuPanel.SetActive(false);
+            _joinLobbyPanel.SetActive(true);
 
             //await _lobbyController.ListPublicLobbies();
         }
 
         public void CloseJoinLobby()
         {
-            _menu.SetActive(true);
-            _joinLobby.SetActive(false);
+            _menuPanel.SetActive(true);
+            _joinLobbyPanel.SetActive(false);
+        }
+
+        public void OpenAuthentication()
+        {
+            _joinLobbyPanel.SetActive(false);
+            _joinPrivateLobbyPopup.SetActive(true);
+        }
+
+        public void CloseAuthentication()
+        {
+            _joinLobbyPanel.SetActive(true);
+            _joinPrivateLobbyPopup.SetActive(false);
         }
 
         public async void JoinPrivateLobby()
         {
-            string lobbyCode = _privateLobbyCode.text;
-            await _lobbyController.JoinPrivateLobby(lobbyCode);
+            string lobbyCode = _privateLobbyCodeInput.text;
+            await LobbyController.Instance.JoinPrivateLobby(lobbyCode);
         }
 
         public async void JoinPublicLobby()
         {
-            string lobbyCode = _publicLobbyCode.text;
-            Dictionary<string, string> playerData = new()
+            string lobbyCode = _publicLobbyCodeInput.text;
+            bool isSuccess = await MultiplayerController.Instance.JoinPublicLobby(lobbyCode);
+
+            if (isSuccess)
             {
-                { "GameTag", "JoinPlayer" }
-            };
-
-            await _lobbyController.JoinPublicLobby(lobbyCode, playerData);
-        }
-
-        public void OpenLeaderboard()
-        {
-            _menu.SetActive(false);
-            _leaderboard.SetActive(true);
+                OpenGameLobby();
+                _gameLobbyCodeText.text = $"Código da sala: {MultiplayerController.Instance.GetLobbyCode()}";
+            }
         }
 
         public async void PlayGame()
         {
-            if (await _lobbyController.PlayGame(_gameCode.text))
+            string gameCode = _publicLobbyCodeInput.text;
+            bool isSuccess = await MultiplayerController.Instance.PlayGame(gameCode);
+
+            if (isSuccess)
             {
-                OpenGameLobby();
+                SceneManager.LoadSceneAsync("Level2MultiplayerScene");
             }
         }
 
@@ -140,51 +151,45 @@ namespace Multiplayer
             SceneManager.LoadSceneAsync("Level2MultiplayerScene");
         }
 
+        public void OpenLeaderboard()
+        {
+            _menuPanel.SetActive(false);
+            _leaderboardPanel.SetActive(true);
+        }
+
         public void OpenGameLobby()
         {
-            _gameLobby.SetActive(true);
+            _gameLobbyPanel.SetActive(true);
         }
 
         public void CloseLeaderboard()
         {
-            _menu.SetActive(true);
-            _leaderboard.SetActive(false);
+            _menuPanel.SetActive(true);
+            _leaderboardPanel.SetActive(false);
         }
 
         public void OpenScorePrivate()
         {
-            _leaderboard.SetActive(false);
-            _scorePrivate.SetActive(true);
+            _leaderboardPanel.SetActive(false);
+            _privateScorePanel.SetActive(true);
         }
 
         public void CloseScorePrivate()
         {
-            _leaderboard.SetActive(true);
-            _scorePrivate.SetActive(false);
+            _leaderboardPanel.SetActive(true);
+            _privateScorePanel.SetActive(false);
         }
 
         public void OpenScorePublic()
         {
-            _leaderboard.SetActive(false);
-            _scorePublic.SetActive(true);
+            _leaderboardPanel.SetActive(false);
+            _publicScorePanel.SetActive(true);
         }
 
         public void CloseScorePublic()
         {
-            _leaderboard.SetActive(true);
-            _scorePublic.SetActive(false);
-        }
-
-        public void OpenAuthentication()
-        {
-            _joinLobby.SetActive(false);
-            _authentication.SetActive(true);
-        }
-
-        public void CloseAuthentication()
-        {
-            _joinLobby.SetActive(true);
-            _authentication.SetActive(false);
+            _leaderboardPanel.SetActive(true);
+            _publicScorePanel.SetActive(false);
         }
 
         public static void ShowError(string message)

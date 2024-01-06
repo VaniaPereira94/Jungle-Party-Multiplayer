@@ -1,3 +1,5 @@
+using Multiplayer;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +9,7 @@ using UnityEngine.UI;
 /// Controla o nível 1.
 /// O nível consiste em uma partida de futebol com várias rondas.
 /// </summary>
-public class Level1Controller : MonoBehaviour
+public class Level1Controller : MonoBehaviour, ILevelController
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -62,13 +64,13 @@ public class Level1Controller : MonoBehaviour
 
     /* MÉTODOS DO MONOBEHAVIOUR */
 
-    void Start()
+    private void Start()
     {
         _gameController = GameController.Instance;
 
         // TEST: usar isto enquanto é testado apenas o nível atual (sem iniciar pelo menu)
-        //_gameController.GamePlayers = new();
-        //_gameController.InitiateGame();
+        _gameController.GamePlayers = new();
+        _gameController.InitiateGame();
 
         // armazenar dados de cada jogador neste nível,
         // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
@@ -89,7 +91,7 @@ public class Level1Controller : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    private void Update()
     {
         // quando está no intervalo entre rondas, ou seja o tempo está parado
         if (_timerController.IsOnPause())
@@ -192,7 +194,7 @@ public class Level1Controller : MonoBehaviour
     }
 
 
-    /* MÉTODOS DO LEVEL4CONTROLLER */
+    /* MÉTODOS DO LEVEL1CONTROLLER */
 
     /// <summary>
     /// É executado ao clicar no botão de iniciar, no painel de introdução do nível.
@@ -224,7 +226,7 @@ public class Level1Controller : MonoBehaviour
     {
         LevelPlayerModel levelPlayer1 = new(_gameController.GamePlayers[0].ID, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
         LevelPlayerModel levelPlayer2 = new(_gameController.GamePlayers[1].ID, 0, _player2Level1Prefab.transform.position, _player2Level1Prefab.transform.rotation);
-       
+
         _levelPlayers.Add(levelPlayer1);
         _levelPlayers.Add(levelPlayer2);
     }

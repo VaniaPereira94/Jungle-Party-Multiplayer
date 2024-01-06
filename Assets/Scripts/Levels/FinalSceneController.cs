@@ -31,7 +31,7 @@ public class FinalSceneController : MonoBehaviour
 
     /* MÉTODOS */
 
-    void Start()
+    private void Start()
     {
         _gameController = GameController.Instance;
 
@@ -56,7 +56,7 @@ public class FinalSceneController : MonoBehaviour
         _finishedGameDescription.GetComponent<Text>().text = finishedGameText;
     }
 
-    void CreatePlayersDataForLevel()
+    private void CreatePlayersDataForLevel()
     {
         foreach (GamePlayerModel gamePlayer in _gameController.GamePlayers)
         {
@@ -65,19 +65,19 @@ public class FinalSceneController : MonoBehaviour
         }
     }
 
-    void DisplayObjectInScene()
+    private void DisplayObjectInScene()
     {
         SpawnPlayers();
         AddActionToPlayers();
     }
 
-    void SpawnPlayers()
+    private void SpawnPlayers()
     {
         _levelPlayers[0].Object = Instantiate(_gameController.GamePlayers[0].Prefab);
         _levelPlayers[1].Object = Instantiate(_gameController.GamePlayers[1].Prefab);
     }
 
-    void AddActionToPlayers()
+    private void AddActionToPlayers()
     {
         // se empatarem
         if (_gameController.GamePlayers[0].GlobalScore == _gameController.GamePlayers[1].GlobalScore)

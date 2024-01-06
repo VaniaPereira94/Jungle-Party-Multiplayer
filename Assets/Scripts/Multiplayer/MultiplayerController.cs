@@ -3,16 +3,28 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 
+
 namespace Multiplayer
 {
-    public class MultiplayerController : Singleton<MultiplayerController>
+    public class MultiplayerController : SingletonMonoBehaviour<MultiplayerController>
     {
-        /* ATRIBUTOS */
+        /* ATRIBUTOS PRIVADOS */
 
         private const int _MAX_PLAYERS_IN_LOOBY = 2;
         private List<LobbyPlayerData> _lobbyPlayersDatas = new();
         private LobbyPlayerData _localLobbyPlayerData;
 
+
+        /* PROPRIEDADES PRIVADAS */
+
+        public bool IsHost
+        {
+            get
+            {
+                return _localLobbyPlayerData != null && _localLobbyPlayerData.Id == LobbyController.Instance.GetHostId();
+            }
+        }
+   
 
         /* MÉTODOS */
 
@@ -31,19 +43,32 @@ namespace Multiplayer
             return LobbyController.Instance.GetLobbyCode();
         }
 
+        public string GetGameCode()
+        {
+            return LobbyController.Instance.GetGameCode();
+        }
+
         public List<LobbyPlayerData> GetPlayers()
         {
             return _lobbyPlayersDatas;
+        }
+
+        public async Task<bool> SetPlayerReady()
+        {
+            _localLobbyPlayerData.IsReady = true;
+
+            bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize());
+            return isSuccess;
         }
 
         public async Task<bool> CreatePublicLobby()
         {
             string lobbyName = "Lobby";
 
-            LobbyPlayerData playerData = new();
-            playerData.Initialize(AuthenticationService.Instance.PlayerId, "HostPlayer");
+            _localLobbyPlayerData = new LobbyPlayerData();
+            _localLobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "HostPlayer");
 
-            bool isSuccess = await LobbyController.Instance.CreatePublicLobby(lobbyName, _MAX_PLAYERS_IN_LOOBY, playerData.Serialize());
+            bool isSuccess = await LobbyController.Instance.CreatePublicLobby(lobbyName, _MAX_PLAYERS_IN_LOOBY, _localLobbyPlayerData.Serialize());
             return isSuccess;
         }
 
@@ -55,10 +80,10 @@ namespace Multiplayer
 
         public async Task<bool> JoinPublicLobby(string lobbyCode)
         {
-            LobbyPlayerData playerData = new();
-            playerData.Initialize(AuthenticationService.Instance.PlayerId, "JoinPlayer");
+            _localLobbyPlayerData = new LobbyPlayerData();
+            _localLobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "JoinPlayer");
 
-            bool isSuccess = await LobbyController.Instance.JoinPublicLobby(lobbyCode, playerData.Serialize());
+            bool isSuccess = await LobbyController.Instance.JoinPublicLobby(lobbyCode, _localLobbyPlayerData.Serialize());
             return isSuccess;
         }
 
@@ -68,16 +93,23 @@ namespace Multiplayer
             return isSuccess;
         }
 
-
         private void OnLobbyUpdated(Lobby lobby)
         {
             List<Dictionary<string, PlayerDataObject>> playerData = LobbyController.Instance.GetPlayersData();
+
             _lobbyPlayersDatas.Clear();
+
+            int numberOfPlayers = 0;
 
             foreach (Dictionary<string, PlayerDataObject> data in playerData)
             {
                 LobbyPlayerData lobbyPlayerData = new();
                 lobbyPlayerData.Initialize(data);
+
+                if (lobbyPlayerData.IsReady)
+                {
+                    numberOfPlayers++;
+                }
 
                 if (lobbyPlayerData.Id == AuthenticationService.Instance.PlayerId)
                 {
@@ -88,6 +120,11 @@ namespace Multiplayer
             }
 
             LobbyGameEvents.OnLobbyUpdated?.Invoke();
+
+            if (numberOfPlayers == lobby.Players.Count)
+            {
+                LobbyGameEvents.OnLobbyReady?.Invoke();
+            }
         }
     }
 }

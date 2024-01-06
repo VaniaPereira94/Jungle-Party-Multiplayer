@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Multiplayer;
 
 
 /// <summary>
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 /// para preversar dados necessários, como a pontuação ou o estado atual do jogo.
 /// Para funcionar corretamente, cada cena deve ter um objeto na hierarquia com este script.
 /// </summary>
-public class GameController : MonoBehaviour
+public class GameController : SingletonMonoBehaviour<GameController>
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -21,9 +22,6 @@ public class GameController : MonoBehaviour
     // para identificar o nível atual e o número total de níveis
     [SerializeField] private int _currentLevelID;
     [SerializeField] private int _numberOfLevels;
-
-    // para guardar uma instância única desta classe
-    private static GameController _instance;
 
 
     /* PROPRIEDADES PÚBLICAS */
@@ -40,30 +38,8 @@ public class GameController : MonoBehaviour
         set { _currentLevelID = value; }
     }
 
-    public static GameController Instance
-    {
-        get { return _instance; }
-        set { _instance = value; }
-    }
-
 
     /* MÉTODOS */
-
-    /// <summary>
-    /// É executado antes da função Start().
-    /// </summary>
-    void Awake()
-    {
-        if (_instance != null)
-        {
-            return;
-        }
-
-        // guarda em memória apenas uma instância desta classe,
-        // e cria-la quando ainda não existe, tal como não destrui-la quando a cena muda.
-        _instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
 
     /// <summary>
     /// Chamar esta função sempre que um novo jogo iniciar,

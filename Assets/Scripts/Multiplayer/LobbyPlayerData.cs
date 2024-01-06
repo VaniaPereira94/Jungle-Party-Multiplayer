@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
 
+
 namespace Multiplayer
 {
     public class LobbyPlayerData
     {
         private string _id;
-        private string _gamerTag;
+        private string _gamerTag;   // se é o proprietário ou convidado da lobby
+        //private GamePlayerModel _gamePlayer;
         private bool _isReady;
 
         public string Id => _id;
@@ -28,6 +30,8 @@ namespace Multiplayer
         {
             UpdateState(playerData);
         }
+
+
 
         public void UpdateState(Dictionary<string, PlayerDataObject> playerData)
         {

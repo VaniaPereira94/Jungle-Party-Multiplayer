@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// O nível consiste em empurrar o adversário para fora do ringue.
 /// O nível é constituido por várias rondas.
 /// </summary>
-public class Level3Controller : MonoBehaviour
+public class Level3Controller : MonoBehaviour, ILevelController
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -62,7 +62,7 @@ public class Level3Controller : MonoBehaviour
 
     /* MÉTODOS DO MONOBEHAVIOUR */
 
-    void Start()
+    private void Start()
     {
         _gameController = GameController.Instance;
 
@@ -83,7 +83,7 @@ public class Level3Controller : MonoBehaviour
         DisplayObjectInScene();
     }
 
-    void Update()
+    private void Update()
     {
         // quando está no intervalo entre rondas, ou seja o tempo está parado
         if (_timerController.IsOnPause())
@@ -192,7 +192,7 @@ public class Level3Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SpawnPowerUp()
+    private void SpawnPowerUp()
     {
         System.Random rnd = new();
         int xValue = rnd.Next(42, 58);
@@ -201,7 +201,7 @@ public class Level3Controller : MonoBehaviour
         Instantiate(_powerUp, new Vector3(xValue, _powerUp.transform.position.y, zValue), Quaternion.identity);
     }
 
-    void CreatePlayersDataForLevel()
+    private void CreatePlayersDataForLevel()
     {
         foreach (GamePlayerModel gamePlayer in _gameController.GamePlayers)
         {
@@ -210,13 +210,13 @@ public class Level3Controller : MonoBehaviour
         }
     }
 
-    void DisplayObjectInScene()
+    private void DisplayObjectInScene()
     {
         SpawnPlayers();
         AddActionToPlayers();
     }
 
-    void SpawnPlayers()
+    private void SpawnPlayers()
     {
         _levelPlayers[0].Object = Instantiate(_gameController.GamePlayers[0].Prefab);
         _levelPlayers[1].Object = Instantiate(_gameController.GamePlayers[1].Prefab);
@@ -225,7 +225,7 @@ public class Level3Controller : MonoBehaviour
     /// <summary>
     /// Adiciona o script da ação a cada um dos objetos dos jogadores, para definir essa ação ao personagem.
     /// </summary>
-    void AddActionToPlayers()
+    private void AddActionToPlayers()
     {
         _carryAction = _levelPlayers[0].Object.AddComponent<CarryAction>();
         _levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_carryAction, this);
@@ -239,7 +239,7 @@ public class Level3Controller : MonoBehaviour
         return _outOfArena;
     }
 
-    LevelPlayerModel GetWinner()
+    private LevelPlayerModel GetWinner()
     {
         if (_playerOutID == 1)
         {
@@ -258,13 +258,13 @@ public class Level3Controller : MonoBehaviour
     /// <summary>
     /// Atribui os pontos do marcador e atualiza no ecrã.
     /// </summary>
-    void UpdateScore(int scorerID)
+    private void UpdateScore(int scorerID)
     {
         _levelPlayers[scorerID - 1].LevelScore += _scoreController.AddScore();
         _scoreController.DisplayScoreObjectText(scorerID, _levelPlayers[scorerID - 1].LevelScore);
     }
 
-    void FreezePlayers(float freezingTime)
+    private void FreezePlayers(float freezingTime)
     {
         _levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
         _levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);
@@ -274,7 +274,7 @@ public class Level3Controller : MonoBehaviour
     /// É executado após o intervalo de espera para iniciar outra ronda.
     /// Responsável por inicializar novamente os componentes necessários para que a ronda comece.
     /// </summary>
-    void RestartRound()
+    private void RestartRound()
     {
         _outOfArena = false;
 
@@ -291,7 +291,7 @@ public class Level3Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SetInitialPosition()
+    private void SetInitialPosition()
     {
         _levelPlayers[0].Object.transform.position = _levelPlayers[0].InitialPosition;
         _levelPlayers[0].Object.transform.rotation = _levelPlayers[0].InitialRotation;
@@ -300,7 +300,7 @@ public class Level3Controller : MonoBehaviour
         _levelPlayers[1].Object.transform.rotation = _levelPlayers[1].InitialRotation;
     }
 
-    void DestroyAllPowerUps()
+    private void DestroyAllPowerUps()
     {
         GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("PowerUp");
         foreach (GameObject obj in objectsToDestroy)

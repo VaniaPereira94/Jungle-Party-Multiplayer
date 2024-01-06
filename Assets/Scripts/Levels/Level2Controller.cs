@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// O nível consiste em apanhar maçãs do cháo e atirá-las ao inimigo.
 /// O nível é constituido por várias rondas.
 /// </summary>
-public class Level2Controller : MonoBehaviour
+public class Level2Controller : MonoBehaviour, ILevelController
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -46,15 +46,15 @@ public class Level2Controller : MonoBehaviour
     private bool _isExtraTime;
 
 
-    /* MÉTODOS */
+    /* MÉTODOS DO MONOBEHAVIOUR */
 
-    void Start()
+    private void Start()
     {
         _gameController = GameController.Instance;
 
         // TEST: usar isto enquanto � testado apenas o n�vel atual (sem iniciar pelo menu)
-        //_gameController.GamePlayers = new();
-        //_gameController.InitiateGame();
+        _gameController.GamePlayers = new();
+        _gameController.InitiateGame();
 
         // armazenar dados de cada jogador neste n�vel,
         // sabendo que um jogo tem v�rios n�veis e j� existem dados que passam de n�vel para n�vel, como a pontua��o
@@ -72,7 +72,7 @@ public class Level2Controller : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    private void Update()
     {
         // quando o tempo já acabou e aparece o painel de final de nível
         if (_timerController.IsOnPause())
@@ -138,6 +138,9 @@ public class Level2Controller : MonoBehaviour
         }
     }
 
+
+    /* MÉTODOS DO LEVEL2CONTROLLER */
+
     /// <summary>
     /// É executado ao clicar no botão de iniciar, no painel de introdução do nível.
     /// </summary>
@@ -151,7 +154,7 @@ public class Level2Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnApple), 0f, 7f);
     }
 
-    void SpawnApple()
+    private void SpawnApple()
     {
         System.Random rnd = new();
         int xValue = rnd.Next(42, 58);
@@ -160,7 +163,7 @@ public class Level2Controller : MonoBehaviour
         Instantiate(_apple, new Vector3(xValue, 5.5f, zValue), Quaternion.Euler(-90, 0, 0));
     }
 
-    void CreatePlayersDataForLevel()
+    private void CreatePlayersDataForLevel()
     {
         foreach (GamePlayerModel gamePlayer in _gameController.GamePlayers)
         {
@@ -169,19 +172,19 @@ public class Level2Controller : MonoBehaviour
         }
     }
 
-    void DisplayObjectInScene()
+    private void DisplayObjectInScene()
     {
         SpawnPlayers();
         AddActionToPlayers();
     }
 
-    void SpawnPlayers()
+    private void SpawnPlayers()
     {
         _levelPlayers[0].Object = Instantiate(_gameController.GamePlayers[0].Prefab);
         _levelPlayers[1].Object = Instantiate(_gameController.GamePlayers[1].Prefab);
     }
 
-    void AddActionToPlayers()
+    private void AddActionToPlayers()
     {
         _throwLvl2Action = _levelPlayers[0].Object.AddComponent<ThrowLvl2Action>();
         _levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_throwLvl2Action, this);
@@ -190,7 +193,7 @@ public class Level2Controller : MonoBehaviour
         _levelPlayers[1].Object.GetComponent<PlayerController>().SetAction(_throwLvl2Action, this);
     }
 
-    LevelPlayerModel GetWinner()
+    private LevelPlayerModel GetWinner()
     {
         foreach (LevelPlayerModel levelPlayer in _levelPlayers)
         {
@@ -215,13 +218,13 @@ public class Level2Controller : MonoBehaviour
     /// <summary>
     /// Atribui os pontos do marcador e atualiza no ecrã.
     /// </summary>
-    void UpdateScore(int scorerID)
+    private void UpdateScore(int scorerID)
     {
         _levelPlayers[scorerID - 1].LevelScore += _scoreController.AddScore();
         _scoreController.DisplayScoreObjectText(scorerID, _levelPlayers[scorerID - 1].LevelScore);
     }
 
-    void FreezePlayers(float freezingTime)
+    private void FreezePlayers(float freezingTime)
     {
         _levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
         _levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);

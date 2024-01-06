@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Multiplayer
 {
-    public class AuthController : Singleton<AuthController>
+    public class AuthController : SingletonMonoBehaviour<AuthController>
     {
         public string CurrentPlayerId { get; private set; }
 

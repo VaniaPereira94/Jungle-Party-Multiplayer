@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 
+
 namespace Multiplayer
 {
     public class LobbyPlayer : MonoBehaviour
@@ -8,10 +9,24 @@ namespace Multiplayer
         //[SerializeField] private TextMeshPro _playerName;
         private LobbyPlayerData _lobbyPlayerData;
 
-        public void SetData(LobbyPlayerData data)
+        public void SetMenuData(LobbyPlayerData lobbyPlayerData)
         {
-            _lobbyPlayerData = data;
+            _lobbyPlayerData = lobbyPlayerData;
             //_playerName.text = data.GamerTag;
+            gameObject.SetActive(true);
+
+            if (lobbyPlayerData.IsReady)
+            {
+                // começar jogo
+            }
+
+            GameObject playerNameTextObject = this.gameObject.transform.Find("PlayerNameText").gameObject;
+            playerNameTextObject.GetComponent<TextMeshProUGUI>().text = lobbyPlayerData.GamerTag;
+        }
+
+        public void SetGameData(LobbyPlayerData lobbyPlayerData)
+        {
+            _lobbyPlayerData = lobbyPlayerData;
             gameObject.SetActive(true);
         }
     }

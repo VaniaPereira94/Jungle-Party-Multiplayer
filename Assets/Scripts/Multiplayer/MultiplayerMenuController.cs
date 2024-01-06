@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
-using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace Multiplayer
 {
@@ -15,13 +15,13 @@ namespace Multiplayer
     //public class MultiplayerMenuController : NetworkBehaviour
     public class MultiplayerMenuController : MonoBehaviour
     {
-        /* ATRIBUTOS */
+        /* ATRIBUTOS PRIVADOS */
 
         // referências para objetos de UI
         [Header("UI - Menu")]
         [SerializeField] private GameObject _menuPanel;
-        [SerializeField] private TMP_InputField _privateLobbyCodeInput;
         [SerializeField] private TMP_InputField _publicLobbyCodeInput;
+        [SerializeField] private TMP_InputField _gameCodeInput;
 
         [Header("UI - Create Lobby")]
         [SerializeField] private GameObject _createLobbyPanel;
@@ -37,17 +37,11 @@ namespace Multiplayer
         [SerializeField] private GameObject _privateScorePanel;
         [SerializeField] private GameObject _publicScorePanel;
 
-        // referências para outros controladores
-        //[Header("Controllers")]
-        //[SerializeField] private GameController _gameController;
-
 
         /* MÉTODOS */
 
         private void Start()
         {
-            //_gameController = GameController.Instance;
-
             InitializeMultiplayer();
         }
 
@@ -87,6 +81,7 @@ namespace Multiplayer
                 if (gameCode != null)
                 {
                     OpenGameLobby();
+                    _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
                 }
             }
         }
@@ -119,36 +114,53 @@ namespace Multiplayer
 
         public async void JoinPrivateLobby()
         {
-            string lobbyCode = _privateLobbyCodeInput.text;
-            await LobbyController.Instance.JoinPrivateLobby(lobbyCode);
+            //string lobbyCode = _privateLobbyCodeInput.text;
+            //await LobbyController.Instance.JoinPrivateLobby(lobbyCode);
         }
 
         public async void JoinPublicLobby()
         {
-            string lobbyCode = _publicLobbyCodeInput.text;
+            string lobbyCode = "";
+
+            if (MultiplayerController.Instance.IsHost)
+            {
+                lobbyCode = MultiplayerController.Instance.GetLobbyCode();
+            }
+            else
+            {
+                lobbyCode = _publicLobbyCodeInput.text;
+            }
+
             bool isSuccess = await MultiplayerController.Instance.JoinPublicLobby(lobbyCode);
 
             if (isSuccess)
             {
                 OpenGameLobby();
-                _gameLobbyCodeText.text = $"Código da sala: {MultiplayerController.Instance.GetLobbyCode()}";
+                _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
             }
         }
 
         public async void PlayGame()
         {
-            string gameCode = _publicLobbyCodeInput.text;
+            string gameCode = "";
+
+            if (MultiplayerController.Instance.IsHost)
+            {
+                Debug.Log("é host");
+                gameCode = MultiplayerController.Instance.GetGameCode();
+            }
+            else
+            {
+                Debug.Log("nao é host");
+                gameCode = _gameCodeInput.text;
+            }
+
             bool isSuccess = await MultiplayerController.Instance.PlayGame(gameCode);
 
             if (isSuccess)
             {
-                SceneManager.LoadSceneAsync("Level2MultiplayerScene");
+                SceneManager.LoadSceneAsync("Level1Scene");
             }
-        }
-
-        public void StartGame()
-        {
-            SceneManager.LoadSceneAsync("Level2MultiplayerScene");
         }
 
         public void OpenLeaderboard()
@@ -160,6 +172,13 @@ namespace Multiplayer
         public void OpenGameLobby()
         {
             _gameLobbyPanel.SetActive(true);
+        }
+
+        public void CloseGameLobby()
+        {
+            _gameLobbyPanel.SetActive(false);
+            _createLobbyPanel.SetActive(false);
+            _joinLobbyPanel.SetActive(false);
         }
 
         public void CloseLeaderboard()

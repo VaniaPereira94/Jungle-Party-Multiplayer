@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 /// até que o tempo acabe e quem tem a bomba perde.
 /// O nível é constituido por várias rondas.
 /// </summary>
-public class Level4Controller : MonoBehaviour
+public class Level4Controller : MonoBehaviour, ILevelController
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -70,7 +70,7 @@ public class Level4Controller : MonoBehaviour
 
     /* MÉTODOS DO MONOBEHAVIOUR */
 
-    void Start()
+    private void Start()
     {
         _gameController = GameController.Instance;
 
@@ -96,7 +96,7 @@ public class Level4Controller : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    private void Update()
     {
         // se o tempo da ronda ainda não acabou
         if (!_timerController.HasFinished())
@@ -167,7 +167,7 @@ public class Level4Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SpawnPowerUp()
+    private void SpawnPowerUp()
     {
         System.Random rnd = new();
         int xValue = rnd.Next(42, 58);
@@ -176,7 +176,7 @@ public class Level4Controller : MonoBehaviour
         Instantiate(_powerUp, new Vector3(xValue, _powerUp.transform.position.y, zValue), Quaternion.identity);
     }
 
-    void CreatePlayersDataForLevel()
+    private void CreatePlayersDataForLevel()
     {
         foreach (GamePlayerModel gamePlayer in _gameController.GamePlayers)
         {
@@ -185,7 +185,7 @@ public class Level4Controller : MonoBehaviour
         }
     }
 
-    int GenerateFirstPlayerWithBomb()
+    private int GenerateFirstPlayerWithBomb()
     {
         // previne que o Random não fique viciado
         Random.InitState(DateTime.Now.Millisecond);
@@ -193,7 +193,7 @@ public class Level4Controller : MonoBehaviour
         return Random.Range(1, 3);
     }
 
-    void DisplayObjectInScene()
+    private void DisplayObjectInScene()
     {
         SpawnPlayers();
         AddActionToPlayers();
@@ -202,7 +202,7 @@ public class Level4Controller : MonoBehaviour
         AssignBomb();
     }
 
-    void SpawnPlayers()
+    private void SpawnPlayers()
     {
         _levelPlayers[0].Object = Instantiate(_gameController.GamePlayers[0].Prefab);
         _levelPlayers[1].Object = Instantiate(_gameController.GamePlayers[1].Prefab);
@@ -211,7 +211,7 @@ public class Level4Controller : MonoBehaviour
     /// <summary>
     /// Adiciona o script da ação a cada um dos objetos dos jogadores, para definir essa ação ao personagem.
     /// </summary>
-    void AddActionToPlayers()
+    private void AddActionToPlayers()
     {
         _throwAction = _levelPlayers[0].Object.AddComponent<ThrowLvl4Action>();
         _levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_throwAction, this);
@@ -220,7 +220,7 @@ public class Level4Controller : MonoBehaviour
         _levelPlayers[1].Object.GetComponent<PlayerController>().SetAction(_throwAction, this);
     }
 
-    void SpawnBomb()
+    private void SpawnBomb()
     {
         _bombObject = Instantiate(_bombPrefab, _bombPrefab.transform.position, Quaternion.identity);
     }
@@ -235,7 +235,7 @@ public class Level4Controller : MonoBehaviour
         _bombController.SetLocalScale(new Vector3(85f, 85f, 85f));
     }
 
-    void FreezePlayers(float freezingTime)
+    private void FreezePlayers(float freezingTime)
     {
         _levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
         _levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);
@@ -244,7 +244,7 @@ public class Level4Controller : MonoBehaviour
     /// <summary>
     /// Atribui os pontos do vencedor e atualiza no ecrã.
     /// </summary>
-    void UpdateWinnerScore()
+    private void UpdateWinnerScore()
     {
         int winnerID = GetWinnerID();
 
@@ -252,7 +252,7 @@ public class Level4Controller : MonoBehaviour
         _scoreController.DisplayScoreObjectText(winnerID, _levelPlayers[winnerID - 1].LevelScore);
     }
 
-    int GetWinnerID()
+    private int GetWinnerID()
     {
         return _playerIDWithBomb == 1 ? 2 : 1;
     }
@@ -261,7 +261,7 @@ public class Level4Controller : MonoBehaviour
     /// É executado após o intervalo de espera para iniciar outra ronda.
     /// Responsável por inicializar novamente os componentes necessários para que a ronda comece.
     /// </summary>
-    void RestartRound()
+    private void RestartRound()
     {
         _freezeObjects = false;
 
@@ -276,7 +276,7 @@ public class Level4Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SetInitialPosition()
+    private void SetInitialPosition()
     {
         _levelPlayers[0].Object.transform.position = _levelPlayers[0].InitialPosition;
         _levelPlayers[0].Object.transform.rotation = _levelPlayers[0].InitialRotation;
@@ -285,7 +285,7 @@ public class Level4Controller : MonoBehaviour
         _levelPlayers[1].Object.transform.rotation = _levelPlayers[1].InitialRotation;
     }
 
-    void DestroyAllPowerUps()
+    private void DestroyAllPowerUps()
     {
         GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("PowerUp");
         foreach (GameObject obj in objectsToDestroy)

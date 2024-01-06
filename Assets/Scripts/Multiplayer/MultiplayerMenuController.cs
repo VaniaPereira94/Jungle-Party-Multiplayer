@@ -5,6 +5,7 @@ using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 namespace Multiplayer
@@ -31,6 +32,7 @@ namespace Multiplayer
         [SerializeField] private GameObject _joinPrivateLobbyPopup;
         [SerializeField] private GameObject _gameLobbyPanel;
         [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
+        [SerializeField] private Button _readyButton;   // botão de jogar no painel de cada lobby
 
         [Header("UI - Leaderboard")]
         [SerializeField] private GameObject _leaderboardPanel;
@@ -39,6 +41,16 @@ namespace Multiplayer
 
 
         /* MÉTODOS */
+
+        private void OnEnable()
+        {
+            LobbyGameEvents.OnLobbyReady += OnLobbyReady;
+        }
+
+        private void OnDisable()
+        {
+            LobbyGameEvents.OnLobbyReady -= OnLobbyReady;
+        }
 
         private void Start()
         {
@@ -140,7 +152,13 @@ namespace Multiplayer
             }
         }
 
-        public async void PlayGame()
+        public async void ReadyLobby()
+        {
+            await MultiplayerController.Instance.SetPlayerReady();
+            _readyButton.gameObject.SetActive(false);
+        }
+
+        public async void OnLobbyReady()
         {
             string gameCode = "";
 

@@ -24,7 +24,7 @@ namespace Multiplayer
                 return _localLobbyPlayerData != null && _localLobbyPlayerData.Id == LobbyController.Instance.GetHostId();
             }
         }
-   
+
 
         /* MÉTODOS */
 

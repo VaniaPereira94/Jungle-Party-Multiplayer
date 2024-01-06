@@ -1,5 +1,6 @@
 using Unity.Services.Lobbies.Models;
 
+
 namespace Multiplayer
 {
     public class LobbyEvents
@@ -15,5 +16,8 @@ namespace Multiplayer
 
         public delegate void LobbyReady();
         public static LobbyReady OnLobbyReady;
+
+        public delegate void GameInited();
+        public static GameInited OnGameInited;
     }
 }

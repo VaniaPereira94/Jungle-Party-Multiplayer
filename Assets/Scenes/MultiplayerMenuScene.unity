@@ -2845,51 +2845,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714529066}
   m_CullTransparentMesh: 1
---- !u!1 &723903095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 723903098}
-  - component: {fileID: 723903099}
-  m_Layer: 0
-  m_Name: MultiplayerMenuUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &723903098
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723903095}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &723903099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723903095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456da5597fd06484ba19f90d090f0433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerRow: {fileID: 1658714035}
 --- !u!1 &753838345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5362,7 +5317,7 @@ MonoBehaviour:
   _joinPrivateLobbyPopup: {fileID: 1887006044}
   _gameLobbyPanel: {fileID: 1428068170}
   _gameLobbyCodeText: {fileID: 1507004600}
-  _readyButton: {fileID: 1599596322}
+  _setReadyPlayerButton: {fileID: 1599596322}
   _leaderboardPanel: {fileID: 584086534}
   _privateScorePanel: {fileID: 1026960021}
   _publicScorePanel: {fileID: 305543062}
@@ -5379,7 +5334,7 @@ GameObject:
   - component: {fileID: 1215278837}
   - component: {fileID: 1215278836}
   m_Layer: 5
-  m_Name: ButtonClose
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7102,7 +7057,7 @@ GameObject:
   - component: {fileID: 1599596323}
   - component: {fileID: 1599596322}
   m_Layer: 5
-  m_Name: ButtonReadyLobby
+  m_Name: SetPlayerReadyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7173,7 +7128,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1211962489}
         m_TargetAssemblyTypeName: Multiplayer.MultiplayerMenuController, Assembly-CSharp
-        m_MethodName: ReadyLobby
+        m_MethodName: SetPlayerReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10509,7 +10464,6 @@ SceneRoots:
   - {fileID: 364119706}
   - {fileID: 644121768}
   - {fileID: 1211962488}
-  - {fileID: 723903098}
   - {fileID: 929757184}
   - {fileID: 1602204228}
   - {fileID: 978772538}

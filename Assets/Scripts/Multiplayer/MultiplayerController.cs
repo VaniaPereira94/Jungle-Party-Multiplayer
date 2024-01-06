@@ -11,6 +11,7 @@ namespace Multiplayer
         /* ATRIBUTOS PRIVADOS */
 
         private const int _MAX_PLAYERS_IN_LOOBY = 2;
+
         private List<LobbyPlayerData> _lobbyPlayersDatas = new();
         private LobbyPlayerData _localLobbyPlayerData;
 
@@ -121,7 +122,7 @@ namespace Multiplayer
 
             LobbyGameEvents.OnLobbyUpdated?.Invoke();
 
-            if (numberOfPlayers == lobby.Players.Count)
+            if (numberOfPlayers == _MAX_PLAYERS_IN_LOOBY)
             {
                 LobbyGameEvents.OnLobbyReady?.Invoke();
             }

@@ -32,7 +32,7 @@ namespace Multiplayer
         [SerializeField] private GameObject _joinPrivateLobbyPopup;
         [SerializeField] private GameObject _gameLobbyPanel;
         [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
-        [SerializeField] private Button _readyButton;   // botão de jogar no painel de cada lobby
+        [SerializeField] private Button _setReadyPlayerButton;   // botão de jogar no painel de cada lobby
 
         [Header("UI - Leaderboard")]
         [SerializeField] private GameObject _leaderboardPanel;
@@ -152,10 +152,10 @@ namespace Multiplayer
             }
         }
 
-        public async void ReadyLobby()
+        public async void SetPlayerReady()
         {
             await MultiplayerController.Instance.SetPlayerReady();
-            _readyButton.gameObject.SetActive(false);
+            _setReadyPlayerButton.gameObject.SetActive(false);
         }
 
         public async void OnLobbyReady()

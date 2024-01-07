@@ -35,7 +35,10 @@ namespace Multiplayer
 
         private void Start()
         {
-            _initButton.gameObject.SetActive(false);
+            if (!MultiplayerController.Instance.IsHost)
+            {
+                _initButton.gameObject.SetActive(false);
+            }
         }
 
         private void OnLobbyUpdated(Lobby lobby)
@@ -55,8 +58,6 @@ namespace Multiplayer
                 {
                     currentLevelController.InitAfterIntro();
                 }
-
-                //SetPlayerReady
             }
         }
 

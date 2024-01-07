@@ -4118,7 +4118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &978772536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5318,6 +5318,7 @@ MonoBehaviour:
   _gameLobbyPanel: {fileID: 1428068170}
   _gameLobbyCodeText: {fileID: 1507004600}
   _setReadyPlayerButton: {fileID: 1599596322}
+  _mapSelectionData: {fileID: 11400000, guid: 53aad7f77454b4840a81d9f6b7c00367, type: 2}
   _leaderboardPanel: {fileID: 584086534}
   _privateScorePanel: {fileID: 1026960021}
   _publicScorePanel: {fileID: 305543062}

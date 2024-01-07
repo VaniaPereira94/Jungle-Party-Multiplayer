@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
@@ -14,6 +15,8 @@ namespace Multiplayer
 
         private List<LobbyPlayerData> _lobbyPlayersDatas = new();
         private LobbyPlayerData _localLobbyPlayerData;
+
+        private LobbyData _lobbyData;
 
 
         /* PROPRIEDADES PRIVADAS */
@@ -44,10 +47,7 @@ namespace Multiplayer
             return LobbyController.Instance.GetLobbyCode();
         }
 
-        public string GetGameCode()
-        {
-            return LobbyController.Instance.GetGameCode();
-        }
+
 
         public List<LobbyPlayerData> GetPlayers()
         {
@@ -69,14 +69,11 @@ namespace Multiplayer
             _localLobbyPlayerData = new LobbyPlayerData();
             _localLobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "HostPlayer");
 
-            bool isSuccess = await LobbyController.Instance.CreatePublicLobby(lobbyName, _MAX_PLAYERS_IN_LOOBY, _localLobbyPlayerData.Serialize());
-            return isSuccess;
-        }
+            _lobbyData = new LobbyData();
+            _lobbyData.Initialize(0);
 
-        public async Task<string> CreateGame()
-        {
-            string gameCode = await LobbyController.Instance.CreateGame();
-            return gameCode;
+            bool isSuccess = await LobbyController.Instance.CreatePublicLobby(lobbyName, _MAX_PLAYERS_IN_LOOBY, _localLobbyPlayerData.Serialize(), _lobbyData.Serialize());
+            return isSuccess;
         }
 
         public async Task<bool> JoinPublicLobby(string lobbyCode)
@@ -88,13 +85,21 @@ namespace Multiplayer
             return isSuccess;
         }
 
-        public async Task<bool> PlayGame(string gameCode)
+        public async Task<bool> StartGame()
         {
-            bool isSuccess = await LobbyController.Instance.PlayGame(gameCode);
+            string relayJoinCode = await RelayController.Instance.CreateRelay(_MAX_PLAYERS_IN_LOOBY);
+
+            _lobbyData.RelayJoinCode = relayJoinCode;
+            await LobbyController.Instance.UpdateLobbyData(_lobbyData.Serialize());
+
+            string allocationId = RelayController.Instance.GetAllocationId();
+            string connectionData = RelayController.Instance.GetConnectionData();
+
+            bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize(), allocationId, connectionData);
             return isSuccess;
         }
 
-        private void OnLobbyUpdated(Lobby lobby)
+        private async void OnLobbyUpdated(Lobby lobby)
         {
             List<Dictionary<string, PlayerDataObject>> playerData = LobbyController.Instance.GetPlayersData();
 
@@ -120,12 +125,31 @@ namespace Multiplayer
                 _lobbyPlayersDatas.Add(lobbyPlayerData);
             }
 
+            _lobbyData = new LobbyData();
+            _lobbyData.Initialize(lobby.Data);
+
             LobbyGameEvents.OnLobbyUpdated?.Invoke();
 
             if (numberOfPlayers == _MAX_PLAYERS_IN_LOOBY)
             {
                 LobbyGameEvents.OnLobbyReady?.Invoke();
             }
+
+            if (_lobbyData.RelayJoinCode != default)
+            {
+                await JoinRelayServer(_lobbyData.RelayJoinCode);
+            }
+        }
+
+        private async Task<bool> JoinRelayServer(string relayJoinCode)
+        {
+            await RelayController.Instance.JoinRelay(relayJoinCode);
+
+            string allocationId = RelayController.Instance.GetAllocationId();
+            string connectionData = RelayController.Instance.GetConnectionData();
+
+            bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize(), allocationId, connectionData);
+            return isSuccess;
         }
     }
 }

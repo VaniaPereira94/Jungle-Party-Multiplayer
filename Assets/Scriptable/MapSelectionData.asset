@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93ffee592362a845b26c8427520d6aa, type: 3}
+  m_Name: MapSelectionData
+  m_EditorClassIdentifier: 
+  Maps:
+  - MapName: "N\xEDvel 1"
+    SceneName: Level1Controller
+    LevelController: {fileID: 11500000, guid: 8ed33b028c67b854ea11120a0e1743ab, type: 3}

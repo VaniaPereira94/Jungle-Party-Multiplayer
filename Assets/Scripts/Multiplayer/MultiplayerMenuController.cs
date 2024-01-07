@@ -39,6 +39,10 @@ namespace Multiplayer
         [SerializeField] private GameObject _privateScorePanel;
         [SerializeField] private GameObject _publicScorePanel;
 
+        [Header("Lobbies")]
+        [SerializeField] private MapSelectionData _mapSelectionData;
+        [SerializeField] private int _currentMapIndex = 0;
+
 
         /* MÉTODOS */
 
@@ -88,13 +92,13 @@ namespace Multiplayer
 
             if (isSuccess)
             {
-                string gameCode = await MultiplayerController.Instance.CreateGame();
+                //string gameCode = await MultiplayerController.Instance.CreateGame();
 
-                if (gameCode != null)
-                {
-                    OpenGameLobby();
-                    _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
-                }
+                //if (gameCode != null)
+                //{
+                OpenGameLobby();
+                _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
+                //}
             }
         }
 
@@ -160,20 +164,7 @@ namespace Multiplayer
 
         public async void OnLobbyReady()
         {
-            string gameCode = "";
-
-            if (MultiplayerController.Instance.IsHost)
-            {
-                Debug.Log("é host");
-                gameCode = MultiplayerController.Instance.GetGameCode();
-            }
-            else
-            {
-                Debug.Log("nao é host");
-                gameCode = _gameCodeInput.text;
-            }
-
-            bool isSuccess = await MultiplayerController.Instance.PlayGame(gameCode);
+            bool isSuccess = await MultiplayerController.Instance.StartGame();
 
             if (isSuccess)
             {

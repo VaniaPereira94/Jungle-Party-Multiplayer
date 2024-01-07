@@ -47,8 +47,6 @@ namespace Multiplayer
             return LobbyController.Instance.GetLobbyCode();
         }
 
-
-
         public List<LobbyPlayerData> GetPlayers()
         {
             return _lobbyPlayersDatas;

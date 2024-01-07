@@ -1,8 +1,4 @@
-using System.Collections.Generic;
 using TMPro;
-using Unity.Collections;
-using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,7 +18,6 @@ namespace Multiplayer
         [Header("UI - Menu")]
         [SerializeField] private GameObject _menuPanel;
         [SerializeField] private TMP_InputField _publicLobbyCodeInput;
-        [SerializeField] private TMP_InputField _gameCodeInput;
 
         [Header("UI - Create Lobby")]
         [SerializeField] private GameObject _createLobbyPanel;
@@ -30,29 +25,41 @@ namespace Multiplayer
         [Header("UI - Join Lobby")]
         [SerializeField] private GameObject _joinLobbyPanel;
         [SerializeField] private GameObject _joinPrivateLobbyPopup;
+
+        [Header("UI - Game Lobby")]
         [SerializeField] private GameObject _gameLobbyPanel;
         [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
-        [SerializeField] private Button _setReadyPlayerButton;   // botão de jogar no painel de cada lobby
+        [SerializeField] private Button _setReadyPlayerButton;
+        [SerializeField] private Button _startGameButton;
+        [SerializeField] private Button _previousMapButton;
+        [SerializeField] private Button _nextMapButton;
+        [SerializeField] private Image _mapCoverImage;
+        [SerializeField] private MapListScriptable _mapListScriptable;
+        private int _currentMapIndex = 0;
 
         [Header("UI - Leaderboard")]
         [SerializeField] private GameObject _leaderboardPanel;
         [SerializeField] private GameObject _privateScorePanel;
         [SerializeField] private GameObject _publicScorePanel;
 
-        [Header("Lobbies")]
-        [SerializeField] private MapSelectionData _mapSelectionData;
-        [SerializeField] private int _currentMapIndex = 0;
-
 
         /* MÉTODOS */
 
         private void OnEnable()
         {
+            _setReadyPlayerButton.onClick.AddListener(OnReadyClicked);
+            _previousMapButton.onClick.AddListener(OnPreviousMapClicked);
+            _nextMapButton.onClick.AddListener(OnNextMapClicked);
+
             LobbyGameEvents.OnLobbyReady += OnLobbyReady;
         }
 
         private void OnDisable()
         {
+            _setReadyPlayerButton.onClick.RemoveAllListeners();
+            _previousMapButton.onClick.RemoveAllListeners();
+            _nextMapButton.onClick.RemoveAllListeners();
+
             LobbyGameEvents.OnLobbyReady -= OnLobbyReady;
         }
 
@@ -160,6 +167,44 @@ namespace Multiplayer
         {
             await MultiplayerController.Instance.SetPlayerReady();
             _setReadyPlayerButton.gameObject.SetActive(false);
+        }
+
+        public async void OnReadyClicked()
+        {
+            bool isSuccess = await MultiplayerController.Instance.SetPlayerReady();
+        }
+
+        public void OnPreviousMapClicked()
+        {
+            if (_currentMapIndex - 1 > 0)
+            {
+                _currentMapIndex--;
+            }
+            else
+            {
+                _currentMapIndex = 0;
+            }
+
+            UpdateMap();
+        }
+
+        public void OnNextMapClicked()
+        {
+            if (_currentMapIndex + 1 < _mapListScriptable.Maps.Count - 1)
+            {
+                _currentMapIndex++;
+            }
+            else
+            {
+                _currentMapIndex = _mapListScriptable.Maps.Count - 1;
+            }
+
+            UpdateMap();
+        }
+
+        private void UpdateMap()
+        {
+             _mapCoverImage.sprite = _mapListScriptable.Maps[_currentMapIndex].coverName;
         }
 
         public async void OnLobbyReady()

@@ -1,35 +1,32 @@
 using UnityEngine;
 
 
-namespace Multiplayer
+public class SingletonMonoBehaviour<T> : MonoBehaviour where T : Component
 {
-    public class SingletonMonoBehaviour<T> : MonoBehaviour where T : Component
+    private static T _instance;
+
+    public static T Instance
     {
-        private static T _instance;
-
-        public static T Instance
+        get
         {
-            get
+            if (_instance == null)
             {
-                if (_instance == null)
+                T[] objs = FindObjectsOfType<T>();
+                if (objs.Length > 0)
                 {
-                    T[] objs = FindObjectsOfType<T>();
-                    if (objs.Length > 0)
-                    {
-                        T instance = objs[0];
-                        _instance = instance;
-                    }
-                    else
-                    {
-                        GameObject gs = new();
-                        gs.name = typeof(T).Name;
-                        _instance = gs.AddComponent<T>();
-                        DontDestroyOnLoad(gs);
-                    }
+                    T instance = objs[0];
+                    _instance = instance;
                 }
-
-                return _instance;
+                else
+                {
+                    GameObject gs = new();
+                    gs.name = typeof(T).Name;
+                    _instance = gs.AddComponent<T>();
+                    DontDestroyOnLoad(gs);
+                }
             }
+
+            return _instance;
         }
     }
 }

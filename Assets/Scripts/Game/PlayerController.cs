@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,7 +7,7 @@ using Random = UnityEngine.Random;
 /// Armazena dados sobre cada personagem criada, no início do jogo.
 /// E controla os movimentos, ações e características do mesmo.
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -58,7 +59,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    /* MÉTODOS DO MONOBEHAVIOUR */
+    /* MÉTODOS DO NETWORKBEHAVIOUR */
+
+    public override void OnNetworkSpawn()
+    {
+
+    }
 
     /// <summary>
     /// É executado antes da primeira frame.
@@ -80,51 +86,54 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_currentAction is SuccessAction)
+        if (IsLocalPlayer)
         {
-            _currentAction.Enter();
-        }
-        if (_currentAction is FailureAction)
-        {
-            _currentAction.Enter();
-        }
-
-        if (!_isFrozen)
-        {
-            bool actionInput = GetCurrentActionInput();
-
-            // se o jogador pressiona a tecla de ação
-            if (actionInput)
+            if (_currentAction is SuccessAction)
             {
-                if (_currentAction is KickAction)  // significa que está no nível 1
+                _currentAction.Enter();
+            }
+            if (_currentAction is FailureAction)
+            {
+                _currentAction.Enter();
+            }
+
+            if (!_isFrozen)
+            {
+                bool actionInput = GetCurrentActionInput();
+
+                // se o jogador pressiona a tecla de ação
+                if (actionInput)
                 {
-                    _currentAction.Enter();
-                }
-                if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
-                {
-                    _currentAction.Enter();
-                }
-                if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
-                {
-                    if (!_isWalking)
+                    if (_currentAction is KickAction)  // significa que está no nível 1
                     {
                         _currentAction.Enter();
                     }
+                    if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
+                    {
+                        _currentAction.Enter();
+                    }
+                    if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
+                    {
+                        if (!_isWalking)
+                        {
+                            _currentAction.Enter();
+                        }
+                    }
                 }
-            }
-            else
-            {
-                if (_currentAction is KickAction)
+                else
                 {
-                    _currentAction.Exit();
-                }
-                if (_currentAction is CarryAction)
-                {
-                    _currentAction.Exit();
-                }
-                if (_currentAction is ThrowLvl4Action)
-                {
-                    _currentAction.Exit();
+                    if (_currentAction is KickAction)
+                    {
+                        _currentAction.Exit();
+                    }
+                    if (_currentAction is CarryAction)
+                    {
+                        _currentAction.Exit();
+                    }
+                    if (_currentAction is ThrowLvl4Action)
+                    {
+                        _currentAction.Exit();
+                    }
                 }
             }
         }
@@ -135,34 +144,37 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (!_isFrozen)
+        if (IsLocalPlayer)
         {
-            (float horizontalInput, float verticalInput) = GetCurrentMovementInput();
-
-            // se o jogador pressiona uma tecla de movimento
-            if (horizontalInput != 0 || verticalInput != 0)
+            if (!_isFrozen)
             {
-                UpdateMovement(horizontalInput, verticalInput);
-                UpdateDirection(horizontalInput, verticalInput);
+                (float horizontalInput, float verticalInput) = GetCurrentMovementInput();
 
-                if (!_isWalking)
+                // se o jogador pressiona uma tecla de movimento
+                if (horizontalInput != 0 || verticalInput != 0)
                 {
-                    _walkAction.Enter();
-                    _isWalking = true;
+                    UpdateMovement(horizontalInput, verticalInput);
+                    UpdateDirection(horizontalInput, verticalInput);
+
+                    if (!_isWalking)
+                    {
+                        _walkAction.Enter();
+                        _isWalking = true;
+                    }
+                }
+                else
+                {
+                    if (_isWalking)
+                    {
+                        _walkAction.Exit();
+                        _isWalking = false;
+                    }
                 }
             }
             else
             {
-                if (_isWalking)
-                {
-                    _walkAction.Exit();
-                    _isWalking = false;
-                }
+                _walkAction.Exit();
             }
-        }
-        else
-        {
-            _walkAction.Exit();
         }
     }
 

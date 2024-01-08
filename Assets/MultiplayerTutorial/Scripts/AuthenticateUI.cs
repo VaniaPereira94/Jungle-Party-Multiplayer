@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AuthenticateUI : MonoBehaviour
+namespace lobbyTutorial
 {
-    [SerializeField] private Button authenticateButton;
-
-    private void Awake()
+    public class AuthenticateUI : MonoBehaviour
     {
-        authenticateButton.onClick.AddListener(() =>
+        [SerializeField] private Button authenticateButton;
+
+        private void Awake()
         {
-            LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
-            Hide();
-        });
-    }
+            authenticateButton.onClick.AddListener(() =>
+            {
+                LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
+                Hide();
+            });
+        }
 
-    private void Hide()
-    {
-        gameObject.SetActive(false);
+        private void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

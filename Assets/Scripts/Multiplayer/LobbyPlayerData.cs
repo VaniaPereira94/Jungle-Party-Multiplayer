@@ -2,58 +2,55 @@ using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
 
 
-namespace Multiplayer
+public class LobbyPlayerData
 {
-    public class LobbyPlayerData
+    private string _id;
+    private string _gamerTag;   // se é o proprietário ou convidado da lobby
+    private bool _isReady;
+
+    public string Id => _id;
+    public string GamerTag => _gamerTag;
+
+    public bool IsReady
     {
-        private string _id;
-        private string _gamerTag;   // se é o proprietário ou convidado da lobby
-        private bool _isReady;
+        get => _isReady;
+        set => _isReady = value;
+    }
 
-        public string Id => _id;
-        public string GamerTag => _gamerTag;
+    public void Initialize(string id, string gamerTag)
+    {
+        _id = id;
+        _gamerTag = gamerTag;
+    }
 
-        public bool IsReady
+    public void Initialize(Dictionary<string, PlayerDataObject> playerData)
+    {
+        UpdateState(playerData);
+    }
+
+    public void UpdateState(Dictionary<string, PlayerDataObject> playerData)
+    {
+        if (playerData.ContainsKey("Id"))
         {
-            get => _isReady;
-            set => _isReady = value;
+            _id = playerData["Id"].Value;
         }
-
-        public void Initialize(string id, string gamerTag)
+        if (playerData.ContainsKey("GamerTag"))
         {
-            _id = id;
-            _gamerTag = gamerTag;
+            _gamerTag = playerData["GamerTag"].Value;
         }
-
-        public void Initialize(Dictionary<string, PlayerDataObject> playerData)
+        if (playerData.ContainsKey("IsReady"))
         {
-            UpdateState(playerData);
+            _isReady = playerData["IsReady"].Value == "True";
         }
+    }
 
-        public void UpdateState(Dictionary<string, PlayerDataObject> playerData)
-        {
-            if (playerData.ContainsKey("Id"))
-            {
-                _id = playerData["Id"].Value;
-            }
-            if (playerData.ContainsKey("GamerTag"))
-            {
-                _gamerTag = playerData["GamerTag"].Value;
-            }
-            if (playerData.ContainsKey("IsReady"))
-            {
-                _isReady = playerData["IsReady"].Value == "True";
-            }
-        }
-
-        public Dictionary<string, string> Serialize()
-        {
-            return new Dictionary<string, string>()
+    public Dictionary<string, string> Serialize()
+    {
+        return new Dictionary<string, string>()
             {
                 { "Id", _id },
                 { "GamerTag", _gamerTag },
                 { "IsReady", _isReady.ToString() }
             };
-        }
     }
 }

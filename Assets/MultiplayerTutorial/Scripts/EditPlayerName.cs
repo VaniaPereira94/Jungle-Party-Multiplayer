@@ -3,52 +3,55 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EditPlayerName : MonoBehaviour
+namespace lobbyTutorial
 {
-    public static EditPlayerName Instance { get; private set; }
-
-    public event EventHandler OnNameChanged;
-
-    [SerializeField] private TextMeshProUGUI playerNameText;
-
-    private string playerName = "Code Monkey";
-
-    private void Awake()
+    public class EditPlayerName : MonoBehaviour
     {
-        Instance = this;
+        public static EditPlayerName Instance { get; private set; }
 
-        GetComponent<Button>().onClick.AddListener(() =>
+        public event EventHandler OnNameChanged;
+
+        [SerializeField] private TextMeshProUGUI playerNameText;
+
+        private string playerName = "Code Monkey";
+
+        private void Awake()
         {
-            UI_InputWindow.Show_Static("Player Name", playerName, "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-", 20,
-            () =>
-            {
-                // Cancel
-            },
-            (string newName) =>
-            {
-                playerName = newName;
+            Instance = this;
 
-                playerNameText.text = playerName;
+            GetComponent<Button>().onClick.AddListener(() =>
+            {
+                UI_InputWindow.Show_Static("Player Name", playerName, "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-", 20,
+                () =>
+                {
+                    // Cancel
+                },
+                (string newName) =>
+                {
+                    playerName = newName;
 
-                OnNameChanged?.Invoke(this, EventArgs.Empty);
+                    playerNameText.text = playerName;
+
+                    OnNameChanged?.Invoke(this, EventArgs.Empty);
+                });
             });
-        });
 
-        playerNameText.text = playerName;
-    }
+            playerNameText.text = playerName;
+        }
 
-    private void Start()
-    {
-        OnNameChanged += EditPlayerName_OnNameChanged;
-    }
+        private void Start()
+        {
+            OnNameChanged += EditPlayerName_OnNameChanged;
+        }
 
-    private void EditPlayerName_OnNameChanged(object sender, EventArgs e)
-    {
-        LobbyManager.Instance.UpdatePlayerName(GetPlayerName());
-    }
+        private void EditPlayerName_OnNameChanged(object sender, EventArgs e)
+        {
+            LobbyManager.Instance.UpdatePlayerName(GetPlayerName());
+        }
 
-    public string GetPlayerName()
-    {
-        return playerName;
+        public string GetPlayerName()
+        {
+            return playerName;
+        }
     }
 }

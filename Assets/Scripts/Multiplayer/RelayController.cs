@@ -7,82 +7,109 @@ using Unity.Services.Relay.Models;
 using UnityEngine;
 
 
-namespace Multiplayer
+public class RelayController : SingletonMonoBehaviour<RelayController>
 {
-    public class RelayController : SingletonMonoBehaviour<RelayController>
+    /* ATRIBUTOS E PROPRIEDADES */
+
+    private bool _isHost = false;
+
+    private string _joinCode;
+    private string _ip;
+    private int _port;
+    private byte[] _connectionData;
+    private Guid _allocationId;
+
+    private byte[] _key;
+    private byte[] _allocationIdBytes;
+    private byte[] _hostConnectionData;
+
+    public bool IsHost
     {
-        /* ATRIBUTOS E PROPRIEDADES */
-
-        private string _joinCode;
-        private string _ip;
-        private int _port;
-        private Guid _allocationId;
-        private byte[] _connectionData;
+        get { return _isHost; }
+    }
 
 
-        /* MÉTODOS */
+    /* MÉTODOS */
 
-        public string GetAllocationId()
+    public string GetAllocationId()
+    {
+        return _allocationId.ToString();
+    }
+
+    public string GetConnectionData()
+    {
+        return _connectionData.ToString();
+    }
+
+    public async Task<string> CreateRelay(int maxConnections)
+    {
+        try
         {
-            return _allocationId.ToString();
-        }
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+            _joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-        public string GetConnectionData()
+            RelayServerEndpoint dtlsEndpoint = allocation.ServerEndpoints.First(
+                relayServerEndpoint => relayServerEndpoint.ConnectionType == "dtls"
+            );
+
+            _ip = dtlsEndpoint.Host;
+            _port = dtlsEndpoint.Port;
+            _allocationId = allocation.AllocationId;
+            _connectionData = allocation.ConnectionData;
+
+            _key = allocation.Key;
+            _allocationIdBytes = allocation.AllocationIdBytes;
+
+            _isHost = true;
+
+            Debug.Log("Criou jogo! Código do jogo: " + _joinCode);
+            return _joinCode;
+        }
+        catch (LobbyServiceException exception)
         {
-            return _connectionData.ToString();
+            Debug.LogError(exception.Message);
+            return null;
         }
+    }
 
-        public async Task<string> CreateRelay(int maxConnections)
+    public async Task<bool> JoinRelay(string joinCode)
+    {
+        try
         {
-            try
-            {
-                Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-                _joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            _joinCode = joinCode;
 
-                RelayServerEndpoint dtlsEndpoint = allocation.ServerEndpoints.First(
-                    relayServerEndpoint => relayServerEndpoint.ConnectionType == "dtls"
-                );
+            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(_joinCode);
 
-                _ip = dtlsEndpoint.Host;
-                _port = dtlsEndpoint.Port;
-                _allocationId = allocation.AllocationId;
-                _connectionData = allocation.ConnectionData;
+            RelayServerEndpoint dtlsEndpoint = allocation.ServerEndpoints.First(
+                relayServerEndpoint => relayServerEndpoint.ConnectionType == "dtls"
+            );
 
-                Debug.Log("Criou jogo! Código do jogo: " + _joinCode);
-                return _joinCode;
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-                return null;
-            }
+            _ip = dtlsEndpoint.Host;
+            _port = dtlsEndpoint.Port;
+            _allocationId = allocation.AllocationId;
+            _connectionData = allocation.ConnectionData;
+
+            _allocationIdBytes = allocation.AllocationIdBytes;
+            _key = allocation.Key;
+            _hostConnectionData = allocation.HostConnectionData;
+
+            Debug.Log("Entrou no jogo! Código do jogo: " + _joinCode);
+            return true;
         }
-
-        public async Task<bool> JoinRelay(string joinCode)
+        catch (LobbyServiceException exception)
         {
-            try
-            {
-                _joinCode = joinCode;
-
-                JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(_joinCode);
-
-                RelayServerEndpoint dtlsEndpoint = allocation.ServerEndpoints.First(
-                    relayServerEndpoint => relayServerEndpoint.ConnectionType == "dtls"
-                );
-
-                _ip = dtlsEndpoint.Host;
-                _port = dtlsEndpoint.Port;
-                _allocationId = allocation.AllocationId;
-                _connectionData = allocation.ConnectionData;
-
-                Debug.Log("Entrou no jogo! Código do jogo: " + _joinCode);
-                return true;
-            }
-            catch (LobbyServiceException exception)
-            {
-                MultiplayerMenuController.ShowError(exception.Message);
-                return false;
-            }
+            MultiplayerMenuController.ShowError(exception.Message);
+            return false;
         }
+    }
+
+    public (byte[] AllocationId, byte[] Key, byte[] ConnectionData, string _dtlsAddress, int _dtlsPort) GetHostConnectionInfo()
+    {
+        return (_allocationIdBytes, _key, _connectionData, _ip, _port);
+    }
+
+    public (byte[] AllocationId, byte[] Key, byte[] ConnectionData, byte[] HostConnectionData, string _dtlsAddress, int _dtlsPort) GetClientConnectionInfo()
+    {
+        return (_allocationIdBytes, _key, _connectionData, _hostConnectionData, _ip, _port);
     }
 }

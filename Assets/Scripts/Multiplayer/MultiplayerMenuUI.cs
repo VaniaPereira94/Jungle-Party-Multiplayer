@@ -2,10 +2,7 @@
 //using UnityEngine;
 
 
-//namespace Multiplayer
-//{
 //    public class MultiplayerMenuUI : MonoBehaviour
 //    {
      
 //    }
-//}

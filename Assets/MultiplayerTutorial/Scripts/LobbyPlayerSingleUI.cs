@@ -3,39 +3,42 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LobbyPlayerSingleUI : MonoBehaviour
+namespace lobbyTutorial
 {
-    [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private Image characterImage;
-    [SerializeField] private Button kickPlayerButton;
-
-    private Player player;
-
-
-    private void Awake()
+    public class LobbyPlayerSingleUI : MonoBehaviour
     {
-        kickPlayerButton.onClick.AddListener(KickPlayer);
-    }
+        [SerializeField] private TextMeshProUGUI playerNameText;
+        [SerializeField] private Image characterImage;
+        [SerializeField] private Button kickPlayerButton;
 
-    public void SetKickPlayerButtonVisible(bool visible)
-    {
-        kickPlayerButton.gameObject.SetActive(visible);
-    }
+        private Player player;
 
-    public void UpdatePlayer(Player player)
-    {
-        this.player = player;
-        playerNameText.text = player.Data[LobbyManager.KEY_PLAYER_NAME].Value;
-        LobbyManager.PlayerCharacter playerCharacter =
-            System.Enum.Parse<LobbyManager.PlayerCharacter>(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value);
-        characterImage.sprite = LobbyAssets.Instance.GetSprite(playerCharacter);
-    }
 
-    private void KickPlayer()
-    {
-        if (player != null)
+        private void Awake()
         {
-            LobbyManager.Instance.KickPlayer(player.Id);
+            kickPlayerButton.onClick.AddListener(KickPlayer);
+        }
+
+        public void SetKickPlayerButtonVisible(bool visible)
+        {
+            kickPlayerButton.gameObject.SetActive(visible);
+        }
+
+        public void UpdatePlayer(Player player)
+        {
+            this.player = player;
+            playerNameText.text = player.Data[LobbyManager.KEY_PLAYER_NAME].Value;
+            LobbyManager.PlayerCharacter playerCharacter =
+                System.Enum.Parse<LobbyManager.PlayerCharacter>(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value);
+            characterImage.sprite = LobbyAssets.Instance.GetSprite(playerCharacter);
+        }
+
+        private void KickPlayer()
+        {
+            if (player != null)
+            {
+                LobbyManager.Instance.KickPlayer(player.Id);
+            }
         }
     }
 }

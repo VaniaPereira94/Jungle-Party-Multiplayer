@@ -1,8 +1,7 @@
-using Multiplayer;
-using System;
 using System.Collections.Generic;
+using Unity.Netcode.Transports.UTP;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 /// <summary>
@@ -66,11 +65,30 @@ public class Level1Controller : MonoBehaviour, ILevelController
 
     private void Start()
     {
-        _gameController = GameController.Instance;
+        //_gameController = GameController.Instance;
 
-        // TEST: usar isto enquanto é testado apenas o nível atual (sem iniciar pelo menu)
-        _gameController.GamePlayers = new();
-        _gameController.InitiateGame();
+        //// TEST: usar isto enquanto é testado apenas o nível atual (sem iniciar pelo menu)
+        //_gameController.GamePlayers = new();
+        //_gameController.InitiateGame();
+
+        NetworkManager.Singleton.NetworkConfig.ConnectionApproval = true;
+
+        if (RelayController.Instance.IsHost)
+        {
+            NetworkManager.Singleton.ConnectionApprovalCallback = ConnectionApproval;
+
+            (byte[] allocationId, byte[] key, byte[] connectionData, string ip, int port) = RelayController.Instance.GetHostConnectionInfo();
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(ip, (ushort)port, allocationId, key, connectionData, true);
+
+            NetworkManager.Singleton.StartHost();
+        }
+        else
+        {
+            (byte[] allocationId, byte[] key, byte[] connectionData, byte[] hostConnectionData, string ip, int port) = RelayController.Instance.GetClientConnectionInfo();
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetClientRelayData(ip, (ushort)port, allocationId, key, connectionData, hostConnectionData, true);
+
+            NetworkManager.Singleton.StartClient();
+        }
 
         // armazenar dados de cada jogador neste nível,
         // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
@@ -82,7 +100,7 @@ public class Level1Controller : MonoBehaviour, ILevelController
         _roundController.DisplayCurrentRound();
         _roundController.DisplayMaxRounds();
 
-        DisplayObjectInScene();
+        //DisplayObjectInScene();
 
         _ballController = _ballObject.GetComponent<BallController>();
         _goal1Controller = _goal1Object.GetComponent<GoalController>();
@@ -91,110 +109,117 @@ public class Level1Controller : MonoBehaviour, ILevelController
         _audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
-    {
-        // quando está no intervalo entre rondas, ou seja o tempo está parado
-        if (_timerController.IsOnPause())
-        {
-            return;
-        }
+    //private void Update()
+    //{
+    //    // quando está no intervalo entre rondas, ou seja o tempo está parado
+    //    if (_timerController.IsOnPause())
+    //    {
+    //        return;
+    //    }
 
-        // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        if (_timerController.HasFinished())
-        {
-            _timerController.Pause();
+    //    // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+    //    if (_timerController.HasFinished())
+    //    {
+    //        _timerController.Pause();
 
-            // congela bola e balizas
-            _ballController.Freeze();
-            _goal1Controller.Freeze();
-            _goal2Controller.Freeze();
+    //        // congela bola e balizas
+    //        _ballController.Freeze();
+    //        _goal1Controller.Freeze();
+    //        _goal2Controller.Freeze();
 
-            CancelInvoke(nameof(SpawnPowerUp));
+    //        CancelInvoke(nameof(SpawnPowerUp));
 
-            // se estiver na última ronda - mostrar o painel do fim de nível
-            if (_roundController.IsLastRound())
-            {
-                // congela para sempre
-                FreezePlayers(-1);
+    //        // se estiver na última ronda - mostrar o painel do fim de nível
+    //        if (_roundController.IsLastRound())
+    //        {
+    //            // congela para sempre
+    //            FreezePlayers(-1);
 
-                string finishedLevelText = "";
-                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                {
-                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                }
+    //            string finishedLevelText = "";
+    //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+    //            {
+    //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+    //            }
 
-                _finishedLevelPanel.SetActive(true);
-                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+    //            _finishedLevelPanel.SetActive(true);
+    //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-                _buttonPause.SetActive(false);
-            }
-            // senão iniciar outra ronda
-            else
-            {
-                float freezingTime = 5f;
-                FreezePlayers(freezingTime);
+    //            _buttonPause.SetActive(false);
+    //        }
+    //        // senão iniciar outra ronda
+    //        else
+    //        {
+    //            float freezingTime = 5f;
+    //            FreezePlayers(freezingTime);
 
-                _roundController.NextRound();
-                _roundController.DisplayNextRoundIntro();
-                _roundController.DisplayCurrentRound();
+    //            _roundController.NextRound();
+    //            _roundController.DisplayNextRoundIntro();
+    //            _roundController.DisplayCurrentRound();
 
-                Invoke(nameof(RestartRound), freezingTime);
-            }
+    //            Invoke(nameof(RestartRound), freezingTime);
+    //        }
 
-            return;
-        }
+    //        return;
+    //    }
 
-        // se alguém marcou golo - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        if (_ballController.IsGoalScored())
-        {
-            _timerController.Pause();
+    //    // se alguém marcou golo - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+    //    if (_ballController.IsGoalScored())
+    //    {
+    //        _timerController.Pause();
 
-            PlayGoalSound();
+    //        PlayGoalSound();
 
-            // congela bola e balizas
-            _ballController.Freeze();
-            _goal1Controller.Freeze();
-            _goal2Controller.Freeze();
+    //        // congela bola e balizas
+    //        _ballController.Freeze();
+    //        _goal1Controller.Freeze();
+    //        _goal2Controller.Freeze();
 
-            CancelInvoke(nameof(SpawnPowerUp));
+    //        CancelInvoke(nameof(SpawnPowerUp));
 
-            LevelPlayerModel scorer = GetScorer();
-            UpdateScore(scorer.ID);
+    //        LevelPlayerModel scorer = GetScorer();
+    //        UpdateScore(scorer.ID);
 
-            // se estiver na última ronda - mostrar o painel do fim de nível
-            if (_roundController.IsLastRound())
-            {
-                // congela para sempre
-                FreezePlayers(-1);
+    //        // se estiver na última ronda - mostrar o painel do fim de nível
+    //        if (_roundController.IsLastRound())
+    //        {
+    //            // congela para sempre
+    //            FreezePlayers(-1);
 
-                string finishedLevelText = "";
-                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                {
-                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                }
+    //            string finishedLevelText = "";
+    //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+    //            {
+    //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+    //            }
 
-                _finishedLevelPanel.SetActive(true);
-                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+    //            _finishedLevelPanel.SetActive(true);
+    //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-                _buttonPause.SetActive(false);
-            }
-            // senão iniciar outra ronda
-            else
-            {
-                float freezingTime = 5f;
-                FreezePlayers(freezingTime);
+    //            _buttonPause.SetActive(false);
+    //        }
+    //        // senão iniciar outra ronda
+    //        else
+    //        {
+    //            float freezingTime = 5f;
+    //            FreezePlayers(freezingTime);
 
-                _roundController.NextRound();
-                _roundController.DisplayNextRoundIntro();
-                _roundController.DisplayCurrentRound();
+    //            _roundController.NextRound();
+    //            _roundController.DisplayNextRoundIntro();
+    //            _roundController.DisplayCurrentRound();
 
-                Invoke(nameof(RestartRound), freezingTime);
-            }
-        }
-    }
+    //            Invoke(nameof(RestartRound), freezingTime);
+    //        }
+    //    }
+    //}
 
 
     /* MÉTODOS DO LEVEL1CONTROLLER */
+
+    private void ConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        response.Approved = false;
+        response.CreatePlayerObject = true;
+        response.Pending = false;
+    }
 
     /// <summary>
     /// É executado ao clicar no botão de iniciar, no painel de introdução do nível.

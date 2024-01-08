@@ -7,312 +7,309 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 
-namespace Multiplayer
+public class LobbyController : SingletonMonoBehaviour<LobbyController>
 {
-    public class LobbyController : SingletonMonoBehaviour<LobbyController>
+    /* ATRIBUTOS E PROPRIEDADES */
+
+    private Lobby _currentLobby;
+
+    private string _gameCode;
+
+    private Coroutine _hearthbeatLobbyCoroutine;
+    private Coroutine _refreshLobbyCoroutine;
+
+
+    /* MÉTODOS */
+
+    public string GetLobbyCode()
     {
-        /* ATRIBUTOS E PROPRIEDADES */
+        return _currentLobby?.LobbyCode;
+    }
 
-        private Lobby _currentLobby;
+    public string GetGameCode()
+    {
+        return _gameCode;
+    }
 
-        private string _gameCode;
+    public string GetHostId()
+    {
+        return _currentLobby.HostId;
+    }
 
-        private Coroutine _hearthbeatLobbyCoroutine;
-        private Coroutine _refreshLobbyCoroutine;
+    public List<Dictionary<string, PlayerDataObject>> GetPlayersData()
+    {
+        List<Dictionary<string, PlayerDataObject>> playerData = new();
 
-
-        /* MÉTODOS */
-
-        public string GetLobbyCode()
+        foreach (Player player in _currentLobby.Players)
         {
-            return _currentLobby?.LobbyCode;
+            playerData.Add(player.Data);
         }
 
-        public string GetGameCode()
+        return playerData;
+    }
+
+    public async Task CreatePrivateLobby(string lobbyName)
+    {
+        try
         {
-            return _gameCode;
+            CreateLobbyOptions options = new CreateLobbyOptions();
+            options.IsPrivate = true;
+            //options.Player = GetPlayer();
+
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, options);
+
+            Debug.Log("Sala privada criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+        }
+    }
+
+    public async Task<bool> CreatePublicLobby(string lobbyName, int maxPlayers, Dictionary<string, string> playerData, Dictionary<string, string> lobbyData)
+    {
+        try
+        {
+            Player player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData));
+
+            CreateLobbyOptions options = new CreateLobbyOptions()
+            {
+                Data = SerializeLobbyData(lobbyData),
+                IsPrivate = false,
+                Player = player
+            };
+
+            _currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+
+            _hearthbeatLobbyCoroutine = StartCoroutine(HearthbeatLobbyCorroutine(_currentLobby.Id, 6f));
+            _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
+
+            Debug.Log("Sala pública criada! " + _currentLobby.Id + " - " + _currentLobby.Name + " - " + _currentLobby.MaxPlayers + " - " + _currentLobby.LobbyCode);
+            return true;
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+            return false;
+        }
+    }
+
+    private Dictionary<string, PlayerDataObject> SerializePlayerData(Dictionary<string, string> data)
+    {
+        Dictionary<string, PlayerDataObject> playerData = new();
+
+        foreach (var (key, value) in data)
+        {
+            playerData.Add(
+                key,
+                new PlayerDataObject(visibility: PlayerDataObject.VisibilityOptions.Member, value: value)
+            );
         }
 
-        public string GetHostId()
+        return playerData;
+    }
+
+    private Dictionary<string, DataObject> SerializeLobbyData(Dictionary<string, string> data)
+    {
+        Dictionary<string, DataObject> lobbyData = new();
+
+        foreach (var (key, value) in data)
         {
-            return _currentLobby.HostId;
+            lobbyData.Add(
+                key,
+                new DataObject(visibility: DataObject.VisibilityOptions.Member, value: value)
+            );
         }
 
-        public List<Dictionary<string, PlayerDataObject>> GetPlayersData()
+        return lobbyData;
+    }
+
+    public void OnApplicationQuit()
+    {
+        if (_currentLobby != null && _currentLobby.HostId == AuthenticationService.Instance.PlayerId)
         {
-            List<Dictionary<string, PlayerDataObject>> playerData = new();
-
-            foreach (Player player in _currentLobby.Players)
-            {
-                playerData.Add(player.Data);
-            }
-
-            return playerData;
+            LobbyService.Instance.DeleteLobbyAsync(_currentLobby.Id);
         }
+    }
 
-        public async Task CreatePrivateLobby(string lobbyName)
+    private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+    {
+        while (true)
         {
-            try
-            {
-                CreateLobbyOptions options = new CreateLobbyOptions();
-                options.IsPrivate = true;
-                //options.Player = GetPlayer();
-
-                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, options);
-
-                Debug.Log("Sala privada criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-            }
+            LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
+            yield return new WaitForSecondsRealtime(waitTimeSeconds);
         }
+    }
 
-        public async Task<bool> CreatePublicLobby(string lobbyName, int maxPlayers, Dictionary<string, string> playerData, Dictionary<string, string> lobbyData)
+    private IEnumerator RefreshLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+    {
+        while (true)
         {
-            try
+            Task<Lobby> task = LobbyService.Instance.GetLobbyAsync(lobbyId);
+            yield return new WaitUntil(() => task.IsCompleted);
+
+            Lobby newLobby = task.Result;
+            if (newLobby.LastUpdated > _currentLobby.LastUpdated)
             {
-                Player player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData));
-
-                CreateLobbyOptions options = new CreateLobbyOptions()
-                {
-                    Data = SerializeLobbyData(lobbyData),
-                    IsPrivate = false,
-                    Player = player
-                };
-
-                _currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-
-                _hearthbeatLobbyCoroutine = StartCoroutine(HearthbeatLobbyCorroutine(_currentLobby.Id, 6f));
-                _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
-
-                Debug.Log("Sala pública criada! " + _currentLobby.Id + " - " + _currentLobby.Name + " - " + _currentLobby.MaxPlayers + " - " + _currentLobby.LobbyCode);
-                return true;
+                _currentLobby = newLobby;
+                LobbyEvents.OnLobbyUpdated?.Invoke(newLobby);
             }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-                return false;
-            }
+
+            yield return new WaitForSecondsRealtime(waitTimeSeconds);
         }
+    }
 
-        private Dictionary<string, PlayerDataObject> SerializePlayerData(Dictionary<string, string> data)
+    public async Task JoinPrivateLobby(string lobbyCode)
+    {
+        try
         {
-            Dictionary<string, PlayerDataObject> playerData = new();
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
+            _currentLobby = lobby;
 
-            foreach (var (key, value) in data)
-            {
-                playerData.Add(
-                    key,
-                    new PlayerDataObject(visibility: PlayerDataObject.VisibilityOptions.Member, value: value)
-                );
-            }
+            Debug.Log("Entrou na sala privada!");
 
-            return playerData;
+            //ListPlayersOfLobby(_joinedLobby);
         }
-
-        private Dictionary<string, DataObject> SerializeLobbyData(Dictionary<string, string> data)
+        catch (LobbyServiceException exception)
         {
-            Dictionary<string, DataObject> lobbyData = new();
-
-            foreach (var (key, value) in data)
-            {
-                lobbyData.Add(
-                    key,
-                    new DataObject(visibility: DataObject.VisibilityOptions.Member, value: value)
-                );
-            }
-
-            return lobbyData;
+            Debug.LogError(exception.Message);
         }
+    }
 
-        public void OnApplicationQuit()
+    public async Task<bool> JoinPublicLobby(string lobbyCode, Dictionary<string, string> playerData)
+    {
+        try
         {
-            if (_currentLobby != null && _currentLobby.HostId == AuthenticationService.Instance.PlayerId)
-            {
-                LobbyService.Instance.DeleteLobbyAsync(_currentLobby.Id);
-            }
+            Player player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData));
+
+            JoinLobbyByCodeOptions options = new();
+            options.Player = player;
+
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
+
+            _currentLobby = lobby;
+            _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
+
+            Debug.Log("Entrou na sala pública! - " + _currentLobby.LobbyCode);
+
+            //ListPlayersOfLobby(_joinedLobby);
+            return true;
         }
-
-        private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+        catch (LobbyServiceException exception)
         {
-            while (true)
-            {
-                LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
-                yield return new WaitForSecondsRealtime(waitTimeSeconds);
-            }
+            Debug.LogError(exception.Message);
+            return false;
         }
+    }
 
-        private IEnumerator RefreshLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+    public async Task ListPublicLobbies()
+    {
+        try
         {
-            while (true)
-            {
-                Task<Lobby> task = LobbyService.Instance.GetLobbyAsync(lobbyId);
-                yield return new WaitUntil(() => task.IsCompleted);
-
-                Lobby newLobby = task.Result;
-                if (newLobby.LastUpdated > _currentLobby.LastUpdated)
-                {
-                    _currentLobby = newLobby;
-                    LobbyEvents.OnLobbyUpdated?.Invoke(newLobby);
-                }
-
-                yield return new WaitForSecondsRealtime(waitTimeSeconds);
-            }
-        }
-
-        public async Task JoinPrivateLobby(string lobbyCode)
-        {
-            try
-            {
-                Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
-                _currentLobby = lobby;
-
-                Debug.Log("Entrou na sala privada!");
-
-                //ListPlayersOfLobby(_joinedLobby);
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-            }
-        }
-
-        public async Task<bool> JoinPublicLobby(string lobbyCode, Dictionary<string, string> playerData)
-        {
-            try
-            {
-                Player player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData));
-
-                JoinLobbyByCodeOptions options = new();
-                options.Player = player;
-
-                Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
-
-                _currentLobby = lobby;
-                _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
-
-                Debug.Log("Entrou na sala pública! - " + _currentLobby.LobbyCode);
-
-                //ListPlayersOfLobby(_joinedLobby);
-                return true;
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-                return false;
-            }
-        }
-
-        public async Task ListPublicLobbies()
-        {
-            try
-            {
-                // filtros para a procura e ordem das lobbies
-                QueryLobbiesOptions options = new QueryLobbiesOptions();
-                options.Filters = new List<QueryFilter>()
+            // filtros para a procura e ordem das lobbies
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Filters = new List<QueryFilter>()
                 {
                     new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT),
                 };
-                options.Order = new List<QueryOrder>()
+            options.Order = new List<QueryOrder>()
                 {
                     new QueryOrder(false, QueryOrder.FieldOptions.Created)
                 };
 
-                QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
+            QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
 
-                Debug.Log("Salas encontradas: " + response.Results.Count);
-                foreach (Lobby lobby in response.Results)
-                {
-                    Debug.Log("Sala: " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
-                }
-            }
-            catch (LobbyServiceException exception)
+            Debug.Log("Salas encontradas: " + response.Results.Count);
+            foreach (Lobby lobby in response.Results)
             {
-                Debug.LogError(exception.Message);
+                Debug.Log("Sala: " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
             }
         }
-
-        public void ListPlayersOfLobby(Lobby lobby)
+        catch (LobbyServiceException exception)
         {
-            Debug.Log("Players in sala: " + lobby.Name + " - " + lobby.Players.Count);
-
-            foreach (Player player in lobby.Players)
-            {
-                Debug.Log("Player: " + player.Id);
-            }
+            Debug.LogError(exception.Message);
         }
+    }
 
-        public async Task<bool> UpdatePlayerData(string playerId, Dictionary<string, string> data, string allocationId = default, string connectionData = default)
+    public void ListPlayersOfLobby(Lobby lobby)
+    {
+        Debug.Log("Players in sala: " + lobby.Name + " - " + lobby.Players.Count);
+
+        foreach (Player player in lobby.Players)
         {
-            try
-            {
-                Dictionary<string, PlayerDataObject> playerData = SerializePlayerData(data);
-
-                UpdatePlayerOptions options = new();
-                options.Data = playerData;
-                options.AllocationId = allocationId;
-                options.ConnectionInfo = connectionData;
-
-                _currentLobby = await LobbyService.Instance.UpdatePlayerAsync(_currentLobby.Id, playerId, options);
-
-                LobbyEvents.OnLobbyUpdated(_currentLobby);
-
-                return true;
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-                return false;
-            }
+            Debug.Log("Player: " + player.Id);
         }
+    }
 
-        public async Task<bool> UpdateLobbyData(Dictionary<string, string> data)
+    public async Task<bool> UpdatePlayerData(string playerId, Dictionary<string, string> data, string allocationId = default, string connectionData = default)
+    {
+        try
         {
-            try
-            {
-                Dictionary<string, DataObject> lobbyData = SerializeLobbyData(data);
+            Dictionary<string, PlayerDataObject> playerData = SerializePlayerData(data);
 
-                UpdateLobbyOptions options = new()
-                {
-                    Data = lobbyData
-                };
+            UpdatePlayerOptions options = new();
+            options.Data = playerData;
+            options.AllocationId = allocationId;
+            options.ConnectionInfo = connectionData;
 
-                _currentLobby = await LobbyService.Instance.UpdateLobbyAsync(_currentLobby.Id, options);
+            _currentLobby = await LobbyService.Instance.UpdatePlayerAsync(_currentLobby.Id, playerId, options);
 
-                LobbyEvents.OnLobbyUpdated(_currentLobby);
+            LobbyEvents.OnLobbyUpdated(_currentLobby);
 
-                return true;
-            }
-            catch (LobbyServiceException exception)
-            {
-                Debug.LogError(exception.Message);
-                return false;
-            }
+            return true;
         }
-
-        private async void KickPlayer()
+        catch (LobbyServiceException exception)
         {
-            try
-            {
-                await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, _currentLobby.Players[1].Id);
-            }
-            catch (LobbyServiceException e)
-            {
-                Debug.Log(e);
-            }
+            Debug.LogError(exception.Message);
+            return false;
         }
+    }
 
-        private async void LeaveLobby()
+    public async Task<bool> UpdateLobbyData(Dictionary<string, string> data)
+    {
+        try
         {
-            try
+            Dictionary<string, DataObject> lobbyData = SerializeLobbyData(data);
+
+            UpdateLobbyOptions options = new()
             {
-                await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, AuthenticationService.Instance.PlayerId);
-            }
-            catch (LobbyServiceException e)
-            {
-                Debug.Log(e);
-            }
+                Data = lobbyData
+            };
+
+            _currentLobby = await LobbyService.Instance.UpdateLobbyAsync(_currentLobby.Id, options);
+
+            LobbyEvents.OnLobbyUpdated(_currentLobby);
+
+            return true;
+        }
+        catch (LobbyServiceException exception)
+        {
+            Debug.LogError(exception.Message);
+            return false;
+        }
+    }
+
+    private async void KickPlayer()
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, _currentLobby.Players[1].Id);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    private async void LeaveLobby()
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, AuthenticationService.Instance.PlayerId);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
         }
     }
 }

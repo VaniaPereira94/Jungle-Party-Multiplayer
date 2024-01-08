@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
+using UnityEngine.SceneManagement;
 
 
 namespace Multiplayer
@@ -47,6 +47,11 @@ namespace Multiplayer
             return LobbyController.Instance.GetLobbyCode();
         }
 
+        public int GetMapIndex()
+        {
+            return _lobbyData.MapIndex;
+        }
+
         public List<LobbyPlayerData> GetPlayers()
         {
             return _lobbyPlayersDatas;
@@ -58,6 +63,14 @@ namespace Multiplayer
 
             bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize());
             return isSuccess;
+        }
+
+        public async Task<bool> SetMap(int currentMapIndex, string sceneName)
+        {
+            _lobbyData.MapIndex = currentMapIndex;
+            _lobbyData.SceneName = sceneName;
+
+            return await LobbyController.Instance.UpdateLobbyData(_lobbyData.Serialize());
         }
 
         public async Task<bool> CreatePublicLobby()
@@ -83,12 +96,23 @@ namespace Multiplayer
             return isSuccess;
         }
 
-        public async Task<bool> StartGame()
+        public async Task StartGame()
         {
             string relayJoinCode = await RelayController.Instance.CreateRelay(_MAX_PLAYERS_IN_LOOBY);
 
             _lobbyData.RelayJoinCode = relayJoinCode;
             await LobbyController.Instance.UpdateLobbyData(_lobbyData.Serialize());
+
+            string allocationId = RelayController.Instance.GetAllocationId();
+            string connectionData = RelayController.Instance.GetConnectionData();
+            await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize(), allocationId, connectionData);
+
+            SceneManager.LoadSceneAsync(_lobbyData.SceneName);
+        }
+
+        private async Task<bool> JoinRelayServer(string relayJoinCode)
+        {
+            await RelayController.Instance.JoinRelay(relayJoinCode);
 
             string allocationId = RelayController.Instance.GetAllocationId();
             string connectionData = RelayController.Instance.GetConnectionData();
@@ -136,18 +160,8 @@ namespace Multiplayer
             if (_lobbyData.RelayJoinCode != default)
             {
                 await JoinRelayServer(_lobbyData.RelayJoinCode);
+                SceneManager.LoadSceneAsync(_lobbyData.SceneName);
             }
-        }
-
-        private async Task<bool> JoinRelayServer(string relayJoinCode)
-        {
-            await RelayController.Instance.JoinRelay(relayJoinCode);
-
-            string allocationId = RelayController.Instance.GetAllocationId();
-            string connectionData = RelayController.Instance.GetConnectionData();
-
-            bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize(), allocationId, connectionData);
-            return isSuccess;
         }
     }
 }

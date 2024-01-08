@@ -74,14 +74,14 @@ namespace Multiplayer
             {
                 Player player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData));
 
-                CreateLobbyOptions options = new CreateLobbyOptions();
-                options.IsPrivate = false;
-                options.Player = player;
-                options.Data = SerializeLobbyData(lobbyData);
+                CreateLobbyOptions options = new CreateLobbyOptions()
+                {
+                    Data = SerializeLobbyData(lobbyData),
+                    IsPrivate = false,
+                    Player = player
+                };
 
-                Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-
-                _currentLobby = lobby;
+                _currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
 
                 _hearthbeatLobbyCoroutine = StartCoroutine(HearthbeatLobbyCorroutine(_currentLobby.Id, 6f));
                 _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
@@ -273,8 +273,10 @@ namespace Multiplayer
             {
                 Dictionary<string, DataObject> lobbyData = SerializeLobbyData(data);
 
-                UpdateLobbyOptions options = new();
-                options.Data = lobbyData;
+                UpdateLobbyOptions options = new()
+                {
+                    Data = lobbyData
+                };
 
                 _currentLobby = await LobbyService.Instance.UpdateLobbyAsync(_currentLobby.Id, options);
 

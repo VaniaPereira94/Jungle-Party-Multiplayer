@@ -1,20 +1,33 @@
 using System;
 using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
-using UnityEngine;
 
 
 namespace Multiplayer
 {
-    public class LobbyData : MonoBehaviour
+    public class LobbyData
     {
         private int _mapIndex;
         private string _relayJoinCode;
         private string _sceneName;
 
-        public int MapIndex { get; set; }
-        public string RelayJoinCode { get; set; }
-        public string SceneName { get; set; }
+        public int MapIndex
+        {
+            get => _mapIndex;
+            set => _mapIndex = value;
+        }
+
+        public string RelayJoinCode
+        {
+            get => _relayJoinCode;
+            set => _relayJoinCode = value;
+        }
+
+        public string SceneName
+        {
+            get => _sceneName;
+            set => _sceneName = value;
+        }
 
         public void Initialize(int mapIndex)
         {

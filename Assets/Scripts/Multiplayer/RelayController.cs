@@ -49,7 +49,6 @@ namespace Multiplayer
                 _connectionData = allocation.ConnectionData;
 
                 Debug.Log("Criou jogo! Código do jogo: " + _joinCode);
-
                 return _joinCode;
             }
             catch (LobbyServiceException exception)

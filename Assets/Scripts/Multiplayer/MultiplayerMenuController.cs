@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -9,12 +8,10 @@ namespace Multiplayer
     /// <summary>
     /// Trata das interações do utilizador com o menu de multiplayer.
     /// </summary>
-    //public class MultiplayerMenuController : NetworkBehaviour
     public class MultiplayerMenuController : MonoBehaviour
     {
         /* ATRIBUTOS PRIVADOS */
 
-        // referências para objetos de UI
         [Header("UI - Menu")]
         [SerializeField] private GameObject _menuPanel;
         [SerializeField] private TMP_InputField _publicLobbyCodeInput;
@@ -47,11 +44,8 @@ namespace Multiplayer
 
         private void OnEnable()
         {
-            _setReadyPlayerButton.onClick.AddListener(OnReadyClicked);
-            _previousMapButton.onClick.AddListener(OnPreviousMapClicked);
-            _nextMapButton.onClick.AddListener(OnNextMapClicked);
-
-            LobbyGameEvents.OnLobbyReady += OnLobbyReady;
+            _setReadyPlayerButton.onClick.AddListener(OnSetReadyPlayerClicked);
+            LobbyGameEvents.OnLobbyUpdated += OnLobbyUpdated;
         }
 
         private void OnDisable()
@@ -59,8 +53,9 @@ namespace Multiplayer
             _setReadyPlayerButton.onClick.RemoveAllListeners();
             _previousMapButton.onClick.RemoveAllListeners();
             _nextMapButton.onClick.RemoveAllListeners();
-
-            LobbyGameEvents.OnLobbyReady -= OnLobbyReady;
+            _startGameButton.onClick.RemoveAllListeners();
+            LobbyGameEvents.OnLobbyReady -= OnLobbyReadyClicked;
+            LobbyGameEvents.OnLobbyUpdated -= OnLobbyUpdated;
         }
 
         private void Start()
@@ -99,13 +94,20 @@ namespace Multiplayer
 
             if (isSuccess)
             {
-                //string gameCode = await MultiplayerController.Instance.CreateGame();
-
-                //if (gameCode != null)
-                //{
                 OpenGameLobby();
                 _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
-                //}
+
+                if (MultiplayerController.Instance.IsHost)
+                {
+                    _startGameButton.gameObject.SetActive(false);
+
+                    _previousMapButton.onClick.AddListener(OnPreviousMapClicked);
+                    _nextMapButton.onClick.AddListener(OnNextMapClicked);
+                    _startGameButton.onClick.AddListener(OnStartGameClicked);
+                    LobbyGameEvents.OnLobbyReady += OnLobbyReadyClicked;
+
+                    await MultiplayerController.Instance.SetMap(_currentMapIndex, _mapListScriptable.Maps[_currentMapIndex].SceneName);
+                }
             }
         }
 
@@ -160,21 +162,14 @@ namespace Multiplayer
             {
                 OpenGameLobby();
                 _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
+
+                _previousMapButton.gameObject.SetActive(false);
+                _nextMapButton.gameObject.SetActive(false);
+                _startGameButton.gameObject.SetActive(false);
             }
         }
 
-        public async void SetPlayerReady()
-        {
-            await MultiplayerController.Instance.SetPlayerReady();
-            _setReadyPlayerButton.gameObject.SetActive(false);
-        }
-
-        public async void OnReadyClicked()
-        {
-            bool isSuccess = await MultiplayerController.Instance.SetPlayerReady();
-        }
-
-        public void OnPreviousMapClicked()
+        public async void OnPreviousMapClicked()
         {
             if (_currentMapIndex - 1 > 0)
             {
@@ -185,10 +180,11 @@ namespace Multiplayer
                 _currentMapIndex = 0;
             }
 
-            UpdateMap();
+            UpdateMapUI();
+            await MultiplayerController.Instance.SetMap(_currentMapIndex, _mapListScriptable.Maps[_currentMapIndex].SceneName);
         }
 
-        public void OnNextMapClicked()
+        public async void OnNextMapClicked()
         {
             if (_currentMapIndex + 1 < _mapListScriptable.Maps.Count - 1)
             {
@@ -199,22 +195,39 @@ namespace Multiplayer
                 _currentMapIndex = _mapListScriptable.Maps.Count - 1;
             }
 
-            UpdateMap();
+            UpdateMapUI();
+            await MultiplayerController.Instance.SetMap(_currentMapIndex, _mapListScriptable.Maps[_currentMapIndex].SceneName);
         }
 
-        private void UpdateMap()
+        private void UpdateMapUI()
         {
-             _mapCoverImage.sprite = _mapListScriptable.Maps[_currentMapIndex].coverName;
+            _mapCoverImage.sprite = _mapListScriptable.Maps[_currentMapIndex].coverName;
         }
 
-        public async void OnLobbyReady()
+        public void OnLobbyUpdated()
         {
-            bool isSuccess = await MultiplayerController.Instance.StartGame();
+            _currentMapIndex = MultiplayerController.Instance.GetMapIndex();
+            UpdateMapUI();
+        }
+
+        public async void OnSetReadyPlayerClicked()
+        {
+            bool isSuccess = await MultiplayerController.Instance.SetPlayerReady();
 
             if (isSuccess)
             {
-                SceneManager.LoadSceneAsync("Level1Scene");
+                _setReadyPlayerButton.gameObject.SetActive(false);
             }
+        }
+
+        public void OnLobbyReadyClicked()
+        {
+            _startGameButton.gameObject.SetActive(true);
+        }
+
+        public async void OnStartGameClicked()
+        {
+            await MultiplayerController.Instance.StartGame();
         }
 
         public void OpenLeaderboard()

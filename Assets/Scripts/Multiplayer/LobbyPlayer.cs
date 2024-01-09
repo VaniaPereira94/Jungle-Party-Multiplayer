@@ -11,12 +11,7 @@ public class LobbyPlayer : MonoBehaviour
     {
         _lobbyPlayerData = lobbyPlayerData;
         //_playerName.text = data.GamerTag;
-        gameObject.SetActive(true);
-
-        if (lobbyPlayerData.IsReady)
-        {
-            // começar jogo
-        }
+        this.gameObject.SetActive(true);
 
         GameObject playerNameTextObject = this.gameObject.transform.Find("PlayerNameText").gameObject;
         playerNameTextObject.GetComponent<TextMeshProUGUI>().text = lobbyPlayerData.GamerTag;

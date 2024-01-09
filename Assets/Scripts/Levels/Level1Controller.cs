@@ -88,18 +88,17 @@ public class Level1Controller : MonoBehaviour
         if (RelayController.Instance.IsHost)
         {
             NetworkManager.Singleton.ConnectionApprovalCallback = ConnectionApproval;
-
             (byte[] allocationId, byte[] key, byte[] connectionData, string ip, int port) = RelayController.Instance.GetHostConnectionInfo();
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(ip, (ushort)port, allocationId, key, connectionData, true);
-
             NetworkManager.Singleton.StartHost();
+            Debug.Log("StartHost()");
         }
         else
         {
             (byte[] allocationId, byte[] key, byte[] connectionData, byte[] hostConnectionData, string ip, int port) = RelayController.Instance.GetClientConnectionInfo();
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetClientRelayData(ip, (ushort)port, allocationId, key, connectionData, hostConnectionData, true);
-
             NetworkManager.Singleton.StartClient();
+            Debug.Log("StartClient()");
         }
 
         if (_levelStarted)
@@ -234,20 +233,21 @@ public class Level1Controller : MonoBehaviour
 
     private void ConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
     {
-        response.Approved = false;
-        response.CreatePlayerObject = true;
+        Debug.Log("Player conectado:" + request.ClientNetworkId);
+        response.Approved = true;
+        response.CreatePlayerObject = false;
         response.Pending = false;
     }
 
     private void OnLobbyUpdated()
     {
-        //List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
+        List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
 
-        //for (int i = 0; i < playerDatas.Count; i++)
-        //{
-        //    LobbyPlayerData data = playerDatas[i];
-        //    _players[i].SetGameData(data);
-        //}
+        for (int i = 0; i < playerDatas.Count; i++)
+        {
+            LobbyPlayerData data = playerDatas[i];
+            _players[i].SetGameData(data);
+        }
 
         //if (playerDatas.Count == 2)
         //{

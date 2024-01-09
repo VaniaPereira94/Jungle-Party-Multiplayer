@@ -54,11 +54,11 @@ public class RelayController : SingletonMonoBehaviour<RelayController>
 
             _ip = dtlsEndpoint.Host;
             _port = dtlsEndpoint.Port;
-            _allocationId = allocation.AllocationId;
-            _connectionData = allocation.ConnectionData;
 
-            _key = allocation.Key;
+            _allocationId = allocation.AllocationId;
             _allocationIdBytes = allocation.AllocationIdBytes;
+            _connectionData = allocation.ConnectionData;
+            _key = allocation.Key;
 
             _isHost = true;
 
@@ -86,12 +86,12 @@ public class RelayController : SingletonMonoBehaviour<RelayController>
 
             _ip = dtlsEndpoint.Host;
             _port = dtlsEndpoint.Port;
-            _allocationId = allocation.AllocationId;
-            _connectionData = allocation.ConnectionData;
 
+            _allocationId = allocation.AllocationId;
             _allocationIdBytes = allocation.AllocationIdBytes;
-            _key = allocation.Key;
+            _connectionData = allocation.ConnectionData;
             _hostConnectionData = allocation.HostConnectionData;
+            _key = allocation.Key;
 
             Debug.Log("Entrou no jogo! Código do jogo: " + _joinCode);
             return true;

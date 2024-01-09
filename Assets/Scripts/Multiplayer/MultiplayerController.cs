@@ -98,9 +98,9 @@ public class MultiplayerController : SingletonMonoBehaviour<MultiplayerControlle
 
     public async Task StartGame()
     {
-        _inGame = true;
-
         string relayJoinCode = await RelayController.Instance.CreateRelay(_MAX_PLAYERS_IN_LOOBY);
+
+        _inGame = true;
 
         _lobbyData.RelayJoinCode = relayJoinCode;
         await LobbyController.Instance.UpdateLobbyData(_lobbyData.Serialize());

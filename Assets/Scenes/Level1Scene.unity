@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _players:
   - {fileID: 1419414003}
+  - {fileID: 1479367229}
   _player1Level1Prefab: {fileID: 3757945735145184329, guid: e9aacc78b9d5b5d4dbbc2dddec464470, type: 3}
   _player2Level1Prefab: {fileID: 1335403432731199281, guid: 399486faba0b1c74ab7f935e2e5eda97, type: 3}
   _ballPrefab: {fileID: 6533743398507693898, guid: 16baa4fa8dfe97c41a6b9d0ddcc622ee, type: 3}

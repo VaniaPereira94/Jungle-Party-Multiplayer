@@ -64,7 +64,7 @@ public class Level3Controller : MonoBehaviour, ILevelController
 
     private void Start()
     {
-        _gameController = GameController.Instance;
+        //_gameController = GameController.Instance;
 
         // TEST: usar isto enquanto é testado apenas o nível atual (sem iniciar pelo menu)
         //_gameController.GamePlayers = new();
@@ -72,7 +72,7 @@ public class Level3Controller : MonoBehaviour, ILevelController
 
         // armazenar dados de cada jogador neste nível,
         // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
-        CreatePlayersDataForLevel();
+        //CreatePlayersDataForLevel();
 
         _timerController = TimerController.Instance;
         TimerController.Freeze();
@@ -80,98 +80,98 @@ public class Level3Controller : MonoBehaviour, ILevelController
         _roundController.DisplayCurrentRound();
         _roundController.DisplayMaxRounds();
 
-        DisplayObjectInScene();
+        //DisplayObjectInScene();
     }
 
-    private void Update()
-    {
-        // quando está no intervalo entre rondas, ou seja o tempo está parado
-        if (_timerController.IsOnPause())
-        {
-            return;
-        }
+    //private void Update()
+    //{
+    //    // quando está no intervalo entre rondas, ou seja o tempo está parado
+    //    if (_timerController.IsOnPause())
+    //    {
+    //        return;
+    //    }
 
-        // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        if (_timerController.HasFinished())
-        {
-            _timerController.Pause();
+    //    // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+    //    if (_timerController.HasFinished())
+    //    {
+    //        _timerController.Pause();
 
-            CancelInvoke(nameof(SpawnPowerUp));
+    //        CancelInvoke(nameof(SpawnPowerUp));
 
-            // se estiver na última ronda - mostrar o painel do fim de nível
-            if (_roundController.IsLastRound())
-            {
-                // congela para sempre
-                FreezePlayers(-1);
+    //        // se estiver na última ronda - mostrar o painel do fim de nível
+    //        if (_roundController.IsLastRound())
+    //        {
+    //            // congela para sempre
+    //            FreezePlayers(-1);
 
-                string finishedLevelText = "";
-                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                {
-                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                }
+    //            string finishedLevelText = "";
+    //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+    //            {
+    //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+    //            }
 
-                _finishedLevelPanel.SetActive(true);
-                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+    //            _finishedLevelPanel.SetActive(true);
+    //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-                _buttonPause.SetActive(false);
-            }
-            // senão iniciar outra ronda
-            else
-            {
-                float freezingTime = 5f;
-                FreezePlayers(freezingTime);
+    //            _buttonPause.SetActive(false);
+    //        }
+    //        // senão iniciar outra ronda
+    //        else
+    //        {
+    //            float freezingTime = 5f;
+    //            FreezePlayers(freezingTime);
 
-                _roundController.NextRound();
-                _roundController.DisplayNextRoundIntro();
-                _roundController.DisplayCurrentRound();
+    //            _roundController.NextRound();
+    //            _roundController.DisplayNextRoundIntro();
+    //            _roundController.DisplayCurrentRound();
 
-                Invoke(nameof(RestartRound), freezingTime);
-            }
+    //            Invoke(nameof(RestartRound), freezingTime);
+    //        }
 
-            return;
-        }
+    //        return;
+    //    }
 
-        // se alguém saiu da arena - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        if (IsOutOfArena())
-        {
-            _timerController.Pause();
+    //    // se alguém saiu da arena - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+    //    if (IsOutOfArena())
+    //    {
+    //        _timerController.Pause();
 
-            CancelInvoke(nameof(SpawnPowerUp));
+    //        CancelInvoke(nameof(SpawnPowerUp));
 
-            LevelPlayerModel winner = GetWinner();
-            UpdateScore(winner.ID);
+    //        LevelPlayerModel winner = GetWinner();
+    //        UpdateScore(winner.ID);
 
-            // se estiver na última ronda - mostrar o painel do fim de nível
-            if (_roundController.IsLastRound())
-            {
-                // congela para sempre
-                FreezePlayers(-1);
+    //        // se estiver na última ronda - mostrar o painel do fim de nível
+    //        if (_roundController.IsLastRound())
+    //        {
+    //            // congela para sempre
+    //            FreezePlayers(-1);
 
-                string finishedLevelText = "";
-                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                {
-                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                }
+    //            string finishedLevelText = "";
+    //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+    //            {
+    //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+    //            }
 
-                _finishedLevelPanel.SetActive(true);
-                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+    //            _finishedLevelPanel.SetActive(true);
+    //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-                _buttonPause.SetActive(false);
-            }
-            // senão iniciar outra ronda
-            else
-            {
-                float freezingTime = 5f;
-                FreezePlayers(freezingTime);
+    //            _buttonPause.SetActive(false);
+    //        }
+    //        // senão iniciar outra ronda
+    //        else
+    //        {
+    //            float freezingTime = 5f;
+    //            FreezePlayers(freezingTime);
 
-                _roundController.NextRound();
-                _roundController.DisplayNextRoundIntro();
-                _roundController.DisplayCurrentRound();
+    //            _roundController.NextRound();
+    //            _roundController.DisplayNextRoundIntro();
+    //            _roundController.DisplayCurrentRound();
 
-                Invoke(nameof(RestartRound), freezingTime);
-            }
-        }
-    }
+    //            Invoke(nameof(RestartRound), freezingTime);
+    //        }
+    //    }
+    //}
 
 
     /* MÉTODOS DO LEVEL3CONTROLLER */

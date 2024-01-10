@@ -3,6 +3,7 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Reflection;
 
 
 /// <summary>
@@ -65,15 +66,15 @@ public class Level1Controller : MonoBehaviour
 
     /* MÉTODOS DO MONOBEHAVIOUR */
 
-    private void OnEnable()
-    {
-        LobbyGameEvents.OnLobbyUpdated += OnLobbyUpdated;
-    }
+    //private void OnEnable()
+    //{
+    //    LobbyGameEvents.OnLobbyUpdated += OnLobbyUpdated;
+    //}
 
-    private void OnDisable()
-    {
-        LobbyGameEvents.OnLobbyUpdated -= OnLobbyUpdated;
-    }
+    //private void OnDisable()
+    //{
+    //    LobbyGameEvents.OnLobbyUpdated -= OnLobbyUpdated;
+    //}
 
     private void Start()
     {
@@ -235,19 +236,39 @@ public class Level1Controller : MonoBehaviour
     {
         Debug.Log("Player conectado:" + request.ClientNetworkId);
         response.Approved = true;
-        response.CreatePlayerObject = false;
+        response.CreatePlayerObject = true;
         response.Pending = false;
+
+        //var playerPrefabIndex = System.BitConverter.ToInt32(request.Payload);
+        //if (AlternatePlayerPrefabs.Count > playerPrefabIndex)
+        //{
+        //    response.PlayerPrefabHash = AlternatePlayerPrefabs[playerPrefabIndex];
+        //}
+
+        //List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
+
+        //for (int i = 0; i < playerDatas.Count; i++)
+        //{
+            //GameObject playerObject = response.PlayerPrefabHash;
+            //ulong? prefabHash = GetPrefabHash(response.PlayerPrefabHash);
+
+            //LobbyPlayerData data = playerDatas[i];
+            //_players[i].SetGameData(data);
+
+            //GameObject go = Instantiate(_players[i].gameObject, Vector3.zero, Quaternion.identity);
+            //go.GetComponent<NetworkObject>().Spawn();
+        //}
     }
 
     private void OnLobbyUpdated()
     {
-        List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
+        //List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
 
-        for (int i = 0; i < playerDatas.Count; i++)
-        {
-            LobbyPlayerData data = playerDatas[i];
-            _players[i].SetGameData(data);
-        }
+        //for (int i = 0; i < playerDatas.Count; i++)
+        //{
+        //    LobbyPlayerData data = playerDatas[i];
+        //    _players[i].SetGameData(data);
+        //}
 
         //if (playerDatas.Count == 2)
         //{

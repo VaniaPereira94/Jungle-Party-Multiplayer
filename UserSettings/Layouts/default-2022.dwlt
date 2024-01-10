@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 77
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -778,9 +778,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.05710846, y: -1086.7318, z: 0.016460538}
+    m_Target: {x: 1.5503999, y: -1538.418, z: 0}
     speed: 2
-    m_Value: {x: -0.05710846, y: -1086.7318, z: 0.016460538}
+    m_Value: {x: 1.5503999, y: -1538.418, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -830,9 +830,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.27097258, y: -0.39066467, z: 0.12149254, w: 0.87131774}
   m_Size:
-    m_Target: 1.2694123
+    m_Target: 0.8660254
     speed: 2
-    m_Value: 1.2694123
+    m_Value: 0.8660254
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -966,7 +966,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ae83ffffcc8cffff8e97fffff8bcffffe4beffff30c8ffff02d0ffffd0daffff9ae5ffff92f8ffffd2f8fffff2f9ffffd2900000
+      m_ExpandedIDs: f4ccfeff50e0feff6ae1feff40e9feff58f6feff360effff480fffffd614ffffa825ffff462cffff4a51ffff4a63ffff2869ffff3278ffff947effff36a4ffff02aaffff78ddffff28e5ffff64ebffffeeebffff78ecffffe8f8ffff00faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1035,7 +1035,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 1ca70000
     m_LastClickedID: 42780
-    m_ExpandedIDs: 00000000c8740000ca740000cc740000ce740000d0740000d2740000d4740000d6740000d8740000
+    m_ExpandedIDs: 00000000c6740000c8740000ca740000cc740000ce740000d0740000d2740000d4740000d6740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1076,24 +1076,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 60}
+    scrollPos: {x: 0, y: 540}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000c8740000ca740000cc740000ce740000d0740000d2740000d4740000d6740000d8740000
+    m_ExpandedIDs: ffffffff00000000c6740000c8740000ca740000cc740000ce740000d0740000d2740000d4740000e4740000d4c00000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MultiplayerMenuScene
-      m_OriginalName: MultiplayerMenuScene
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 29990
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 4
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 

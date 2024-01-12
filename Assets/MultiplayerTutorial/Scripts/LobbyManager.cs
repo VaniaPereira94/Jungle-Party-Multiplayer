@@ -69,7 +69,7 @@ namespace lobbyTutorial
         {
             this.playerName = playerName;
             InitializationOptions initializationOptions = new InitializationOptions();
-            initializationOptions.SetProfile(playerName);
+            //initializationOptions.SetProfile(playerName);
 
             await UnityServices.InitializeAsync(initializationOptions);
 

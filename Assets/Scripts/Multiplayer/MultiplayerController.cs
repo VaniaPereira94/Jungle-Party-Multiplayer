@@ -1,7 +1,11 @@
+using lobbyTutorial;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -17,6 +21,12 @@ public class MultiplayerController : SingletonMonoBehaviour<MultiplayerControlle
     private LobbyData _lobbyData;
 
     private bool _inGame = false;
+
+    public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
+    public class OnLobbyListChangedEventArgs : EventArgs
+    {
+        public List<Lobby> lobbyList;
+    }
 
 
     /* PROPRIEDADES PRIVADAS */
@@ -123,6 +133,38 @@ public class MultiplayerController : SingletonMonoBehaviour<MultiplayerControlle
 
         bool isSuccess = await LobbyController.Instance.UpdatePlayerData(_localLobbyPlayerData.Id, _localLobbyPlayerData.Serialize(), allocationId, connectionData);
         return isSuccess;
+    }
+
+    public async void RefreshLobbies()
+    {
+        try
+        {
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Count = 25;
+
+            // Filter for open lobbies only
+            options.Filters = new List<QueryFilter> {
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.AvailableSlots,
+                    op: QueryFilter.OpOptions.GT,
+                    value: "0")
+            };
+
+            // Order by newest lobbies first
+            options.Order = new List<QueryOrder> {
+                new QueryOrder(
+                    asc: false,
+                    field: QueryOrder.FieldOptions.Created)
+            };
+
+            QueryResponse lobbyListQueryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+
+            OnLobbyListChanged?.Invoke(this, new OnLobbyListChangedEventArgs { lobbyList = lobbyListQueryResponse.Results });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
     }
 
     private async void OnLobbyUpdated(Lobby lobby)

@@ -30,6 +30,11 @@ public class LobbyPlayerData
 
     public void UpdateState(Dictionary<string, PlayerDataObject> playerData)
     {
+        if (playerData == null)
+        {
+            return;
+        }
+
         if (playerData.ContainsKey("Id"))
         {
             _id = playerData["Id"].Value;

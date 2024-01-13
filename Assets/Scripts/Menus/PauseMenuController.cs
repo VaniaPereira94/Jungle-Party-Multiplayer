@@ -41,7 +41,14 @@ public class PauseMenuController : MonoBehaviour
         TimerController.Unfreeze();
         _menuPause.SetActive(false);
 
-        string sceneName = "MainMenuScene";
+        LobbyController.Instance.LeaveLobby();
+
+        string sceneName = "MultiplayerMenuScene";
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void Kick()
+    {
+        LobbyController.Instance.KickPlayer();
     }
 }

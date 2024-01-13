@@ -169,6 +169,7 @@ public class MultiplayerController : SingletonMonoBehaviour<MultiplayerControlle
 
     private async void OnLobbyUpdated(Lobby lobby)
     {
+
         List<Dictionary<string, PlayerDataObject>> playerData = LobbyController.Instance.GetPlayersData();
 
         _lobbyPlayersDatas.Clear();

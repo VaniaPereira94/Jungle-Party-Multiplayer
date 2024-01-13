@@ -296,13 +296,16 @@ public class MultiplayerMenuController : MonoBehaviour
 
     public void CloseGameLobby()
     {
+        LobbyController.Instance.LeaveLobby();
         _gameLobbyPanel.SetActive(false);
         _createLobbyPanel.SetActive(false);
         _joinLobbyPanel.SetActive(false);
+        _menuPanel.SetActive(true);
     }
 
     public static void ShowError(string message)
     {
         Debug.LogError(message);
     }
+
 }

@@ -124,15 +124,24 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         return lobbyData;
     }
 
-    public void OnApplicationQuit()
+    public async void OnApplicationQuit()
     {
         if (_currentLobby != null && _currentLobby.HostId == AuthenticationService.Instance.PlayerId)
         {
-            LobbyService.Instance.DeleteLobbyAsync(_currentLobby.Id);
+            try
+            {
+                await LobbyService.Instance.DeleteLobbyAsync(_currentLobby.Id);
+                // Limpe os dados do lobby local
+                _currentLobby = null;
+            }
+            catch (LobbyServiceException exception)
+            {
+                Debug.LogError(exception.Message);
+            }
         }
     }
 
-    private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+        private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
     {
         while (true)
         {
@@ -289,7 +298,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         }
     }
 
-    private async void KickPlayer()
+    public async void KickPlayer()
     {
         try
         {
@@ -301,9 +310,9 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         }
     }
 
-    private async void LeaveLobby()
+    public async void LeaveLobby()
     {
-        try
+        try 
         {
             await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, AuthenticationService.Instance.PlayerId);
         }
@@ -311,5 +320,6 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         {
             Debug.Log(e);
         }
+
     }
 }

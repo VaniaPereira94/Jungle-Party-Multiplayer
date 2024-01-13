@@ -54,7 +54,7 @@ public class KickAction : MonoBehaviour, IPlayerAction
     public void Start()
     {
         _animator = GetComponent<Animator>();
-        _ballObject = GameObject.FindGameObjectsWithTag("Ball")[0];
+        _ballObject = GameObject.FindGameObjectWithTag("Ball");
     }
 
     public void Enter()
@@ -65,7 +65,10 @@ public class KickAction : MonoBehaviour, IPlayerAction
 
     public void Exit()
     {
-        _animator.SetBool("isKicking", false);
+        if (_animator != null)
+        {
+            _animator.SetBool("isKicking", false);
+        }
     }
 
     public void Collide(Collision collision)

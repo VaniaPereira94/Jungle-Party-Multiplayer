@@ -34,6 +34,9 @@ public class PlayerController : NetworkBehaviour
     // guarda a ação de andar do jogador (é igual para todos os níveis)
     private WalkAction _walkAction;
 
+    // guarda a ação de chutar
+    private KickAction _kickAction;
+
     // guarda qual ação o jogador deve executar
     private IPlayerAction _currentAction;
 
@@ -47,8 +50,6 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField] private string _tigerPlayer1MaterialName;
     [SerializeField] private string _tigerPlayer2MaterialName;
-
-    private bool _levelStarted = false;
 
 
     /* PROPRIEDADES PÚBLICAS */
@@ -75,12 +76,10 @@ public class PlayerController : NetworkBehaviour
         if (IsServer && IsOwner)
         {
             SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 73f), "Player1", _tigerPlayer1MaterialName);
-            //_levelStarted = true;
         }
         else if (!IsServer && IsOwner)
         {
             SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 81.83f), "Player2", _tigerPlayer2MaterialName);
-            //_levelStarted = true;
         }
     }
 
@@ -109,6 +108,8 @@ public class PlayerController : NetworkBehaviour
             //mats[0] = mat;
             //skinnedMeshRenderer.materials = mats;
         }
+        Debug.Log("XXXXXXXXXXXXXXXXX");
+        AddActionToPlayer();
     }
 
     /// <summary>
@@ -134,56 +135,54 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Update()
     {
-        if (_levelStarted)
+        if (IsLocalPlayer)
         {
-            if (IsLocalPlayer)
+            if (_currentAction is SuccessAction)
             {
-                if (_currentAction is SuccessAction)
-                {
-                    _currentAction.Enter();
-                }
-                if (_currentAction is FailureAction)
-                {
-                    _currentAction.Enter();
-                }
+                _currentAction.Enter();
+            }
+            if (_currentAction is FailureAction)
+            {
+                _currentAction.Enter();
+            }
 
-                if (!_isFrozen)
-                {
-                    bool actionInput = GetCurrentActionInput();
+            if (!_isFrozen)
+            {
+                bool actionInput = _playerControls.Player.Action.triggered;
 
-                    // se o jogador pressiona a tecla de ação
-                    if (actionInput)
+                // se o jogador pressiona a tecla de ação
+                if (actionInput)
+                {
+                    Debug.Log("_currentAction.Level:", _currentAction.Level);
+                    if (_currentAction is KickAction)  // significa que está no nível 1
                     {
-                        if (_currentAction is KickAction)  // significa que está no nível 1
+                        _currentAction.Enter();
+                    }
+                    if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
+                    {
+                        _currentAction.Enter();
+                    }
+                    if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
+                    {
+                        if (!_isWalking)
                         {
                             _currentAction.Enter();
-                        }
-                        if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
-                        {
-                            _currentAction.Enter();
-                        }
-                        if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
-                        {
-                            if (!_isWalking)
-                            {
-                                _currentAction.Enter();
-                            }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (_currentAction is KickAction)
                     {
-                        if (_currentAction is KickAction)
-                        {
-                            _currentAction.Exit();
-                        }
-                        if (_currentAction is CarryAction)
-                        {
-                            _currentAction.Exit();
-                        }
-                        if (_currentAction is ThrowLvl4Action)
-                        {
-                            _currentAction.Exit();
-                        }
+                        _currentAction.Exit();
+                    }
+                    if (_currentAction is CarryAction)
+                    {
+                        _currentAction.Exit();
+                    }
+                    if (_currentAction is ThrowLvl4Action)
+                    {
+                        _currentAction.Exit();
                     }
                 }
             }
@@ -197,33 +196,29 @@ public class PlayerController : NetworkBehaviour
     {
         Vector3 movementInput = _playerControls.Player.Move.ReadValue<Vector2>();
 
-        //if (_levelStarted)
-        //{
-
         if (IsServer && IsLocalPlayer)
         {
-            //if (!_isFrozen)
-            //{
-            if (movementInput == Vector3.zero)
+            if (!_isFrozen)
             {
-                Debug.Log("A andar...");
-                UpdateMovement(movementInput);
+                if (movementInput.magnitude > 0)
+                {
+                    UpdateMovement(movementInput);
 
-                if (!_isWalking)
+                    if (!_isWalking)
+                    {
+                        _walkAction.Enter();
+                        _isWalking = true;
+                    }
+                }
+                else
                 {
-                    _walkAction.Enter();
-                    _isWalking = true;
+                    if (_isWalking)
+                    {
+                        _walkAction.Exit();
+                        _isWalking = false;
+                    }
                 }
             }
-            else
-            {
-                if (_isWalking)
-                {
-                    _walkAction.Exit();
-                    _isWalking = false;
-                }
-            }
-            //}
         }
         else if (IsLocalPlayer)
         {
@@ -247,17 +242,18 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        if (_levelStarted)
+        // colisão com alguma power up - destroi a power up e aplica o efeito ao jogador
+        if (collision.gameObject.CompareTag("PowerUp"))
         {
-            // colisão com alguma power up - destroi a power up e aplica o efeito ao jogador
-            if (collision.gameObject.CompareTag("PowerUp"))
-            {
-                Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
 
-                int value = GenerateEffect();
-                ApplyEffect(value);
-            }
+            int value = GenerateEffect();
+            ApplyEffect(value);
+        }
 
+        int spawnedObjects = GetSpawnedObjectCount();
+        if (spawnedObjects == 2)
+        {
             string oppositePlayerTag = GetOppositePlayer().tag;
 
             // colisão com o outro jogador
@@ -273,21 +269,21 @@ public class PlayerController : NetworkBehaviour
                     _currentAction.Collide(collision);
                 }
             }
+        }
 
-            if (_currentAction is KickAction)  // significa que está no nível 1
+        if (_currentAction is KickAction)  // significa que está no nível 1
+        {
+            // colisão com a bola
+            if (collision.gameObject.CompareTag("Ball"))
             {
-                // colisão com a bola
-                if (collision.gameObject.CompareTag("Ball"))
+                _currentAction.Collide(collision);
+
+                bool actionInput = _playerControls.Player.Action.triggered;
+
+                // se o jogador pressiona a tecla de ação
+                if (actionInput)
                 {
-                    _currentAction.Collide(collision);
-
-                    bool actionInput = GetCurrentActionInput();
-
-                    // se o jogador pressiona a tecla de ação
-                    if (actionInput)
-                    {
-                        _currentAction.Enter();
-                    }
+                    _currentAction.Enter();
                 }
             }
         }
@@ -298,15 +294,12 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void OnCollisionStay(Collision collision)
     {
-        if (_levelStarted)
+        // colisão com alguma parede da arena - impede que o jogador saia da arena
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            // colisão com alguma parede da arena - impede que o jogador saia da arena
-            if (collision.gameObject.CompareTag("Wall"))
-            {
-                // atualiza a posição do jogador para entrar novamente na arena
-                Vector3 oppositeDirection = transform.position - collision.collider.ClosestPoint(transform.position);
-                transform.position += oppositeDirection.normalized * 0.12f;
-            }
+            // atualiza a posição do jogador para entrar novamente na arena
+            Vector3 oppositeDirection = transform.position - collision.collider.ClosestPoint(transform.position);
+            transform.position += oppositeDirection.normalized * 0.12f;
         }
     }
 
@@ -315,30 +308,35 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider collider)
     {
-        if (_levelStarted)
+        // colisão com alguma parede da arena - para saber que o jogador saiu da arena
+        if (collider.CompareTag("Wall"))
         {
-            // colisão com alguma parede da arena - para saber que o jogador saiu da arena
-            if (collider.CompareTag("Wall"))
+            if (_currentAction is CarryAction)
             {
-                if (_currentAction is CarryAction)
-                {
-                    _currentAction.Trigger(collider);
-                }
+                _currentAction.Trigger(collider);
             }
+        }
 
-            // colisão com alguma maçã
-            if (collider.gameObject.CompareTag("Apple"))
+        // colisão com alguma maçã
+        if (collider.gameObject.CompareTag("Apple"))
+        {
+            if (_currentAction is ThrowLvl2Action)
             {
-                if (_currentAction is ThrowLvl2Action)
-                {
-                    _currentAction.Trigger(collider);
-                }
+                _currentAction.Trigger(collider);
             }
         }
     }
 
 
     /* MÉTODOS DO PLAYERCONTROLLER */
+
+    void AddActionToPlayer()
+    {
+        GameObject levelControllerObject = GameObject.Find("Level1Controller");
+        _kickAction = this.gameObject.AddComponent<KickAction>();
+        Level1Controller level1Controller = levelControllerObject.GetComponent<Level1Controller>();
+        SetAction(_kickAction, level1Controller);
+    }
 
     public void SetAction(IPlayerAction action, MonoBehaviour level)
     {
@@ -347,30 +345,11 @@ public class PlayerController : NetworkBehaviour
         _currentAction.Player = this;
     }
 
-    public bool GetCurrentActionInput()
-    {
-        bool action = Input.GetButtonDown("Action" + _playerID);
-        return action;
-    }
-
-    public (float, float) GetCurrentMovementInput()
-    {
-        float horizontal = Input.GetAxis("Horizontal" + _playerID);
-        float vertical = Input.GetAxis("Vertical" + _playerID);
-        return (horizontal, vertical);
-    }
-
-    private void UpdateMovement(float horizontalInput, float verticalInput)
-    {
-        Vector3 movement = _moveSpeed * Time.fixedDeltaTime * new Vector3(horizontalInput, 0f, verticalInput);
-        _rigidbody.MovePosition(transform.position + movement);
-    }
-
-    private void UpdateDirection(float horizontalInput, float verticalInput)
-    {
-        Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
-    }
+    //public bool GetCurrentActionInput()
+    //{
+    //    bool action = Input.GetButtonDown("Action" + _playerID);
+    //    return action;
+    //}
 
     private void UpdateMovement(Vector2 movementInput)
     {
@@ -397,13 +376,13 @@ public class PlayerController : NetworkBehaviour
     {
         if (_playerID == 1)
         {
-            GameObject[] oppositePlayer = GameObject.FindGameObjectsWithTag("Player2");
-            return oppositePlayer[0];
+            GameObject oppositePlayer = GameObject.FindGameObjectWithTag("Player2");
+            return oppositePlayer;
         }
         else
         {
-            GameObject[] oppositePlayer = GameObject.FindGameObjectsWithTag("Player1");
-            return oppositePlayer[0];
+            GameObject oppositePlayer = GameObject.FindGameObjectWithTag("Player1");
+            return oppositePlayer;
         }
     }
 

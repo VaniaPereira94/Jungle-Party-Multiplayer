@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Unity.Netcode.Transports.UTP;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Reflection;
 
 
 /// <summary>
@@ -16,7 +15,6 @@ public class Level1Controller : MonoBehaviour
 
     // variável para a referência do controlador de jogo
     private GameController _gameController;
-    public static bool _levelStarted = false;
 
     // variáveis sobre os jogadores
     private List<LevelPlayerModel> _levelPlayers = new();
@@ -92,6 +90,31 @@ public class Level1Controller : MonoBehaviour
             (byte[] allocationId, byte[] key, byte[] connectionData, string ip, int port) = RelayController.Instance.GetHostConnectionInfo();
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(ip, (ushort)port, allocationId, key, connectionData, true);
             NetworkManager.Singleton.StartHost();
+
+            // armazenar dados de cada jogador neste nível,
+            // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
+            //CreatePlayersDataForLevel();
+
+            _timerController = TimerController.Instance;
+            //TimerController.Freeze();
+
+            _roundController.DisplayCurrentRound();
+            _roundController.DisplayMaxRounds();
+
+            //DisplayObjectInScene();
+
+            _ballController = _ballObject.GetComponent<BallController>();
+            _goal1Controller = _goal1Object.GetComponent<GoalController>();
+            _goal2Controller = _goal2Object.GetComponent<GoalController>();
+
+            _audioSource = GetComponent<AudioSource>();
+
+            _roundController.NextRound();
+            _roundController.DisplayCurrentRound();
+
+            _buttonPause.SetActive(true);
+
+            InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
             Debug.Log("StartHost()");
         }
         else
@@ -101,132 +124,108 @@ public class Level1Controller : MonoBehaviour
             NetworkManager.Singleton.StartClient();
             Debug.Log("StartClient()");
         }
-
-        if (_levelStarted)
-        {
-            //// armazenar dados de cada jogador neste nível,
-            //// sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
-            //CreatePlayersDataForLevel();
-
-            //_timerController = TimerController.Instance;
-            //TimerController.Freeze();
-
-            //_roundController.DisplayCurrentRound();
-            //_roundController.DisplayMaxRounds();
-
-            ////DisplayObjectInScene();
-
-            //_ballController = _ballObject.GetComponent<BallController>();
-            //_goal1Controller = _goal1Object.GetComponent<GoalController>();
-            //_goal2Controller = _goal2Object.GetComponent<GoalController>();
-
-            //_audioSource = GetComponent<AudioSource>();
-        }
     }
 
     private void Update()
     {
-        //if (_levelStarted)
-        //{
-        //    // quando está no intervalo entre rondas, ou seja o tempo está parado
-        //    if (_timerController.IsOnPause())
-        //    {
-        //        return;
-        //    }
+        // quando está no intervalo entre rondas, ou seja o tempo está parado
+        if (_timerController.IsOnPause())
+        {
+            return;
+        }
 
-        //    // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        //    if (_timerController.HasFinished())
-        //    {
-        //        _timerController.Pause();
+        // se o tempo acabou - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+        if (_timerController.HasFinished())
+        {
+            _timerController.Pause();
 
-        //        // congela bola e balizas
-        //        _ballController.Freeze();
-        //        _goal1Controller.Freeze();
-        //        _goal2Controller.Freeze();
+            // congela bola e balizas
+            _ballController.Freeze();
+            _goal1Controller.Freeze();
+            _goal2Controller.Freeze();
 
-        //        CancelInvoke(nameof(SpawnPowerUp));
+            CancelInvoke(nameof(SpawnPowerUp));
 
-        //        // se estiver na última ronda - mostrar o painel do fim de nível
-        //        if (_roundController.IsLastRound())
-        //        {
-        //            // congela para sempre
-        //            FreezePlayers(-1);
+            // se estiver na última ronda - mostrar o painel do fim de nível
+            if (_roundController.IsLastRound())
+            {
+                // congela para sempre
+                FreezePlayers(-1);
 
-        //            string finishedLevelText = "";
-        //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-        //            {
-        //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-        //            }
+                string finishedLevelText = "";
+                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+                {
+                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+                }
 
-        //            _finishedLevelPanel.SetActive(true);
-        //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+                _finishedLevelPanel.SetActive(true);
+                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-        //            _buttonPause.SetActive(false);
-        //        }
-        //        // senão iniciar outra ronda
-        //        else
-        //        {
-        //            float freezingTime = 5f;
-        //            FreezePlayers(freezingTime);
+                _buttonPause.SetActive(false);
+            }
+            // senão iniciar outra ronda
+            else
+            {
+                float freezingTime = 5f;
+                FreezePlayers(freezingTime);
 
-        //            _roundController.NextRound();
-        //            _roundController.DisplayNextRoundIntro();
-        //            _roundController.DisplayCurrentRound();
+                _roundController.NextRound();
+                _roundController.DisplayNextRoundIntro();
+                _roundController.DisplayCurrentRound();
 
-        //            Invoke(nameof(RestartRound), freezingTime);
-        //        }
+                Invoke(nameof(RestartRound), freezingTime);
+            }
 
-        //        return;
-        //    }
+            return;
+        }
 
-        //    // se alguém marcou golo - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
-        //    if (_ballController.IsGoalScored())
-        //    {
-        //        _timerController.Pause();
+        // se alguém marcou golo - congelar objetos, cancelar spawn de power ups, atribuir pontos e iniciar nova ronda
+        if (_ballController.IsGoalScored())
+        {
+            _timerController.Pause();
 
-        //        PlayGoalSound();
+            PlayGoalSound();
 
-        //        // congela bola e balizas
-        //        _ballController.Freeze();
-        //        _goal1Controller.Freeze();
-        //        _goal2Controller.Freeze();
+            // congela bola e balizas
+            _ballController.Freeze();
+            _goal1Controller.Freeze();
+            _goal2Controller.Freeze();
 
-        //        CancelInvoke(nameof(SpawnPowerUp));
+            CancelInvoke(nameof(SpawnPowerUp));
 
-        //        LevelPlayerModel scorer = GetScorer();
-        //        UpdateScore(scorer.ID);
+            LevelPlayerModel scorer = GetScorer();
+            UpdateScore(scorer.ID);
 
-        //        // se estiver na última ronda - mostrar o painel do fim de nível
-        //        if (_roundController.IsLastRound())
-        //        {
-        //            // congela para sempre
-        //            FreezePlayers(-1);
+            // se estiver na última ronda - mostrar o painel do fim de nível
+            if (_roundController.IsLastRound())
+            {
+                // congela para sempre
+                FreezePlayers(-1);
 
-        //            string finishedLevelText = "";
-        //            foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-        //            {
-        //                finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-        //            }
+                string finishedLevelText = "";
+                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
+                {
+                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
+                }
 
-        //            _finishedLevelPanel.SetActive(true);
-        //            _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
+                _finishedLevelPanel.SetActive(true);
+                _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
-        //            _buttonPause.SetActive(false);
-        //        }
-        //        // senão iniciar outra ronda
-        //        else
-        //        {
-        //            float freezingTime = 5f;
-        //            FreezePlayers(freezingTime);
+                _buttonPause.SetActive(false);
+            }
+            // senão iniciar outra ronda
+            else
+            {
+                float freezingTime = 5f;
+                FreezePlayers(freezingTime);
 
-        //            _roundController.NextRound();
-        //            _roundController.DisplayNextRoundIntro();
-        //            _roundController.DisplayCurrentRound();
+                _roundController.NextRound();
+                _roundController.DisplayNextRoundIntro();
+                _roundController.DisplayCurrentRound();
 
-        //            Invoke(nameof(RestartRound), freezingTime);
-        //        }
-        //    }
-        //}
+                Invoke(nameof(RestartRound), freezingTime);
+            }
+        }
     }
 
 
@@ -238,26 +237,6 @@ public class Level1Controller : MonoBehaviour
         response.Approved = true;
         response.CreatePlayerObject = true;
         response.Pending = false;
-
-        //var playerPrefabIndex = System.BitConverter.ToInt32(request.Payload);
-        //if (AlternatePlayerPrefabs.Count > playerPrefabIndex)
-        //{
-        //    response.PlayerPrefabHash = AlternatePlayerPrefabs[playerPrefabIndex];
-        //}
-
-        //List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
-
-        //for (int i = 0; i < playerDatas.Count; i++)
-        //{
-            //GameObject playerObject = response.PlayerPrefabHash;
-            //ulong? prefabHash = GetPrefabHash(response.PlayerPrefabHash);
-
-            //LobbyPlayerData data = playerDatas[i];
-            //_players[i].SetGameData(data);
-
-            //GameObject go = Instantiate(_players[i].gameObject, Vector3.zero, Quaternion.identity);
-            //go.GetComponent<NetworkObject>().Spawn();
-        //}
     }
 
     private void OnLobbyUpdated()
@@ -315,7 +294,7 @@ public class Level1Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SpawnPowerUp()
+    private void SpawnPowerUp()
     {
         System.Random rnd = new();
         int xValue = rnd.Next(42, 58);
@@ -324,7 +303,7 @@ public class Level1Controller : MonoBehaviour
         Instantiate(_powerUp, new Vector3(xValue, _powerUp.transform.position.y, zValue), Quaternion.identity);
     }
 
-    void CreatePlayersDataForLevel()
+    private void CreatePlayersDataForLevel()
     {
         LevelPlayerModel levelPlayer1 = new(1, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
         LevelPlayerModel levelPlayer2 = new(2, 0, _player2Level1Prefab.transform.position, _player2Level1Prefab.transform.rotation);
@@ -335,31 +314,31 @@ public class Level1Controller : MonoBehaviour
         _levelPlayers.Add(levelPlayer2);
     }
 
-    void DisplayObjectInScene()
-    {
-        SpawnPlayers();
-        AddActionToPlayers();
-    }
+    //private void DisplayObjectInScene()
+    //{
+    //    SpawnPlayers();
+    //    AddActionToPlayers();
+    //}
 
-    void SpawnPlayers()
-    {
-        _levelPlayers[0].Object = Instantiate(_player1Level1Prefab);
-        _levelPlayers[1].Object = Instantiate(_player2Level1Prefab);
-    }
+    //private void SpawnPlayers()
+    //{
+    //    _levelPlayers[0].Object = Instantiate(_player1Level1Prefab);
+    //    _levelPlayers[1].Object = Instantiate(_player2Level1Prefab);
+    //}
 
     /// <summary>
     /// Adiciona o script da ação a cada um dos objetos dos jogadores, para definir essa ação ao personagem.
     /// </summary>
-    void AddActionToPlayers()
+    private void AddActionToPlayers()
     {
-        _kickAction = _levelPlayers[0].Object.AddComponent<KickAction>();
-        _levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
+        //_kickAction = _levelPlayers[0].Object.AddComponent<KickAction>();
+        //_levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
 
-        _kickAction = _levelPlayers[1].Object.AddComponent<KickAction>();
-        _levelPlayers[1].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
+        //_kickAction = _levelPlayers[1].Object.AddComponent<KickAction>();
+        //_levelPlayers[1].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
     }
 
-    LevelPlayerModel GetScorer()
+    private LevelPlayerModel GetScorer()
     {
         if (_ballController.Player1Scored)
         {
@@ -378,23 +357,25 @@ public class Level1Controller : MonoBehaviour
     /// <summary>
     /// Atribui os pontos do marcador e atualiza no ecrã.
     /// </summary>
-    void UpdateScore(int scorerID)
+    private void UpdateScore(int scorerID)
     {
         _levelPlayers[scorerID - 1].LevelScore += _scoreController.AddScore();
         _scoreController.DisplayScoreObjectText(scorerID, _levelPlayers[scorerID - 1].LevelScore);
     }
 
-    void FreezePlayers(float freezingTime)
+    private void FreezePlayers(float freezingTime)
     {
-        _levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
-        _levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);
+        PlayerController player1Object = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerController>();
+        player1Object.Freeze(freezingTime);
+        //_levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
+        //_levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);
     }
 
     /// <summary>
     /// É executado após o intervalo de espera para iniciar outra ronda.
     /// Responsável por inicializar novamente os componentes necessários para que a ronda comece.
     /// </summary>
-    void RestartRound()
+    private void RestartRound()
     {
         _timerController.Play();
 
@@ -418,13 +399,13 @@ public class Level1Controller : MonoBehaviour
         InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
-    void SetInitialPosition()
+    private void SetInitialPosition()
     {
-        _levelPlayers[0].Object.transform.position = _levelPlayers[0].InitialPosition;
-        _levelPlayers[0].Object.transform.rotation = _levelPlayers[0].InitialRotation;
+        //_levelPlayers[0].Object.transform.position = _levelPlayers[0].InitialPosition;
+        //_levelPlayers[0].Object.transform.rotation = _levelPlayers[0].InitialRotation;
 
-        _levelPlayers[1].Object.transform.position = _levelPlayers[1].InitialPosition;
-        _levelPlayers[1].Object.transform.rotation = _levelPlayers[1].InitialRotation;
+        //_levelPlayers[1].Object.transform.position = _levelPlayers[1].InitialPosition;
+        //_levelPlayers[1].Object.transform.rotation = _levelPlayers[1].InitialRotation;
 
         _ballObject.transform.position = _ballPrefab.transform.position;
         _ballObject.transform.rotation = _ballPrefab.transform.rotation;
@@ -436,7 +417,7 @@ public class Level1Controller : MonoBehaviour
         _goal2Object.transform.rotation = _goal2Prefab.transform.rotation;
     }
 
-    void DestroyAllPowerUps()
+    private void DestroyAllPowerUps()
     {
         GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("PowerUp");
         foreach (GameObject obj in objectsToDestroy)

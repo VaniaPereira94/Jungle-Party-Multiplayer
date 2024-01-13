@@ -1,10 +1,8 @@
 using lobbyTutorial;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +25,7 @@ public class MultiplayerMenuController : MonoBehaviour
     [Header("UI - Join Lobby")]
     [SerializeField] private GameObject _joinLobbyPanel;
     [SerializeField] private GameObject _joinPrivateLobbyPopup;
-   
+
     private float _refreshLobbiesTimer = 5f;
     [SerializeField] private Button _refreshButton;
     [SerializeField] private Transform _lobbiesContainer;
@@ -43,11 +41,6 @@ public class MultiplayerMenuController : MonoBehaviour
     [SerializeField] private Image _mapCoverImage;
     [SerializeField] private MapListScriptable _mapListScriptable;
     private int _currentMapIndex = 0;
-
-    [Header("UI - Leaderboard")]
-    [SerializeField] private GameObject _leaderboardPanel;
-    [SerializeField] private GameObject _privateScorePanel;
-    [SerializeField] private GameObject _publicScorePanel;
 
 
     /* MÉTODOS */
@@ -296,12 +289,6 @@ public class MultiplayerMenuController : MonoBehaviour
         await MultiplayerController.Instance.StartGame();
     }
 
-    public void OpenLeaderboard()
-    {
-        _menuPanel.SetActive(false);
-        _leaderboardPanel.SetActive(true);
-    }
-
     public void OpenGameLobby()
     {
         _gameLobbyPanel.SetActive(true);
@@ -312,36 +299,6 @@ public class MultiplayerMenuController : MonoBehaviour
         _gameLobbyPanel.SetActive(false);
         _createLobbyPanel.SetActive(false);
         _joinLobbyPanel.SetActive(false);
-    }
-
-    public void CloseLeaderboard()
-    {
-        _menuPanel.SetActive(true);
-        _leaderboardPanel.SetActive(false);
-    }
-
-    public void OpenScorePrivate()
-    {
-        _leaderboardPanel.SetActive(false);
-        _privateScorePanel.SetActive(true);
-    }
-
-    public void CloseScorePrivate()
-    {
-        _leaderboardPanel.SetActive(true);
-        _privateScorePanel.SetActive(false);
-    }
-
-    public void OpenScorePublic()
-    {
-        _leaderboardPanel.SetActive(false);
-        _publicScorePanel.SetActive(true);
-    }
-
-    public void CloseScorePublic()
-    {
-        _leaderboardPanel.SetActive(true);
-        _publicScorePanel.SetActive(false);
     }
 
     public static void ShowError(string message)

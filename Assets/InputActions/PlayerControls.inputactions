@@ -18,7 +18,7 @@
                     "name": "Action",
                     "type": "PassThrough",
                     "id": "71dd1b55-4a15-4bc2-9525-595251392fc1",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Key",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -82,8 +82,8 @@
                 },
                 {
                     "name": "SPACEBAR",
-                    "id": "982609e7-4739-4438-8dd0-b43f98e416b7",
-                    "path": "2DVector",
+                    "id": "673abb94-5614-4b41-8598-504ed3df1c14",
+                    "path": "OneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -92,8 +92,19 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "a4193c1d-5818-4fa6-9d11-480572bd5265",
+                    "name": "modifier",
+                    "id": "1cf038d1-380d-4c8f-a8c7-73639b3eb7a8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "ff993c35-dc89-4a55-a9c4-cb5925f66a35",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",

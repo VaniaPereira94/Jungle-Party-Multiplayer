@@ -269,8 +269,6 @@ public class PlayerController : NetworkBehaviour
 
         if (!_isFrozen)
         {
-            //bool actionInput = _playerControls.Player.Action.triggered;
-
             // se o jogador pressiona a tecla de ação
             if (actionInput)
             {

@@ -191,8 +191,8 @@ public class Level1Controller : NetworkBehaviour
                 int player1Score = GetPlayer1InScene().GetComponent<PlayerController>().Score;
                 string finishedLevelText = "Jogador " + player1ID.ToString() + ": " + player1Score.ToString() + "\n";
 
-                int player2ID = GetPlayer1InScene().GetComponent<PlayerController>().PlayerID;
-                int player2Score = GetPlayer1InScene().GetComponent<PlayerController>().Score;
+                int player2ID = GetPlayer2InScene().GetComponent<PlayerController>().PlayerID;
+                int player2Score = GetPlayer2InScene().GetComponent<PlayerController>().Score;
                 finishedLevelText += "Jogador " + player2ID.ToString() + ": " + player2Score.ToString() + "\n";
 
                 _finishedLevelPanel.SetActive(true);
@@ -438,13 +438,5 @@ public class Level1Controller : NetworkBehaviour
     public void PlayGoalSound()
     {
         _audioSource.Play();
-    }
-
-    /// <summary>
-    /// É executado quando é clicado o botão de ir para o menu, no painel de fim de nível.
-    /// </summary>
-    public void FinishLevel()
-    {
-        SceneManager.LoadScene("MainMenuScene");
     }
 }

@@ -1,11 +1,12 @@
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 
 /// <summary>
 /// É responsável por tratar da pontuação de cada jogador e exibir-la no ecrã.
 /// </summary>
-public class ScoreController : MonoBehaviour
+public class ScoreController : NetworkBehaviour
 {
     /* ATRIBUTOS PRIVADOS */
 
@@ -30,7 +31,7 @@ public class ScoreController : MonoBehaviour
         {
             _scorePlayer1.GetComponent<TextMeshProUGUI>().text = score.ToString();
         }
-        else
+        else if (winnerID == 2)
         {
             _scorePlayer2.GetComponent<TextMeshProUGUI>().text = score.ToString();
         }

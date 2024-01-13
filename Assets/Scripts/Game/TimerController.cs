@@ -1,10 +1,11 @@
+using Unity.Netcode;
 using UnityEngine;
 
 
 /// <summary>
 /// Controla o relógio que existe em cada nível.
 /// </summary>
-public class TimerController : MonoBehaviour
+public class TimerController : NetworkBehaviour
 {
     /* ATRIBUTOS PRIVADOS */
 

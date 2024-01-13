@@ -13,6 +13,7 @@ public class PlayerController : NetworkBehaviour
 
     // variável para identificação do jogador
     [SerializeField] private int _playerID;
+    private int _score = 0;
 
     // variáveis para a física (movimento e velocidade do personagem)
     private Rigidbody _rigidbody;
@@ -58,6 +59,12 @@ public class PlayerController : NetworkBehaviour
     {
         get { return _playerID; }
         set { _playerID = value; }
+    }
+
+    public int Score
+    {
+        get { return _score; }
+        set { _score = value; }
     }
 
     public bool IsWalking
@@ -164,7 +171,9 @@ public class PlayerController : NetworkBehaviour
             //skinnedMeshRenderer.materials = mats;
         }
 
-        AddActionToPlayer();
+        Level1Controller.Instance.CreateLevelPlayer(_playerID - 1);
+        Level1Controller.Instance.SetPlayerObject(this.gameObject, _playerID - 1);
+        Level1Controller.Instance.AddActionToPlayer(_playerID - 1);
     }
 
     [ServerRpc]
@@ -182,21 +191,6 @@ public class PlayerController : NetworkBehaviour
 
     /* MÉTODOS DE PLAYERCONTROLLER */
 
-    private bool IsAllPlayersSpawned()
-    {
-        GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
-        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
-
-        if (player1 != null && player2 != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     /// <summary>
     /// É executado quando existe alguma colisão do jogador com outro objeto.
     /// </summary>
@@ -211,7 +205,7 @@ public class PlayerController : NetworkBehaviour
             ApplyEffect(value);
         }
 
-        if (IsAllPlayersSpawned())
+        if (Level1Controller.Instance.IsAllPlayersSpawned())
         {
             string oppositePlayerTag = GetOppositePlayer().tag;
 
@@ -292,9 +286,7 @@ public class PlayerController : NetworkBehaviour
     void AddActionToPlayer()
     {
         _kickAction = this.gameObject.AddComponent<KickAction>();
-
-        Level1Controller level1Controller = GameObject.Find("Level1Controller").GetComponent<Level1Controller>();
-        SetAction(_kickAction, level1Controller);
+        SetAction(_kickAction, Level1Controller.Instance);
     }
 
     public void SetAction(IPlayerAction action, MonoBehaviour level)

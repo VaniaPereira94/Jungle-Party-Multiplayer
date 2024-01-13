@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 
 /// <summary>
-/// Trata das interações do utilizador com o menu de multiplayer.
+/// Trata das interaï¿½ï¿½es do utilizador com o menu de multiplayer.
 /// </summary>
 public class MultiplayerMenuController : MonoBehaviour
 {
@@ -43,7 +43,7 @@ public class MultiplayerMenuController : MonoBehaviour
     private int _currentMapIndex = 0;
 
 
-    /* MÉTODOS */
+    /* Mï¿½TODOS */
 
     private void OnEnable()
     {
@@ -81,8 +81,10 @@ public class MultiplayerMenuController : MonoBehaviour
 
     private async void InitializeMultiplayer()
     {
-        await AuthController.Instance.Connect();
-        await AuthController.Instance.AuthenticateAnonymous();
+        if (AuthController.Instance.CurrentPlayerId == null) {
+            await AuthController.Instance.Connect();
+            await AuthController.Instance.AuthenticateAnonymous();
+        };
     }
 
     public void OpenCreateLobby()

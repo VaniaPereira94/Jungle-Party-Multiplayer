@@ -39,6 +39,10 @@ public class LobbyData
 
     public void UpdateState(Dictionary<string, DataObject> lobbyData)
     {
+        if (lobbyData == null) {
+            return;
+        }
+
         if (lobbyData.ContainsKey("MapIndex"))
         {
             _mapIndex = Int32.Parse(lobbyData["MapIndex"].Value);

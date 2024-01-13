@@ -67,7 +67,7 @@ public class PlayerController : NetworkBehaviour
     }
 
 
-    /* MÉTODOS DO NETWORKBEHAVIOUR */
+    /* MÉTODOS DO NETWORKBEHAVIOUR E MONOBEHAVIOUR */
 
     public override void OnNetworkSpawn()
     {
@@ -82,6 +82,61 @@ public class PlayerController : NetworkBehaviour
             SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 81.83f), "Player2", _tigerPlayer2MaterialName);
         }
     }
+
+    /// <summary>
+    /// É executado antes da primeira frame.
+    /// </summary>
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
+
+        _walkAction = gameObject.AddComponent<WalkAction>();
+
+        _normalSpeed = _moveSpeed;
+        _halfSpeed = _moveSpeed / 2;
+        _doubleSpeed = _moveSpeed * 2;
+
+        _playerControls = new PlayerControls();
+        _playerControls.Enable();
+    }
+
+    /// <summary>
+    /// É executado uma vez por frame.
+    /// </summary>
+    private void Update()
+    {
+        bool actionInput = _playerControls.Player.Action.triggered;
+
+        if (IsServer && IsLocalPlayer)
+        {
+            DoActions(actionInput);
+        }
+        else if (IsLocalPlayer)
+        {
+            DoActionsServerRPC(actionInput);
+        }
+    }
+
+    /// <summary>
+    /// É executado em intervalos fixos.
+    /// </summary>
+    private void FixedUpdate()
+    {
+        Vector3 movementInput = _playerControls.Player.Move.ReadValue<Vector2>();
+
+        if (IsServer && IsLocalPlayer)
+        {
+            Move(movementInput);
+        }
+        else if (IsLocalPlayer)
+        {
+            MoveServerRPC(movementInput);
+        }
+    }
+
+
+    /* MÉTODOS DE SINCRONIZAÇÃO */
 
     [ServerRpc]
     private void SetInitialPlayerServerRPC(Vector3 position, string tagName, string tigerMaterialPath)
@@ -108,133 +163,38 @@ public class PlayerController : NetworkBehaviour
             //mats[0] = mat;
             //skinnedMeshRenderer.materials = mats;
         }
-        Debug.Log("XXXXXXXXXXXXXXXXX");
+
         AddActionToPlayer();
     }
 
-    /// <summary>
-    /// É executado antes da primeira frame.
-    /// </summary>
-    private void Start()
+    [ServerRpc]
+    private void MoveServerRPC(Vector2 movementInput)
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
-
-        _walkAction = gameObject.AddComponent<WalkAction>();
-
-        _normalSpeed = _moveSpeed;
-        _halfSpeed = _moveSpeed / 2;
-        _doubleSpeed = _moveSpeed * 2;
-
-        _playerControls = new PlayerControls();
-        _playerControls.Enable();
+        Move(movementInput);
     }
 
-    /// <summary>
-    /// É executado uma vez por frame.
-    /// </summary>
-    private void Update()
+    [ServerRpc]
+    private void DoActionsServerRPC(bool actionInput)
     {
-        if (IsLocalPlayer)
-        {
-            if (_currentAction is SuccessAction)
-            {
-                _currentAction.Enter();
-            }
-            if (_currentAction is FailureAction)
-            {
-                _currentAction.Enter();
-            }
-
-            if (!_isFrozen)
-            {
-                bool actionInput = _playerControls.Player.Action.triggered;
-
-                // se o jogador pressiona a tecla de ação
-                if (actionInput)
-                {
-                    Debug.Log("_currentAction.Level:", _currentAction.Level);
-                    if (_currentAction is KickAction)  // significa que está no nível 1
-                    {
-                        _currentAction.Enter();
-                    }
-                    if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
-                    {
-                        _currentAction.Enter();
-                    }
-                    if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
-                    {
-                        if (!_isWalking)
-                        {
-                            _currentAction.Enter();
-                        }
-                    }
-                }
-                else
-                {
-                    if (_currentAction is KickAction)
-                    {
-                        _currentAction.Exit();
-                    }
-                    if (_currentAction is CarryAction)
-                    {
-                        _currentAction.Exit();
-                    }
-                    if (_currentAction is ThrowLvl4Action)
-                    {
-                        _currentAction.Exit();
-                    }
-                }
-            }
-        }
+        DoActions(actionInput);
     }
 
-    /// <summary>
-    /// É executado em intervalos fixos.
-    /// </summary>
-    private void FixedUpdate()
+
+    /* MÉTODOS DE PLAYERCONTROLLER */
+
+    private bool IsAllPlayersSpawned()
     {
-        Vector3 movementInput = _playerControls.Player.Move.ReadValue<Vector2>();
+        GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
+        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
 
-        if (IsServer && IsLocalPlayer)
+        if (player1 != null && player2 != null)
         {
-            if (!_isFrozen)
-            {
-                if (movementInput.magnitude > 0)
-                {
-                    UpdateMovement(movementInput);
-
-                    if (!_isWalking)
-                    {
-                        _walkAction.Enter();
-                        _isWalking = true;
-                    }
-                }
-                else
-                {
-                    if (_isWalking)
-                    {
-                        _walkAction.Exit();
-                        _isWalking = false;
-                    }
-                }
-            }
+            return true;
         }
-        else if (IsLocalPlayer)
+        else
         {
-            MoveServerRPC(movementInput);
+            return false;
         }
-    }
-
-    private int GetSpawnedObjectCount()
-    {
-        if (NetworkManager.Singleton == null)
-        {
-            Debug.LogError("NetworkingManager não encontrado. Certifique-se de que o MLAPI está configurado corretamente.");
-            return 0;
-        }
-
-        return NetworkManager.Singleton.SpawnManager.SpawnedObjects.Count;
     }
 
     /// <summary>
@@ -251,8 +211,7 @@ public class PlayerController : NetworkBehaviour
             ApplyEffect(value);
         }
 
-        int spawnedObjects = GetSpawnedObjectCount();
-        if (spawnedObjects == 2)
+        if (IsAllPlayersSpawned())
         {
             string oppositePlayerTag = GetOppositePlayer().tag;
 
@@ -332,9 +291,9 @@ public class PlayerController : NetworkBehaviour
 
     void AddActionToPlayer()
     {
-        GameObject levelControllerObject = GameObject.Find("Level1Controller");
         _kickAction = this.gameObject.AddComponent<KickAction>();
-        Level1Controller level1Controller = levelControllerObject.GetComponent<Level1Controller>();
+
+        Level1Controller level1Controller = GameObject.Find("Level1Controller").GetComponent<Level1Controller>();
         SetAction(_kickAction, level1Controller);
     }
 
@@ -345,26 +304,94 @@ public class PlayerController : NetworkBehaviour
         _currentAction.Player = this;
     }
 
-    //public bool GetCurrentActionInput()
-    //{
-    //    bool action = Input.GetButtonDown("Action" + _playerID);
-    //    return action;
-    //}
+    private void DoActions(bool actionInput)
+    {
+        if (_currentAction is SuccessAction)
+        {
+            _currentAction.Enter();
+        }
+        if (_currentAction is FailureAction)
+        {
+            _currentAction.Enter();
+        }
+
+        if (!_isFrozen)
+        {
+            //bool actionInput = _playerControls.Player.Action.triggered;
+
+            // se o jogador pressiona a tecla de ação
+            if (actionInput)
+            {
+                if (_currentAction is KickAction)  // significa que está no nível 1
+                {
+                    _currentAction.Enter();
+                }
+                if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
+                {
+                    _currentAction.Enter();
+                }
+                if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
+                {
+                    if (!_isWalking)
+                    {
+                        _currentAction.Enter();
+                    }
+                }
+            }
+            else
+            {
+                if (_currentAction is KickAction)
+                {
+                    _currentAction.Exit();
+                }
+                if (_currentAction is CarryAction)
+                {
+                    _currentAction.Exit();
+                }
+                if (_currentAction is ThrowLvl4Action)
+                {
+                    _currentAction.Exit();
+                }
+            }
+        }
+    }
+
+    private void Move(Vector2 movementInput)
+    {
+        if (!_isFrozen)
+        {
+            if (movementInput.magnitude > 0)
+            {
+                UpdateMovement(movementInput);
+                UpdateDirection(movementInput);
+
+                if (!_isWalking)
+                {
+                    _walkAction.Enter();
+                    _isWalking = true;
+                }
+            }
+            else
+            {
+                if (_isWalking)
+                {
+                    _walkAction.Exit();
+                    _isWalking = false;
+                }
+            }
+        }
+    }
 
     private void UpdateMovement(Vector2 movementInput)
     {
         Vector3 movement = _moveSpeed * Time.fixedDeltaTime * new Vector3(movementInput.x, 0f, movementInput.y);
-
         _rigidbody.MovePosition(transform.position + movement);
-
-        Vector3 direction = new Vector3(movementInput.x, 0f, movementInput.y).normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    [ServerRpc]
-    private void MoveServerRPC(Vector2 movementInput)
+    private void UpdateDirection(Vector2 movementInput)
     {
-        UpdateMovement(movementInput);
+        Vector3 direction = new Vector3(movementInput.x, 0f, movementInput.y).normalized;
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public GameObject GetCurrentPlayer()

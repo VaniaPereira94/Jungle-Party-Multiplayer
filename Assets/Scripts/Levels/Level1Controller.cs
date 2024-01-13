@@ -90,31 +90,6 @@ public class Level1Controller : MonoBehaviour
             (byte[] allocationId, byte[] key, byte[] connectionData, string ip, int port) = RelayController.Instance.GetHostConnectionInfo();
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(ip, (ushort)port, allocationId, key, connectionData, true);
             NetworkManager.Singleton.StartHost();
-
-            // armazenar dados de cada jogador neste nível,
-            // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
-            //CreatePlayersDataForLevel();
-
-            _timerController = TimerController.Instance;
-            //TimerController.Freeze();
-
-            _roundController.DisplayCurrentRound();
-            _roundController.DisplayMaxRounds();
-
-            //DisplayObjectInScene();
-
-            _ballController = _ballObject.GetComponent<BallController>();
-            _goal1Controller = _goal1Object.GetComponent<GoalController>();
-            _goal2Controller = _goal2Object.GetComponent<GoalController>();
-
-            _audioSource = GetComponent<AudioSource>();
-
-            _roundController.NextRound();
-            _roundController.DisplayCurrentRound();
-
-            _buttonPause.SetActive(true);
-
-            InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
             Debug.Log("StartHost()");
         }
         else
@@ -124,6 +99,31 @@ public class Level1Controller : MonoBehaviour
             NetworkManager.Singleton.StartClient();
             Debug.Log("StartClient()");
         }
+
+        // armazenar dados de cada jogador neste nível,
+        // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
+        //CreatePlayersDataForLevel();
+
+        _timerController = TimerController.Instance;
+        //TimerController.Freeze();
+
+        _roundController.DisplayCurrentRound();
+        _roundController.DisplayMaxRounds();
+
+        //DisplayObjectInScene();
+
+        _ballController = _ballObject.GetComponent<BallController>();
+        _goal1Controller = _goal1Object.GetComponent<GoalController>();
+        _goal2Controller = _goal2Object.GetComponent<GoalController>();
+
+        _audioSource = GetComponent<AudioSource>();
+
+        _roundController.NextRound();
+        _roundController.DisplayCurrentRound();
+
+        _buttonPause.SetActive(true);
+
+        InvokeRepeating(nameof(SpawnPowerUp), 10f, 10f);
     }
 
     private void Update()

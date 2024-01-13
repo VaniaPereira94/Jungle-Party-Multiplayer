@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &107739656302064724
+--- !u!1 &123483474944484295
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,95 +8,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1149783462552274744}
+  - component: {fileID: 5285500052393878116}
   m_Layer: 0
-  m_Name: Tiger L Upper Eyelid
+  m_Name: Tiger L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1149783462552274744
+--- !u!4 &5285500052393878116
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107739656302064724}
+  m_GameObject: {fileID: 123483474944484295}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6816442, y: -0.180709, z: -0.30164298, w: 0.64165175}
-  m_LocalPosition: {x: -0.27787796, y: 0.21236953, z: 0.09751747}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &136815974652088987
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5866797782159704894}
-  m_Layer: 0
-  m_Name: Tiger L Toe0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5866797782159704894
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136815974652088987}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.00006705695, y: 0.00011329897, z: -0.7048811, w: 0.7093255}
-  m_LocalPosition: {x: -0.057132877, y: 0.2220256, z: 0.000000019073486}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8288792191127044149}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &164983209770274038
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1389985162052606067}
-  m_Layer: 0
-  m_Name: Tiger Spine2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1389985162052606067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164983209770274038}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.0077450695, y: -0.02816881, z: -0.1849907, w: 0.98230594}
-  m_LocalPosition: {x: -0.14491531, y: -0.000107469554, z: -0.0000029557943}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.68422365, y: 0.13416643, z: 0.7047944, w: -0.13077585}
+  m_LocalPosition: {x: -0.057030715, y: -0.023696478, z: 0.033783812}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4066831094136782105}
-  - {fileID: 1315547834177133958}
-  - {fileID: 5528908554924491119}
-  m_Father: {fileID: 5983161037978454208}
+  - {fileID: 7548080151999928406}
+  m_Father: {fileID: 4017688093545201700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &183581996683344936
+--- !u!1 &179448678956457968
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,566 +40,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5983161037978454208}
-  m_Layer: 0
-  m_Name: Tiger Spine1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5983161037978454208
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183581996683344936}
-  serializedVersion: 2
-  m_LocalRotation: {x: -2.7672617e-10, y: 0.0000005155974, z: -0.18506968, w: 0.9827254}
-  m_LocalPosition: {x: -0.14491537, y: -0.000107469554, z: -0.0000000017881393}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1389985162052606067}
-  m_Father: {fileID: 6598480566905947773}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &229199703578263728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1542965278190615792}
-  m_Layer: 0
-  m_Name: Tiger R Cheek
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1542965278190615792
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229199703578263728}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.28994188, y: -0.7046341, z: 0.119546466, w: 0.6365007}
-  m_LocalPosition: {x: -0.15905838, y: 0.092192724, z: -0.17326131}
-  m_LocalScale: {x: 1, y: 1, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &413871745053308831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2115776913669637251}
-  m_Layer: 0
-  m_Name: Tiger Tail02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2115776913669637251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413871745053308831}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.12119456, y: -0.15850474, z: -0.6318001, w: 0.7490105}
-  m_LocalPosition: {x: -0.28628096, y: -0.000039367675, z: -0.0000042438505}
-  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1132011772243348141}
-  m_Father: {fileID: 3558170086616084418}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &423010039986666684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6499587179996895684}
-  m_Layer: 0
-  m_Name: Tiger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6499587179996895684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423010039986666684}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
-  m_LocalPosition: {x: 0.008388499, y: 0.2546926, z: -0.04981935}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5391575757252028355}
-  m_Father: {fileID: 5204651933761727051}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &493518359950277855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5391575757252028355}
-  m_Layer: 0
-  m_Name: Tiger Pelvis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5391575757252028355
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493518359950277855}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.5073791, y: 0.5073798, z: 0.49250975, w: 0.4925104}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5333031524063570727}
-  - {fileID: 4797629181155377212}
-  - {fileID: 6598480566905947773}
-  - {fileID: 3558170086616084418}
-  m_Father: {fileID: 6499587179996895684}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &508478153122002436
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8743983177609494697}
-  m_Layer: 0
-  m_Name: Tiger L UpperArm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8743983177609494697
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508478153122002436}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.16698362, y: -0.5018673, z: 0.14347187, w: 0.8364577}
-  m_LocalPosition: {x: -0.12346552, y: 0, z: 0.000000076293944}
-  m_LocalScale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 136877677628700329}
-  m_Father: {fileID: 4066831094136782105}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1087205601893728027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4221643180715785743}
-  m_Layer: 0
-  m_Name: Tiger L Ear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4221643180715785743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1087205601893728027}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.23653536, y: 0.18230028, z: 0.53886443, w: 0.7876819}
-  m_LocalPosition: {x: -0.29341865, y: -0.112705246, z: 0.1414227}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1118762009636541946
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4571002235697994919}
-  m_Layer: 0
-  m_Name: Tiger Head
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4571002235697994919
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118762009636541946}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.030169873, y: 0.06672111, z: 0.08877212, w: 0.99335676}
-  m_LocalPosition: {x: -0.13586105, y: -0.000000019073486, z: 0.0000000023841857}
-  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 603379057619582007}
-  - {fileID: 3517015192481434325}
-  - {fileID: 4221643180715785743}
-  - {fileID: 1140003897505983107}
-  - {fileID: 5543448680780612777}
-  - {fileID: 8747366888746178926}
-  - {fileID: 8156846015547093995}
-  - {fileID: 1149783462552274744}
-  - {fileID: 398033248256884319}
-  - {fileID: 3178023131563772504}
-  - {fileID: 1542965278190615792}
-  - {fileID: 1353771225992926181}
-  - {fileID: 2287518876844273748}
-  - {fileID: 2712096353435386754}
-  - {fileID: 7925549184268670434}
-  - {fileID: 7479478369129462365}
-  - {fileID: 2071929380206117677}
-  - {fileID: 9066176806717431432}
-  - {fileID: 1673394117327027477}
-  m_Father: {fileID: 1315547834177133958}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1146874060382650032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6881562752642848399}
-  m_Layer: 0
-  m_Name: Tiger Lower Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6881562752642848399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146874060382650032}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000026786335, y: 0.0000015448398, z: -0.55584675, w: 0.83128476}
-  m_LocalPosition: {x: -0.3647347, y: -0.04018387, z: 0.0021051466}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 603379057619582007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1174235359885090111
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4797629181155377212}
-  m_Layer: 0
-  m_Name: Tiger R Thigh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4797629181155377212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174235359885090111}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.3550106, y: 0.92843974, z: -0.1015279, w: 0.040734943}
-  m_LocalPosition: {x: -0.000000114440915, y: -0.00000013828277, z: -0.10535894}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6318612516410168832}
-  m_Father: {fileID: 5391575757252028355}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1204071290342563887
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1673394117327027477}
-  m_Layer: 0
-  m_Name: Tiger R Whiskers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1673394117327027477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204071290342563887}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.035108257, y: -0.70153975, z: -0.14868861, w: 0.69606113}
-  m_LocalPosition: {x: -0.105564035, y: 0.38767967, z: -0.1778886}
-  m_LocalScale: {x: 1, y: 1, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1306301471199240369
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2449203289285624553}
-  m_Layer: 0
-  m_Name: Tiger R Toe0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2449203289285624553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306301471199240369}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.00031972036, y: -0.00054150564, z: -0.70450443, w: 0.7096993}
-  m_LocalPosition: {x: -0.057132877, y: 0.22202557, z: 0.000000009536743}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8839883612505724989}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1362687620084000164
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2287518876844273748}
-  m_Layer: 0
-  m_Name: Tiger R Eye
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2287518876844273748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362687620084000164}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.5374068, y: 0.45877463, z: -0.49426565, w: 0.50638056}
-  m_LocalPosition: {x: -0.27786657, y: 0.21236621, z: -0.09751516}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1489658714286217394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2788917072156980543}
-  m_Layer: 0
-  m_Name: Tiger R Forearm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2788917072156980543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489658714286217394}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000023958057, y: 0.000000017725398, z: 0.5947657, w: 0.80389905}
-  m_LocalPosition: {x: -0.15568535, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6304102619081597058}
-  m_Father: {fileID: 302028603021952587}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1744483204078740854
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6304102619081597058}
-  m_Layer: 0
-  m_Name: Tiger R Hand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6304102619081597058
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744483204078740854}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.71777016, y: -0.075124554, z: 0.16268875, w: 0.6728259}
-  m_LocalPosition: {x: -0.16454789, y: 0, z: -0.000000038146972}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1211877723874058247}
-  - {fileID: 1394418762753249279}
-  m_Father: {fileID: 2788917072156980543}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2076491038391647397
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3558170086616084418}
-  m_Layer: 0
-  m_Name: Tiger Tail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3558170086616084418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2076491038391647397}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.13376586, y: 0.1666181, z: 0.7094879, w: 0.6715445}
-  m_LocalPosition: {x: -0.011345024, y: -0.10619835, z: -0.000012671947}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2115776913669637251}
-  m_Father: {fileID: 5391575757252028355}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2103681806487834661
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7479478369129462365}
-  m_Layer: 0
-  m_Name: Tiger R Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7479478369129462365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103681806487834661}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.36269253, y: 0.7921781, z: -0.05608057, w: -0.48760957}
-  m_LocalPosition: {x: -0.10692093, y: 0.23552436, z: -0.17062025}
-  m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2129821168226366028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2071929380206117677}
+  - component: {fileID: 6821137315409922921}
   m_Layer: 0
   m_Name: Tiger R Upper Eyelid
   m_TagString: Untagged
@@ -671,22 +48,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2071929380206117677
+--- !u!4 &6821137315409922921
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129821168226366028}
+  m_GameObject: {fileID: 179448678956457968}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6960372, y: 0.18668802, z: -0.32039133, w: 0.6148409}
   m_LocalPosition: {x: -0.27787733, y: 0.21237552, z: -0.09751703}
   m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4571002235697994919}
+  m_Father: {fileID: 3376178196121393483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2265304482185715296
+--- !u!1 &283395667523772282
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -694,30 +71,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8747366888746178926}
+  - component: {fileID: 7900373211120595529}
   m_Layer: 0
-  m_Name: Tiger L Lower Eyelid
+  m_Name: Tiger L Whiskers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8747366888746178926
+--- !u!4 &7900373211120595529
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2265304482185715296}
+  m_GameObject: {fileID: 283395667523772282}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.41979116, y: 0.48927897, z: 0.6806778, w: -0.34793568}
-  m_LocalPosition: {x: -0.27787116, y: 0.21238399, z: 0.09751964}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
+  m_LocalRotation: {x: 0.035108365, y: 0.70154065, z: -0.14868473, w: 0.69606113}
+  m_LocalPosition: {x: -0.10556412, y: 0.38767868, z: 0.17789072}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4571002235697994919}
+  m_Father: {fileID: 3376178196121393483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2457192430609160820
+--- !u!1 &457874650581714007
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,13 +102,824 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5204651933761727051}
-  - component: {fileID: 4268588233100035385}
-  - component: {fileID: 4346080982128163298}
-  - component: {fileID: 5518006790010948263}
-  - component: {fileID: 5373853512525098404}
-  - component: {fileID: 4708888930300646673}
-  - component: {fileID: -2515262879350085733}
+  - component: {fileID: 8339120696408892582}
+  m_Layer: 0
+  m_Name: Tiger L Lower Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8339120696408892582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457874650581714007}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.106408745, y: -0.0032261736, z: -0.6625526, w: 0.7414114}
+  m_LocalPosition: {x: -0.20967473, y: 0.0048283385, z: 0.14496948}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1161677059822956072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &583311538168267288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8165507311683278272}
+  m_Layer: 0
+  m_Name: Tiger R Finger0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8165507311683278272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583311538168267288}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.3673839, y: 0.34684196, z: 0.05748587, w: 0.86106044}
+  m_LocalPosition: {x: -0.023631305, y: 0.00017757415, z: 0.03282547}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8772205601535377736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &638532471628270129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3376178196121393483}
+  m_Layer: 0
+  m_Name: Tiger Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3376178196121393483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638532471628270129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.030169873, y: 0.06672111, z: 0.08877212, w: 0.99335676}
+  m_LocalPosition: {x: -0.13586105, y: -0.000000019073486, z: 0.0000000023841857}
+  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1161677059822956072}
+  - {fileID: 4705628720150948616}
+  - {fileID: 6112149321607538581}
+  - {fileID: 446979685253317051}
+  - {fileID: 996674429329568964}
+  - {fileID: 2058637152481163671}
+  - {fileID: 7387688917798717867}
+  - {fileID: 797878574502659150}
+  - {fileID: 3570837548223760799}
+  - {fileID: 7900373211120595529}
+  - {fileID: 7994591253825356110}
+  - {fileID: 7227557958940832413}
+  - {fileID: 4537900858205254225}
+  - {fileID: 2644140433832812618}
+  - {fileID: 6854329737348176717}
+  - {fileID: 5300579555403831754}
+  - {fileID: 6821137315409922921}
+  - {fileID: 8049963422986705225}
+  - {fileID: 4603715922796323161}
+  m_Father: {fileID: 5041468916902543900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &669375571164397548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 996674429329568964}
+  m_Layer: 0
+  m_Name: Tiger L Eyebrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &996674429329568964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669375571164397548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.6173384, y: -0.29581764, z: -0.22093391, w: 0.694675}
+  m_LocalPosition: {x: -0.30334136, y: 0.19137645, z: 0.08769548}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &952050386088246898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3570837548223760799}
+  m_Layer: 0
+  m_Name: Tiger L Upper Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3570837548223760799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952050386088246898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0089761345, y: 0.0000035691978, z: -0.00039881063, w: 0.99995965}
+  m_LocalPosition: {x: -0.05615959, y: 0.46009567, z: 0.104507156}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1090148875826367192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7548080151999928406}
+  m_Layer: 0
+  m_Name: Tiger L UpperArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7548080151999928406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090148875826367192}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.16698362, y: -0.5018673, z: 0.14347187, w: 0.8364577}
+  m_LocalPosition: {x: -0.12346552, y: 0, z: 0.000000076293944}
+  m_LocalScale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5343355931825470354}
+  m_Father: {fileID: 5285500052393878116}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1306977237362206120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161677059822956072}
+  m_Layer: 0
+  m_Name: Tiger Jaw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161677059822956072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306977237362206120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.034644414, y: 0.008038379, z: -0.83218694, w: 0.55335355}
+  m_LocalPosition: {x: -0.050669175, y: 0.13081723, z: -0.0000076675415}
+  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8339120696408892582}
+  - {fileID: 941328923776629499}
+  - {fileID: 8807155619960481409}
+  - {fileID: 5366927138747916396}
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1410356882200969413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941328923776629499}
+  m_Layer: 0
+  m_Name: Tiger Lower Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &941328923776629499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410356882200969413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000000026786335, y: 0.0000015448398, z: -0.55584675, w: 0.83128476}
+  m_LocalPosition: {x: -0.3647347, y: -0.04018387, z: 0.0021051466}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1161677059822956072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1445222955423956114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5239618359376207936}
+  m_Layer: 0
+  m_Name: Tiger L Foot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5239618359376207936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445222955423956114}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.03801878, y: -0.0026396615, z: -0.292056, w: 0.9556416}
+  m_LocalPosition: {x: -0.10706501, y: -0.0000000047683715, z: 0.000000009536743}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3225581081788439775}
+  m_Father: {fileID: 2535681886378534041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1525870167368337602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3268012714444346932}
+  m_Layer: 0
+  m_Name: Tiger L Thigh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3268012714444346932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525870167368337602}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.38505563, y: 0.91942114, z: 0.07349207, w: 0.03155696}
+  m_LocalPosition: {x: 0.0000001335144, y: 0.00000015735625, z: 0.10535894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2535681886378534041}
+  m_Father: {fileID: 1284082074152043515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2058060652476681537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8241570094258448077}
+  m_Layer: 0
+  m_Name: Tiger R Foot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8241570094258448077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058060652476681537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.19143309, y: 0.0055726464, z: -0.28005102, w: 0.94068795}
+  m_LocalPosition: {x: -0.10706503, y: -0.0000000047683715, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7843140430188452466}
+  m_Father: {fileID: 2771461288093812596}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2358319571149398893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4537900858205254225}
+  m_Layer: 0
+  m_Name: Tiger R Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4537900858205254225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358319571149398893}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5374068, y: 0.45877463, z: -0.49426565, w: 0.50638056}
+  m_LocalPosition: {x: -0.27786657, y: 0.21236621, z: -0.09751516}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2480902581427106728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5817247668657288066}
+  m_Layer: 0
+  m_Name: Tiger R Thigh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5817247668657288066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480902581427106728}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.3550106, y: 0.92843974, z: -0.1015279, w: 0.040734943}
+  m_LocalPosition: {x: -0.000000114440915, y: -0.00000013828277, z: -0.10535894}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2771461288093812596}
+  m_Father: {fileID: 1284082074152043515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2500984695316604806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7843140430188452466}
+  m_Layer: 0
+  m_Name: Tiger R Toe0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7843140430188452466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500984695316604806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00031972036, y: -0.00054150564, z: -0.70450443, w: 0.7096993}
+  m_LocalPosition: {x: -0.057132877, y: 0.22202557, z: 0.000000009536743}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8241570094258448077}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2600837175019019693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2301584105730544040}
+  m_Layer: 0
+  m_Name: Tiger L Finger0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2301584105730544040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600837175019019693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.36738384, y: -0.34684196, z: 0.057485797, w: 0.8610605}
+  m_LocalPosition: {x: -0.023631295, y: 0.000177536, z: -0.032825507}
+  m_LocalScale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3876103024806977642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2720103115890838527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 446979685253317051}
+  m_Layer: 0
+  m_Name: Tiger L Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &446979685253317051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720103115890838527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5346815, y: -0.48352516, z: -0.45864877, w: 0.5195772}
+  m_LocalPosition: {x: -0.2778624, y: 0.21235935, z: 0.09751623}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2774256260410608854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6678889173190322238}
+  m_Layer: 0
+  m_Name: Tiger L Finger1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6678889173190322238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774256260410608854}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.13970214, y: 0.048069865, z: 0.06446042, w: 0.9869232}
+  m_LocalPosition: {x: -0.07504794, y: 0.0071173473, z: 0.0099330135}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3876103024806977642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2890204656889161600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2381390271050210060}
+  m_Layer: 0
+  m_Name: Tiger Spine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2381390271050210060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890204656889161600}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.027719421, y: -0.01837549, z: 0.23671885, w: 0.97100884}
+  m_LocalPosition: {x: -0.06299585, y: 0.023002004, z: -0.0018684625}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7707345792936580288}
+  m_Father: {fileID: 1284082074152043515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3127101866149930593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3876103024806977642}
+  m_Layer: 0
+  m_Name: Tiger L Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3876103024806977642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127101866149930593}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.71776974, y: 0.075124085, z: 0.1626884, w: 0.67282647}
+  m_LocalPosition: {x: -0.16454789, y: 0, z: -0.000000038146972}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2301584105730544040}
+  - {fileID: 6678889173190322238}
+  m_Father: {fileID: 5343355931825470354}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3231222382534236428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7994591253825356110}
+  m_Layer: 0
+  m_Name: Tiger R Cheek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7994591253825356110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231222382534236428}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.28994188, y: -0.7046341, z: 0.119546466, w: 0.6365007}
+  m_LocalPosition: {x: -0.15905838, y: 0.092192724, z: -0.17326131}
+  m_LocalScale: {x: 1, y: 1, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3237214630813732865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5343355931825470354}
+  m_Layer: 0
+  m_Name: Tiger L Forearm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5343355931825470354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237214630813732865}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000000055345613, y: 0.00000003627002, z: 0.53933686, w: 0.84209013}
+  m_LocalPosition: {x: -0.15568535, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3876103024806977642}
+  m_Father: {fileID: 7548080151999928406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3420743514516603717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3757363474286248829}
+  m_Layer: 0
+  m_Name: Tiger Tail04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3757363474286248829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420743514516603717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.17319512, y: -0.11307832, z: -0.48271132, w: 0.8510032}
+  m_LocalPosition: {x: -0.28625256, y: -0.000108032225, z: 0.000042324064}
+  m_LocalScale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4254111723563984866}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3534027687174177470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5041468916902543900}
+  m_Layer: 0
+  m_Name: Tiger Neck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5041468916902543900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534027687174177470}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000010116569, y: -0.0000002324829, z: -0.022427488, w: 0.99974847}
+  m_LocalPosition: {x: -0.14487824, y: -0.00010807037, z: 0.0000000023841857}
+  m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3376178196121393483}
+  m_Father: {fileID: 4017688093545201700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3537454588260710157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2771461288093812596}
+  m_Layer: 0
+  m_Name: Tiger R Calf
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2771461288093812596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537454588260710157}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000008175472, y: 0.000000007844183, z: 0.59793854, w: 0.801542}
+  m_LocalPosition: {x: -0.12467453, y: -0.000000009536743, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8241570094258448077}
+  m_Father: {fileID: 5817247668657288066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3590660070939779928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8807155619960481409}
+  m_Layer: 0
+  m_Name: Tiger R Lower Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8807155619960481409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590660070939779928}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.10640875, y: 0.0032298537, z: -0.66255265, w: 0.7414114}
+  m_LocalPosition: {x: -0.20967473, y: 0.0048291013, z: -0.14496945}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1161677059822956072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3757945735145184329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7982440435463094786}
+  - component: {fileID: 533129235233762567}
+  - component: {fileID: 2986657258477770189}
+  - component: {fileID: 7694514210716888163}
+  - component: {fileID: 8381221635219087697}
+  - component: {fileID: 1414973488232366880}
+  - component: {fileID: -9214310285915361011}
+  - component: {fileID: 8432708704659671951}
+  - component: {fileID: 97723178681970653}
   m_Layer: 0
   m_Name: Player1Prefab
   m_TagString: Player1
@@ -739,30 +927,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5204651933761727051
+--- !u!4 &7982440435463094786
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 43, y: 6, z: 73}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.95, y: 6, z: 73}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6499587179996895684}
-  - {fileID: 3367317549754017140}
+  - {fileID: 4020918335784801197}
+  - {fileID: 5680896115174124967}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!54 &4268588233100035385
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &533129235233762567
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -783,13 +971,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!136 &4346080982128163298
+--- !u!136 &2986657258477770189
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -806,14 +994,14 @@ CapsuleCollider:
   m_Height: 1.4105953
   m_Direction: 1
   m_Center: {x: -0.04759038, y: 0.6356671, z: 0.013717133}
---- !u!95 &5518006790010948263
+--- !u!95 &7694514210716888163
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dbde9d173828cd94dabb8c1c7fec75b0, type: 2}
@@ -827,13 +1015,13 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5373853512525098404
+--- !u!114 &8381221635219087697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 775056d1437c18745ba5fb91c4da41a5, type: 3}
@@ -846,13 +1034,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _groundDistance: 0.1
---- !u!114 &4708888930300646673
+  _tigerPlayer1MaterialName: Materiais/TigerMaterial2.tga
+  _tigerPlayer2MaterialName: Materiais/TigerMaterial3.tga
+--- !u!114 &1414973488232366880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -866,13 +1056,13 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-2515262879350085733
+--- !u!114 &-9214310285915361011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457192430609160820}
+  m_GameObject: {fileID: 3757945735145184329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
@@ -896,7 +1086,33 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!1 &2666117496473966637
+--- !u!114 &8432708704659671951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757945735145184329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &97723178681970653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757945735145184329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 7694514210716888163}
+--- !u!1 &3772840394732991588
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -904,194 +1120,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6397499452213023552}
-  m_Layer: 0
-  m_Name: Tiger L Lower Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6397499452213023552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2666117496473966637}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.106408745, y: -0.0032261736, z: -0.6625526, w: 0.7414114}
-  m_LocalPosition: {x: -0.20967473, y: 0.0048283385, z: 0.14496948}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 603379057619582007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3215969033765817501
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2351993762558696020}
-  m_Layer: 0
-  m_Name: Tiger L Finger0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2351993762558696020
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3215969033765817501}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.36738384, y: -0.34684196, z: 0.057485797, w: 0.8610605}
-  m_LocalPosition: {x: -0.023631295, y: 0.000177536, z: -0.032825507}
-  m_LocalScale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4102124704189667412}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3308339013877202835
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3517015192481434325}
-  m_Layer: 0
-  m_Name: Tiger L Cheek
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3517015192481434325
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308339013877202835}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.28994185, y: 0.7046334, z: 0.119550705, w: 0.63650066}
-  m_LocalPosition: {x: -0.15905838, y: 0.09219173, z: 0.17326184}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3457834373388874663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1211877723874058247}
-  m_Layer: 0
-  m_Name: Tiger R Finger0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1211877723874058247
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457834373388874663}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.3673839, y: 0.34684196, z: 0.05748587, w: 0.86106044}
-  m_LocalPosition: {x: -0.023631305, y: 0.00017757415, z: 0.03282547}
-  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6304102619081597058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3660042239823175159
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6598480566905947773}
-  m_Layer: 0
-  m_Name: Tiger Spine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6598480566905947773
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660042239823175159}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.027719421, y: -0.01837549, z: 0.23671885, w: 0.97100884}
-  m_LocalPosition: {x: -0.06299585, y: 0.023002004, z: -0.0018684625}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5983161037978454208}
-  m_Father: {fileID: 5391575757252028355}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3825007707580405491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9066176806717431432}
-  m_Layer: 0
-  m_Name: Tiger R Upper Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9066176806717431432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3825007707580405491}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.008976139, y: -0.0000035673336, z: -0.0003988106, w: 0.99995965}
-  m_LocalPosition: {x: -0.056159515, y: 0.4600962, z: -0.10450462}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4306047822405611447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1132011772243348141}
+  - component: {fileID: 4254111723563984866}
   m_Layer: 0
   m_Name: Tiger Tail03
   m_TagString: Untagged
@@ -1099,23 +1128,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1132011772243348141
+--- !u!4 &4254111723563984866
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4306047822405611447}
+  m_GameObject: {fileID: 3772840394732991588}
   serializedVersion: 2
   m_LocalRotation: {x: -0.17319512, y: -0.113078214, z: -0.4827113, w: 0.8510033}
   m_LocalPosition: {x: -0.28625268, y: -0.00010799408, z: 0.000042390824}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1986937436360967326}
-  m_Father: {fileID: 2115776913669637251}
+  - {fileID: 3757363474286248829}
+  m_Father: {fileID: 3787999537955430457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4475032957059235249
+--- !u!1 &4027033968318932264
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1123,225 +1152,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 398033248256884319}
-  m_Layer: 0
-  m_Name: Tiger L Upper Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &398033248256884319
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4475032957059235249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.0089761345, y: 0.0000035691978, z: -0.00039881063, w: 0.99995965}
-  m_LocalPosition: {x: -0.05615959, y: 0.46009567, z: 0.104507156}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4486235916553564603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4171600844269817393}
-  m_Layer: 0
-  m_Name: Tiger R Lower Mouth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4171600844269817393
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4486235916553564603}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.10640875, y: 0.0032298537, z: -0.66255265, w: 0.7414114}
-  m_LocalPosition: {x: -0.20967473, y: 0.0048291013, z: -0.14496945}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 603379057619582007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4535178234775385675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5528908554924491119}
-  m_Layer: 0
-  m_Name: Tiger R Clavicle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5528908554924491119
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535178234775385675}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.6842233, y: -0.13416843, z: 0.70479405, w: -0.13077767}
-  m_LocalPosition: {x: -0.057030715, y: -0.023696288, z: -0.03378394}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 302028603021952587}
-  m_Father: {fileID: 1389985162052606067}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4876551223320077733
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2712096353435386754}
-  m_Layer: 0
-  m_Name: Tiger R Eyebrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2712096353435386754
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4876551223320077733}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.59025186, y: 0.31796762, z: -0.22213094, w: 0.70792454}
-  m_LocalPosition: {x: -0.30334106, y: 0.1913692, z: -0.087695785}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5010825320659888100
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1353771225992926181}
-  m_Layer: 0
-  m_Name: Tiger R Ear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1353771225992926181
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5010825320659888100}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.18823081, y: -0.182552, z: 0.48963562, w: 0.8315653}
-  m_LocalPosition: {x: -0.29342735, y: -0.11272856, z: -0.14141624}
-  m_LocalScale: {x: 0.99999994, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5173477046802015581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5543448680780612777}
-  m_Layer: 0
-  m_Name: Tiger L Eyebrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5543448680780612777
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5173477046802015581}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.6173384, y: -0.29581764, z: -0.22093391, w: 0.694675}
-  m_LocalPosition: {x: -0.30334136, y: 0.19137645, z: 0.08769548}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5462749676657391371
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1986937436360967326}
-  m_Layer: 0
-  m_Name: Tiger Tail04
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1986937436360967326
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462749676657391371}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.17319512, y: -0.11307832, z: -0.48271132, w: 0.8510032}
-  m_LocalPosition: {x: -0.28625256, y: -0.000108032225, z: 0.000042324064}
-  m_LocalScale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1132011772243348141}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5475169796629604218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7905555303293516506}
+  - component: {fileID: 2535681886378534041}
   m_Layer: 0
   m_Name: Tiger L Calf
   m_TagString: Untagged
@@ -1349,23 +1160,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7905555303293516506
+--- !u!4 &2535681886378534041
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475169796629604218}
+  m_GameObject: {fileID: 4027033968318932264}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000000010655992, y: 0.0000000027455624, z: 0.63805616, w: 0.76998985}
   m_LocalPosition: {x: -0.124674544, y: -0.000000019073486, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8288792191127044149}
-  m_Father: {fileID: 5333031524063570727}
+  - {fileID: 5239618359376207936}
+  m_Father: {fileID: 3268012714444346932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5509645187540445622
+--- !u!1 &4301864300378207120
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1373,158 +1184,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 136877677628700329}
+  - component: {fileID: 7387688917798717867}
   m_Layer: 0
-  m_Name: Tiger L Forearm
+  m_Name: Tiger L Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &136877677628700329
+--- !u!4 &7387688917798717867
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5509645187540445622}
+  m_GameObject: {fileID: 4301864300378207120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000055345613, y: 0.00000003627002, z: 0.53933686, w: 0.84209013}
-  m_LocalPosition: {x: -0.15568535, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4102124704189667412}
-  m_Father: {fileID: 8743983177609494697}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5511125078365056316
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8288792191127044149}
-  m_Layer: 0
-  m_Name: Tiger L Foot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8288792191127044149
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511125078365056316}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.03801878, y: -0.0026396615, z: -0.292056, w: 0.9556416}
-  m_LocalPosition: {x: -0.10706501, y: -0.0000000047683715, z: 0.000000009536743}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5866797782159704894}
-  m_Father: {fileID: 7905555303293516506}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5533296967487229491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1315547834177133958}
-  m_Layer: 0
-  m_Name: Tiger Neck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1315547834177133958
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5533296967487229491}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.00000010116569, y: -0.0000002324829, z: -0.022427488, w: 0.99974847}
-  m_LocalPosition: {x: -0.14487824, y: -0.00010807037, z: 0.0000000023841857}
-  m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4571002235697994919}
-  m_Father: {fileID: 1389985162052606067}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5695931816670906005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4066831094136782105}
-  m_Layer: 0
-  m_Name: Tiger L Clavicle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4066831094136782105
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5695931816670906005}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.68422365, y: 0.13416643, z: 0.7047944, w: -0.13077585}
-  m_LocalPosition: {x: -0.057030715, y: -0.023696478, z: 0.033783812}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8743983177609494697}
-  m_Father: {fileID: 1389985162052606067}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6004444571220236580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2094989889048409737}
-  m_Layer: 0
-  m_Name: Tiger L Finger1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2094989889048409737
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6004444571220236580}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.13970214, y: 0.048069865, z: 0.06446042, w: 0.9869232}
-  m_LocalPosition: {x: -0.07504794, y: 0.0071173473, z: 0.0099330135}
-  m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
+  m_LocalRotation: {x: 0.36269248, y: 0.7921778, z: 0.056085106, w: 0.48760948}
+  m_LocalPosition: {x: -0.10692093, y: 0.23552339, z: 0.17062153}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4102124704189667412}
+  m_Father: {fileID: 3376178196121393483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6122796975385581870
+--- !u!1 &4447515191564782404
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1532,30 +1215,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7925549184268670434}
+  - component: {fileID: 2058637152481163671}
   m_Layer: 0
-  m_Name: Tiger R Lower Eyelid
+  m_Name: Tiger L Lower Eyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7925549184268670434
+--- !u!4 &2058637152481163671
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6122796975385581870}
+  m_GameObject: {fileID: 4447515191564782404}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40828848, y: -0.49106446, z: 0.68647534, w: -0.3477181}
-  m_LocalPosition: {x: -0.27787238, y: 0.21238422, z: -0.09751848}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalRotation: {x: -0.41979116, y: 0.48927897, z: 0.6806778, w: -0.34793568}
+  m_LocalPosition: {x: -0.27787116, y: 0.21238399, z: 0.09751964}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4571002235697994919}
+  m_Father: {fileID: 3376178196121393483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6268153380858005039
+--- !u!1 &4660137376391209211
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1563,261 +1246,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5085673562421614116}
-  m_Layer: 0
-  m_Name: Tiger Tongue02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5085673562421614116
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6268153380858005039}
-  serializedVersion: 2
-  m_LocalRotation: {x: -2.6135208e-10, y: 0.00000056613777, z: -0.20435631, w: 0.97889656}
-  m_LocalPosition: {x: -0.11920545, y: -0.0000868988, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 838134956569897151}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6486342623090859425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4102124704189667412}
-  m_Layer: 0
-  m_Name: Tiger L Hand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4102124704189667412
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6486342623090859425}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.71776974, y: 0.075124085, z: 0.1626884, w: 0.67282647}
-  m_LocalPosition: {x: -0.16454789, y: 0, z: -0.000000038146972}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2351993762558696020}
-  - {fileID: 2094989889048409737}
-  m_Father: {fileID: 136877677628700329}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6563268975107532461
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 302028603021952587}
-  m_Layer: 0
-  m_Name: Tiger R UpperArm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &302028603021952587
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6563268975107532461}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.10649597, y: 0.44608438, z: 0.11487632, w: 0.8811758}
-  m_LocalPosition: {x: -0.12346551, y: 0, z: -0.000000038146972}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2788917072156980543}
-  m_Father: {fileID: 5528908554924491119}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6855683473844942130
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1394418762753249279}
-  m_Layer: 0
-  m_Name: Tiger R Finger1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1394418762753249279
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855683473844942130}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.13970216, y: -0.04806986, z: 0.06446041, w: 0.9869232}
-  m_LocalPosition: {x: -0.07504797, y: 0.0071173287, z: -0.009933052}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6304102619081597058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6857246962226721903
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1140003897505983107}
-  m_Layer: 0
-  m_Name: Tiger L Eye
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1140003897505983107
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857246962226721903}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5346815, y: -0.48352516, z: -0.45864877, w: 0.5195772}
-  m_LocalPosition: {x: -0.2778624, y: 0.21235935, z: 0.09751623}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6929399131276986725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6318612516410168832}
-  m_Layer: 0
-  m_Name: Tiger R Calf
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6318612516410168832
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929399131276986725}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000008175472, y: 0.000000007844183, z: 0.59793854, w: 0.801542}
-  m_LocalPosition: {x: -0.12467453, y: -0.000000009536743, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8839883612505724989}
-  m_Father: {fileID: 4797629181155377212}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6937284833414747303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 838134956569897151}
-  m_Layer: 0
-  m_Name: Tiger Tongue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &838134956569897151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6937284833414747303}
-  serializedVersion: 2
-  m_LocalRotation: {x: 2.8031935e-10, y: -0.00000015601454, z: 0.05850355, w: 0.9982872}
-  m_LocalPosition: {x: -0.046539154, y: -0.017964324, z: 0.00000034093856}
-  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5085673562421614116}
-  m_Father: {fileID: 603379057619582007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7384146446462418347
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3178023131563772504}
-  m_Layer: 0
-  m_Name: Tiger L Whiskers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3178023131563772504
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7384146446462418347}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.035108365, y: 0.70154065, z: -0.14868473, w: 0.69606113}
-  m_LocalPosition: {x: -0.10556412, y: 0.38767868, z: 0.17789072}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7914312342399684043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3367317549754017140}
-  - component: {fileID: 6334094805339649273}
+  - component: {fileID: 5680896115174124967}
+  - component: {fileID: 2830003422751693685}
   m_Layer: 0
   m_Name: Tiger Mesh
   m_TagString: Untagged
@@ -1825,28 +1255,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3367317549754017140
+--- !u!4 &5680896115174124967
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914312342399684043}
+  m_GameObject: {fileID: 4660137376391209211}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5204651933761727051}
+  m_Father: {fileID: 7982440435463094786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &6334094805339649273
+--- !u!137 &2830003422751693685
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914312342399684043}
+  m_GameObject: {fileID: 4660137376391209211}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1887,67 +1317,67 @@ SkinnedMeshRenderer:
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 9102263721871789820, guid: ea1fab11abb804a4d87ef1758b5052cd, type: 3}
   m_Bones:
-  - {fileID: 4571002235697994919}
-  - {fileID: 1149783462552274744}
-  - {fileID: 8747366888746178926}
-  - {fileID: 1140003897505983107}
-  - {fileID: 838134956569897151}
-  - {fileID: 5085673562421614116}
-  - {fileID: 603379057619582007}
-  - {fileID: 8156846015547093995}
-  - {fileID: 6397499452213023552}
-  - {fileID: 2071929380206117677}
-  - {fileID: 7925549184268670434}
-  - {fileID: 2287518876844273748}
-  - {fileID: 7479478369129462365}
-  - {fileID: 4171600844269817393}
-  - {fileID: 398033248256884319}
-  - {fileID: 5543448680780612777}
-  - {fileID: 4221643180715785743}
-  - {fileID: 3517015192481434325}
-  - {fileID: 9066176806717431432}
-  - {fileID: 6881562752642848399}
-  - {fileID: 1315547834177133958}
-  - {fileID: 1389985162052606067}
-  - {fileID: 5983161037978454208}
-  - {fileID: 5391575757252028355}
-  - {fileID: 6598480566905947773}
-  - {fileID: 5333031524063570727}
-  - {fileID: 3558170086616084418}
-  - {fileID: 4066831094136782105}
-  - {fileID: 2115776913669637251}
-  - {fileID: 1132011772243348141}
-  - {fileID: 1986937436360967326}
-  - {fileID: 7905555303293516506}
-  - {fileID: 8743983177609494697}
-  - {fileID: 8288792191127044149}
-  - {fileID: 136877677628700329}
-  - {fileID: 4102124704189667412}
-  - {fileID: 2351993762558696020}
-  - {fileID: 2094989889048409737}
-  - {fileID: 5866797782159704894}
-  - {fileID: 2712096353435386754}
-  - {fileID: 1353771225992926181}
-  - {fileID: 1542965278190615792}
-  - {fileID: 4797629181155377212}
-  - {fileID: 5528908554924491119}
-  - {fileID: 6318612516410168832}
-  - {fileID: 302028603021952587}
-  - {fileID: 8839883612505724989}
-  - {fileID: 2788917072156980543}
-  - {fileID: 6304102619081597058}
-  - {fileID: 1211877723874058247}
-  - {fileID: 1394418762753249279}
-  - {fileID: 2449203289285624553}
-  - {fileID: 3178023131563772504}
-  - {fileID: 1673394117327027477}
+  - {fileID: 3376178196121393483}
+  - {fileID: 797878574502659150}
+  - {fileID: 2058637152481163671}
+  - {fileID: 446979685253317051}
+  - {fileID: 5366927138747916396}
+  - {fileID: 7783359651950574577}
+  - {fileID: 1161677059822956072}
+  - {fileID: 7387688917798717867}
+  - {fileID: 8339120696408892582}
+  - {fileID: 6821137315409922921}
+  - {fileID: 6854329737348176717}
+  - {fileID: 4537900858205254225}
+  - {fileID: 5300579555403831754}
+  - {fileID: 8807155619960481409}
+  - {fileID: 3570837548223760799}
+  - {fileID: 996674429329568964}
+  - {fileID: 6112149321607538581}
+  - {fileID: 4705628720150948616}
+  - {fileID: 8049963422986705225}
+  - {fileID: 941328923776629499}
+  - {fileID: 5041468916902543900}
+  - {fileID: 4017688093545201700}
+  - {fileID: 7707345792936580288}
+  - {fileID: 1284082074152043515}
+  - {fileID: 2381390271050210060}
+  - {fileID: 3268012714444346932}
+  - {fileID: 2833214767553457919}
+  - {fileID: 5285500052393878116}
+  - {fileID: 3787999537955430457}
+  - {fileID: 4254111723563984866}
+  - {fileID: 3757363474286248829}
+  - {fileID: 2535681886378534041}
+  - {fileID: 7548080151999928406}
+  - {fileID: 5239618359376207936}
+  - {fileID: 5343355931825470354}
+  - {fileID: 3876103024806977642}
+  - {fileID: 2301584105730544040}
+  - {fileID: 6678889173190322238}
+  - {fileID: 3225581081788439775}
+  - {fileID: 2644140433832812618}
+  - {fileID: 7227557958940832413}
+  - {fileID: 7994591253825356110}
+  - {fileID: 5817247668657288066}
+  - {fileID: 7815625661183546783}
+  - {fileID: 2771461288093812596}
+  - {fileID: 1518333780875932311}
+  - {fileID: 8241570094258448077}
+  - {fileID: 9074825738152379790}
+  - {fileID: 8772205601535377736}
+  - {fileID: 8165507311683278272}
+  - {fileID: 3747301511778309899}
+  - {fileID: 7843140430188452466}
+  - {fileID: 7900373211120595529}
+  - {fileID: 4603715922796323161}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 5391575757252028355}
+  m_RootBone: {fileID: 1284082074152043515}
   m_AABB:
     m_Center: {x: -0.4163481, y: -0.011760652, z: -0.030553848}
     m_Extent: {x: 0.69883883, y: 0.6825928, z: 0.42754784}
   m_DirtyAABB: 0
---- !u!1 &8036728466662832433
+--- !u!1 &4829429796495823148
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1955,31 +1385,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8839883612505724989}
+  - component: {fileID: 7783359651950574577}
   m_Layer: 0
-  m_Name: Tiger R Foot
+  m_Name: Tiger Tongue02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8839883612505724989
+--- !u!4 &7783359651950574577
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8036728466662832433}
+  m_GameObject: {fileID: 4829429796495823148}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19143309, y: 0.0055726464, z: -0.28005102, w: 0.94068795}
-  m_LocalPosition: {x: -0.10706503, y: -0.0000000047683715, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalRotation: {x: -2.6135208e-10, y: 0.00000056613777, z: -0.20435631, w: 0.97889656}
+  m_LocalPosition: {x: -0.11920545, y: -0.0000868988, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5366927138747916396}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5103612465339210354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4020918335784801197}
+  m_Layer: 0
+  m_Name: Tiger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4020918335784801197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103612465339210354}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
+  m_LocalPosition: {x: 0.008388499, y: 0.2546926, z: -0.04981935}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2449203289285624553}
-  m_Father: {fileID: 6318612516410168832}
+  - {fileID: 1284082074152043515}
+  m_Father: {fileID: 7982440435463094786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8384794980659296216
+--- !u!1 &5510198861059272369
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1987,30 +1448,635 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8156846015547093995}
+  - component: {fileID: 6112149321607538581}
   m_Layer: 0
-  m_Name: Tiger L Mouth
+  m_Name: Tiger L Ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8156846015547093995
+--- !u!4 &6112149321607538581
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8384794980659296216}
+  m_GameObject: {fileID: 5510198861059272369}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36269248, y: 0.7921778, z: 0.056085106, w: 0.48760948}
-  m_LocalPosition: {x: -0.10692093, y: 0.23552339, z: 0.17062153}
+  m_LocalRotation: {x: -0.23653536, y: 0.18230028, z: 0.53886443, w: 0.7876819}
+  m_LocalPosition: {x: -0.29341865, y: -0.112705246, z: 0.1414227}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5863365035351675939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7707345792936580288}
+  m_Layer: 0
+  m_Name: Tiger Spine1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7707345792936580288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863365035351675939}
+  serializedVersion: 2
+  m_LocalRotation: {x: -2.7672617e-10, y: 0.0000005155974, z: -0.18506968, w: 0.9827254}
+  m_LocalPosition: {x: -0.14491537, y: -0.000107469554, z: -0.0000000017881393}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4017688093545201700}
+  m_Father: {fileID: 2381390271050210060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5891274268926469214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9074825738152379790}
+  m_Layer: 0
+  m_Name: Tiger R Forearm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9074825738152379790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891274268926469214}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000023958057, y: 0.000000017725398, z: 0.5947657, w: 0.80389905}
+  m_LocalPosition: {x: -0.15568535, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8772205601535377736}
+  m_Father: {fileID: 1518333780875932311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5939798423516815526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3787999537955430457}
+  m_Layer: 0
+  m_Name: Tiger Tail02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3787999537955430457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939798423516815526}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.12119456, y: -0.15850474, z: -0.6318001, w: 0.7490105}
+  m_LocalPosition: {x: -0.28628096, y: -0.000039367675, z: -0.0000042438505}
+  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4254111723563984866}
+  m_Father: {fileID: 2833214767553457919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5970073548376535031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5300579555403831754}
+  m_Layer: 0
+  m_Name: Tiger R Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5300579555403831754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970073548376535031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.36269253, y: 0.7921781, z: -0.05608057, w: -0.48760957}
+  m_LocalPosition: {x: -0.10692093, y: 0.23552436, z: -0.17062025}
+  m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6048963368209440235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6854329737348176717}
+  m_Layer: 0
+  m_Name: Tiger R Lower Eyelid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6854329737348176717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048963368209440235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.40828848, y: -0.49106446, z: 0.68647534, w: -0.3477181}
+  m_LocalPosition: {x: -0.27787238, y: 0.21238422, z: -0.09751848}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6100114745155178085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5366927138747916396}
+  m_Layer: 0
+  m_Name: Tiger Tongue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5366927138747916396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100114745155178085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 2.8031935e-10, y: -0.00000015601454, z: 0.05850355, w: 0.9982872}
+  m_LocalPosition: {x: -0.046539154, y: -0.017964324, z: 0.00000034093856}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7783359651950574577}
+  m_Father: {fileID: 1161677059822956072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6121292160967790193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2644140433832812618}
+  m_Layer: 0
+  m_Name: Tiger R Eyebrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2644140433832812618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121292160967790193}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.59025186, y: 0.31796762, z: -0.22213094, w: 0.70792454}
+  m_LocalPosition: {x: -0.30334106, y: 0.1913692, z: -0.087695785}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6444502845765639058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2833214767553457919}
+  m_Layer: 0
+  m_Name: Tiger Tail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2833214767553457919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444502845765639058}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.13376586, y: 0.1666181, z: 0.7094879, w: 0.6715445}
+  m_LocalPosition: {x: -0.011345024, y: -0.10619835, z: -0.000012671947}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3787999537955430457}
+  m_Father: {fileID: 1284082074152043515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7085118108442514294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4705628720150948616}
+  m_Layer: 0
+  m_Name: Tiger L Cheek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4705628720150948616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085118108442514294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.28994185, y: 0.7046334, z: 0.119550705, w: 0.63650066}
+  m_LocalPosition: {x: -0.15905838, y: 0.09219173, z: 0.17326184}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7540488055004408195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284082074152043515}
+  m_Layer: 0
+  m_Name: Tiger Pelvis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1284082074152043515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7540488055004408195}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5073791, y: 0.5073798, z: 0.49250975, w: 0.4925104}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3268012714444346932}
+  - {fileID: 5817247668657288066}
+  - {fileID: 2381390271050210060}
+  - {fileID: 2833214767553457919}
+  m_Father: {fileID: 4020918335784801197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7544406558604391575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8772205601535377736}
+  m_Layer: 0
+  m_Name: Tiger R Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8772205601535377736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7544406558604391575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.71777016, y: -0.075124554, z: 0.16268875, w: 0.6728259}
+  m_LocalPosition: {x: -0.16454789, y: 0, z: -0.000000038146972}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8165507311683278272}
+  - {fileID: 3747301511778309899}
+  m_Father: {fileID: 9074825738152379790}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7626961560623206080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3747301511778309899}
+  m_Layer: 0
+  m_Name: Tiger R Finger1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3747301511778309899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626961560623206080}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.13970216, y: -0.04806986, z: 0.06446041, w: 0.9869232}
+  m_LocalPosition: {x: -0.07504797, y: 0.0071173287, z: -0.009933052}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8772205601535377736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8119432094216684952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7227557958940832413}
+  m_Layer: 0
+  m_Name: Tiger R Ear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7227557958940832413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119432094216684952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.18823081, y: -0.182552, z: 0.48963562, w: 0.8315653}
+  m_LocalPosition: {x: -0.29342735, y: -0.11272856, z: -0.14141624}
+  m_LocalScale: {x: 0.99999994, y: 1.0000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8172734649262181529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518333780875932311}
+  m_Layer: 0
+  m_Name: Tiger R UpperArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1518333780875932311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172734649262181529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.10649597, y: 0.44608438, z: 0.11487632, w: 0.8811758}
+  m_LocalPosition: {x: -0.12346551, y: 0, z: -0.000000038146972}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9074825738152379790}
+  m_Father: {fileID: 7815625661183546783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8265275945833729751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4017688093545201700}
+  m_Layer: 0
+  m_Name: Tiger Spine2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4017688093545201700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265275945833729751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0077450695, y: -0.02816881, z: -0.1849907, w: 0.98230594}
+  m_LocalPosition: {x: -0.14491531, y: -0.000107469554, z: -0.0000029557943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5285500052393878116}
+  - {fileID: 5041468916902543900}
+  - {fileID: 7815625661183546783}
+  m_Father: {fileID: 7707345792936580288}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8563868383107246738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7815625661183546783}
+  m_Layer: 0
+  m_Name: Tiger R Clavicle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7815625661183546783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8563868383107246738}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.6842233, y: -0.13416843, z: 0.70479405, w: -0.13077767}
+  m_LocalPosition: {x: -0.057030715, y: -0.023696288, z: -0.03378394}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1518333780875932311}
+  m_Father: {fileID: 4017688093545201700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8612191649355633907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8049963422986705225}
+  m_Layer: 0
+  m_Name: Tiger R Upper Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8049963422986705225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612191649355633907}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.008976139, y: -0.0000035673336, z: -0.0003988106, w: 0.99995965}
+  m_LocalPosition: {x: -0.056159515, y: 0.4600962, z: -0.10450462}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8710501968666829440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4603715922796323161}
+  m_Layer: 0
+  m_Name: Tiger R Whiskers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4603715922796323161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710501968666829440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.035108257, y: -0.70153975, z: -0.14868861, w: 0.69606113}
+  m_LocalPosition: {x: -0.105564035, y: 0.38767967, z: -0.1778886}
+  m_LocalScale: {x: 1, y: 1, z: 1.0000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3376178196121393483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8772859722500915067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797878574502659150}
+  m_Layer: 0
+  m_Name: Tiger L Upper Eyelid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &797878574502659150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8772859722500915067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.6816442, y: -0.180709, z: -0.30164298, w: 0.64165175}
+  m_LocalPosition: {x: -0.27787796, y: 0.21236953, z: 0.09751747}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4571002235697994919}
+  m_Father: {fileID: 3376178196121393483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8929896267140348836
+--- !u!1 &8819983207943503949
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2018,62 +2084,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 603379057619582007}
+  - component: {fileID: 3225581081788439775}
   m_Layer: 0
-  m_Name: Tiger Jaw
+  m_Name: Tiger L Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &603379057619582007
+--- !u!4 &3225581081788439775
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8929896267140348836}
+  m_GameObject: {fileID: 8819983207943503949}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034644414, y: 0.008038379, z: -0.83218694, w: 0.55335355}
-  m_LocalPosition: {x: -0.050669175, y: 0.13081723, z: -0.0000076675415}
-  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1}
+  m_LocalRotation: {x: 0.00006705695, y: 0.00011329897, z: -0.7048811, w: 0.7093255}
+  m_LocalPosition: {x: -0.057132877, y: 0.2220256, z: 0.000000019073486}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6397499452213023552}
-  - {fileID: 6881562752642848399}
-  - {fileID: 4171600844269817393}
-  - {fileID: 838134956569897151}
-  m_Father: {fileID: 4571002235697994919}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9011946718232153410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5333031524063570727}
-  m_Layer: 0
-  m_Name: Tiger L Thigh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5333031524063570727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9011946718232153410}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.38505563, y: 0.91942114, z: 0.07349207, w: 0.03155696}
-  m_LocalPosition: {x: 0.0000001335144, y: 0.00000015735625, z: 0.10535894}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7905555303293516506}
-  m_Father: {fileID: 5391575757252028355}
+  m_Children: []
+  m_Father: {fileID: 5239618359376207936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

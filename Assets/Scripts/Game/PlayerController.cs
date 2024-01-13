@@ -13,6 +13,8 @@ public class PlayerController : NetworkBehaviour
 
     // variável para identificação do jogador
     [SerializeField] private int _playerID;
+
+    // variável para a pontuação atual do jogador
     private int _score = 0;
 
     // variáveis para a física (movimento e velocidade do personagem)
@@ -47,6 +49,7 @@ public class PlayerController : NetworkBehaviour
     private float _halfSpeed;
     private float _doubleSpeed;
 
+    // para os controlos do jogador
     private PlayerControls _playerControls;
 
     [SerializeField] private string _tigerPlayer1MaterialName;
@@ -205,25 +208,6 @@ public class PlayerController : NetworkBehaviour
             ApplyEffect(value);
         }
 
-        if (Level1Controller.Instance.IsAllPlayersSpawned())
-        {
-            string oppositePlayerTag = GetOppositePlayer().tag;
-
-            // colisão com o outro jogador
-            if (collision.gameObject.CompareTag(oppositePlayerTag))
-            {
-                if (_currentAction is CarryAction)
-                {
-                    _currentAction.Collide(collision);
-                }
-
-                if (_currentAction is ThrowLvl4Action)
-                {
-                    _currentAction.Collide(collision);
-                }
-            }
-        }
-
         if (_currentAction is KickAction)  // significa que está no nível 1
         {
             // colisão com a bola
@@ -253,30 +237,6 @@ public class PlayerController : NetworkBehaviour
             // atualiza a posição do jogador para entrar novamente na arena
             Vector3 oppositeDirection = transform.position - collision.collider.ClosestPoint(transform.position);
             transform.position += oppositeDirection.normalized * 0.12f;
-        }
-    }
-
-    /// <summary>
-    /// É executado quando o jogador colide com algum objeto que tem o "isTrigger" ativado no seu colisor.
-    /// </summary>
-    private void OnTriggerEnter(Collider collider)
-    {
-        // colisão com alguma parede da arena - para saber que o jogador saiu da arena
-        if (collider.CompareTag("Wall"))
-        {
-            if (_currentAction is CarryAction)
-            {
-                _currentAction.Trigger(collider);
-            }
-        }
-
-        // colisão com alguma maçã
-        if (collider.gameObject.CompareTag("Apple"))
-        {
-            if (_currentAction is ThrowLvl2Action)
-            {
-                _currentAction.Trigger(collider);
-            }
         }
     }
 
@@ -318,29 +278,10 @@ public class PlayerController : NetworkBehaviour
                 {
                     _currentAction.Enter();
                 }
-                if (_currentAction is ThrowLvl2Action)  // significa que está no nível 2
-                {
-                    _currentAction.Enter();
-                }
-                if (_currentAction is ThrowLvl4Action)  // significa que está no nível 4
-                {
-                    if (!_isWalking)
-                    {
-                        _currentAction.Enter();
-                    }
-                }
             }
             else
             {
                 if (_currentAction is KickAction)
-                {
-                    _currentAction.Exit();
-                }
-                if (_currentAction is CarryAction)
-                {
-                    _currentAction.Exit();
-                }
-                if (_currentAction is ThrowLvl4Action)
                 {
                     _currentAction.Exit();
                 }

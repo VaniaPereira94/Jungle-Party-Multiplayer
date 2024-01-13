@@ -16,13 +16,9 @@ public class Level1Controller : NetworkBehaviour
     // para guardar uma instância única desta classe
     private static Level1Controller _instance;
 
-    // variável para a referência do controlador de jogo
-    //private GameController _gameController;
-
     // variáveis sobre os jogadores
     private List<LevelPlayerModel> _levelPlayers = new();
     //private NetworkVariable<List<LevelPlayerModel>> _levelPlayers = new NetworkVariable<List<LevelPlayerModel>>();
-    //[SerializeField] private List<LobbyPlayer> _players;
 
     // variáveis sobre os prefabs específicos dos jogadores
     [SerializeField] private GameObject _player1Level1Prefab;
@@ -43,6 +39,8 @@ public class Level1Controller : NetworkBehaviour
     [SerializeField] private GameObject _goal2Object;
     private GoalController _goal1Controller;
     private GoalController _goal2Controller;
+
+    private bool _gameStarted = false;
 
     // para os objetos do nível - power ups
     private readonly List<GameObject> _powerUps = new();
@@ -65,6 +63,9 @@ public class Level1Controller : NetworkBehaviour
     [SerializeField] private GameObject _finishedLevelPanel;
     [SerializeField] private GameObject _finishedLevelDescription;
 
+
+    /* PROPRIEDADES PÚBLICAS */
+
     public static Level1Controller Instance
     {
         get { return _instance; }
@@ -73,16 +74,6 @@ public class Level1Controller : NetworkBehaviour
 
 
     /* MÉTODOS DO MONOBEHAVIOUR */
-
-    //private void OnEnable()
-    //{
-    //    LobbyGameEvents.OnLobbyUpdated += OnLobbyUpdated;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    LobbyGameEvents.OnLobbyUpdated -= OnLobbyUpdated;
-    //}
 
     /// <summary>
     /// É executado antes da função Start().
@@ -99,31 +90,29 @@ public class Level1Controller : NetworkBehaviour
 
     private void Start()
     {
-        // armazenar dados de cada jogador neste nível,
-        // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
-        //CreatePlayersDataForLevel();
-
         _timerController = TimerController.Instance;
-        //TimerController.Freeze();
+        TimerController.Freeze();
 
         _roundController.DisplayCurrentRound();
         _roundController.DisplayMaxRounds();
 
-        //DisplayObjectInScene();
-        Debug.Log("_player1Level1Prefab.transform.position" + _player1Level1Prefab.transform.position);
-        Debug.Log("_player2Level1Prefab.transform.position" + _player2Level1Prefab.transform.position);
-    
         _ballController = _ballObject.GetComponent<BallController>();
         _goal1Controller = _goal1Object.GetComponent<GoalController>();
         _goal2Controller = _goal2Object.GetComponent<GoalController>();
 
         _audioSource = GetComponent<AudioSource>();
-
-        InitAfterPlayersReady();
     }
 
     private void Update()
     {
+        // quando o jogo ainda não iniciou
+        if (!_gameStarted && IsAllPlayersSpawned())
+        {
+            _gameStarted = true;
+            InitAfterPlayersReady();
+            return;
+        }
+
         // quando está no intervalo entre rondas, ou seja o tempo está parado
         if (_timerController.IsOnPause())
         {
@@ -198,11 +187,6 @@ public class Level1Controller : NetworkBehaviour
                 // congela para sempre
                 FreezePlayers(-1);
 
-                //string finishedLevelText = "";
-                //foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                //{
-                //    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                //}
                 int player1ID = GetPlayer1InScene().GetComponent<PlayerController>().PlayerID;
                 int player1Score = GetPlayer1InScene().GetComponent<PlayerController>().Score;
                 string finishedLevelText = "Jogador " + player1ID.ToString() + ": " + player1Score.ToString() + "\n";
@@ -234,52 +218,13 @@ public class Level1Controller : NetworkBehaviour
 
     /* MÉTODOS DO LEVEL1CONTROLLER */
 
-    private void OnLobbyUpdated()
-    {
-        //List<LobbyPlayerData> playerDatas = MultiplayerController.Instance.GetPlayers();
-
-        //for (int i = 0; i < playerDatas.Count; i++)
-        //{
-        //    LobbyPlayerData data = playerDatas[i];
-        //    _players[i].SetGameData(data);
-        //}
-
-        //if (playerDatas.Count == 2)
-        //{
-        //    _player1Level1Prefab = _players[0].gameObject;
-        //    _player2Level1Prefab = _players[1].gameObject;
-
-        //    // armazenar dados de cada jogador neste nível,
-        //    // sabendo que um jogo tem vários níveis e já existem dados que passam de nível para nível, como a pontuação
-        //    CreatePlayersDataForLevel();
-
-        //    _timerController = TimerController.Instance;
-        //    TimerController.Freeze();
-
-        //    _roundController.DisplayCurrentRound();
-        //    _roundController.DisplayMaxRounds();
-
-        //    //DisplayObjectInScene();
-
-        //    _ballController = _ballObject.GetComponent<BallController>();
-        //    _goal1Controller = _goal1Object.GetComponent<GoalController>();
-        //    _goal2Controller = _goal2Object.GetComponent<GoalController>();
-
-        //    _audioSource = GetComponent<AudioSource>();
-
-        //    InitAfterPlayersReader();
-
-        //    _levelStarted = true;
-        //}
-    }
-
     /// <summary>
     /// É executado ao clicar no botão de iniciar, no painel de introdução do nível.
     /// Permite que os jogadores comecem de facto a jogar.
     /// </summary>
     public void InitAfterPlayersReady()
     {
-        //TimerController.Unfreeze();
+        TimerController.Unfreeze();
 
         _roundController.NextRound();
         _roundController.DisplayCurrentRound();
@@ -314,18 +259,6 @@ public class Level1Controller : NetworkBehaviour
         LevelPlayerModel levelPlayer = new(listIndex + 1, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
         _levelPlayers.Add(levelPlayer);
     }
-
-    //private void DisplayObjectInScene()
-    //{
-    //    SpawnPlayers();
-    //    AddActionToPlayers();
-    //}
-
-    //private void SpawnPlayers()
-    //{
-    //    _levelPlayers[0].Object = Instantiate(_player1Level1Prefab);
-    //    _levelPlayers[1].Object = Instantiate(_player2Level1Prefab);
-    //}
 
     private void SetPlayersObjects()
     {
@@ -369,7 +302,6 @@ public class Level1Controller : NetworkBehaviour
         }
         else
         {
-            Debug.Log("nao:GetPlayer1InScene");
             return null;
         }
     }
@@ -384,7 +316,6 @@ public class Level1Controller : NetworkBehaviour
         }
         else
         {
-            Debug.Log("nao:GetPlayer1InScene");
             return null;
         }
     }
@@ -447,16 +378,11 @@ public class Level1Controller : NetworkBehaviour
 
     private void FreezePlayers(float freezingTime)
     {
-        GameObject player1 = GetPlayer1InScene();
-        GameObject player2 = GetPlayer2InScene();
-        PlayerController player1Object = player1.GetComponent<PlayerController>();
-        PlayerController player2Object = player2.GetComponent<PlayerController>();
+        PlayerController player1Controller = GetPlayer1InScene().GetComponent<PlayerController>();
+        PlayerController player2Controller = GetPlayer2InScene().GetComponent<PlayerController>();
 
-        player1Object.Freeze(freezingTime);
-        player2Object.Freeze(freezingTime);
-
-        //_levelPlayers[0].Object.GetComponent<PlayerController>().Freeze(freezingTime);
-        //_levelPlayers[1].Object.GetComponent<PlayerController>().Freeze(freezingTime);
+        player1Controller.Freeze(freezingTime);
+        player2Controller.Freeze(freezingTime);
     }
 
     /// <summary>
@@ -487,17 +413,8 @@ public class Level1Controller : NetworkBehaviour
 
     private void SetInitialPositions()
     {
-        Vector3 player1Position = GetPlayer1InScene().transform.position;
-        player1Position = _player1Level1Prefab.transform.position;
-
-        Vector3 player2Position = GetPlayer2InScene().transform.position;
-        player2Position = _player2Level1Prefab.transform.position;
-
-        //_levelPlayers[0].Object.transform.position = _levelPlayers[0].InitialPosition;
-        //_levelPlayers[0].Object.transform.rotation = _levelPlayers[0].InitialRotation;
-
-        //_levelPlayers[1].Object.transform.position = _levelPlayers[1].InitialPosition;
-        //_levelPlayers[1].Object.transform.rotation = _levelPlayers[1].InitialRotation;
+        GetPlayer1InScene().transform.position = _player1Level1Prefab.transform.position;
+        GetPlayer2InScene().transform.position = _player2Level1Prefab.transform.position;
 
         _ballObject.transform.position = _ballPrefab.transform.position;
         _ballObject.transform.rotation = _ballPrefab.transform.rotation;
@@ -524,7 +441,7 @@ public class Level1Controller : NetworkBehaviour
     }
 
     /// <summary>
-    /// É executado quando é clicado o botão de próximo nível, no painel de fim de nível.
+    /// É executado quando é clicado o botão de ir para o menu, no painel de fim de nível.
     /// </summary>
     public void FinishLevel()
     {

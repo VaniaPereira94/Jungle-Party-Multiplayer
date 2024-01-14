@@ -126,9 +126,8 @@ public class MultiplayerMenuController : MonoBehaviour
     public void OpenJoinLobby()
     {
         _menuPanel.SetActive(false);
+        LobbyController.Instance.ListPublicLobbies();
         _joinLobbyPanel.SetActive(true);
-
-        //await _lobbyController.ListPublicLobbies();
     }
 
     public void CloseJoinLobby()
@@ -203,7 +202,7 @@ public class MultiplayerMenuController : MonoBehaviour
         {
             if (child == _lobbySingleTemplate) continue;
 
-            Destroy(child.gameObject);
+            //Destroy(child.gameObject);
         }
 
         foreach (Lobby lobby in lobbyList)

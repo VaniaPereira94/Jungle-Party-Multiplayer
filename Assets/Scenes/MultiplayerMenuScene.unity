@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 459817876}
   - component: {fileID: 459817877}
   m_Layer: 5
-  m_Name: LobbiesContainer
+  m_Name: LobbyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5655,7 +5655,7 @@ GameObject:
   - component: {fileID: 2120786062}
   - component: {fileID: 2120786064}
   m_Layer: 5
-  m_Name: LobbySingleTemplate
+  m_Name: LobbyTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

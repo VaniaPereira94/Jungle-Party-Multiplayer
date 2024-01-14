@@ -81,6 +81,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
                 Data = SerializeLobbyData(lobbyData),
                 IsPrivate = false,
                 Player = player
+                
             };
 
             _currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
@@ -234,7 +235,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
 
             Debug.Log("Salas encontradas: " + response.Results.Count);
 
-            _menuUI.SetLobbyListUI(response.Results);
+            MenuUI.Instance.SetLobbyListUI(response.Results);
         }
         catch (LobbyServiceException exception)
         {

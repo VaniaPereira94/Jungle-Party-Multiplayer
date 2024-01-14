@@ -26,7 +26,6 @@ namespace lobbyTutorial
             this.lobby = lobby;
 
             lobbyNameText.text = lobby.Name;
-            playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
             gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;
         }
     }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class AuthController : SingletonMonoBehaviour<AuthController>
                 string customArgument = ParrelSync.ClonesManager.GetArgument();
                 AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
             }
+#else
+            int randomNumber = Random.Range(1, 2000);
+            AuthenticationService.Instance.SwitchProfile($"Profile_{randomNumber}");
 #endif
 
             Debug.Log("Utilizador conectado com sucesso!");
@@ -42,6 +46,8 @@ public class AuthController : SingletonMonoBehaviour<AuthController>
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             CurrentPlayerId = AuthenticationService.Instance.PlayerId;
+            TextMeshProUGUI _labelPlayerId = GameObject.Find("aaaaaabcd").GetComponent<TextMeshProUGUI>();
+            _labelPlayerId.text = CurrentPlayerId;
             Debug.Log("Utilizador anónimo autenticado com sucesso!" + " Player ID: " + CurrentPlayerId);
         }
         catch (AuthenticationException exception)

@@ -166,6 +166,9 @@ public class Level1Controller : NetworkBehaviour
                 float freezingTime = 5f;
                 FreezePlayers(freezingTime);
 
+                GetPlayer1InScene().GetComponent<PlayerController>().StopMoveAnimation();
+                GetPlayer2InScene().GetComponent<PlayerController>().StopMoveAnimation();
+
                 _roundController.NextRound();
                 _roundController.DisplayNextRoundIntro();
                 _roundController.DisplayCurrentRound();
@@ -414,6 +417,15 @@ public class Level1Controller : NetworkBehaviour
 
     private void FinishLevel(int player1Score, int player2Score)
     {
+        _ballObject.transform.position = _ballPrefab.transform.position;
+        _ballObject.transform.rotation = _ballPrefab.transform.rotation;
+
+        _goal1Object.transform.position = _goal1Prefab.transform.position;
+        _goal1Object.transform.rotation = _goal1Prefab.transform.rotation;
+
+        _goal2Object.transform.position = _goal2Prefab.transform.position;
+        _goal2Object.transform.rotation = _goal2Prefab.transform.rotation;
+
         GameObject backgroundMusicObject = GameObject.Find("BackgroundMusicController");
         AudioSource backgroundMusicAudioSource = backgroundMusicObject.GetComponent<AudioSource>();
         backgroundMusicAudioSource.Stop();

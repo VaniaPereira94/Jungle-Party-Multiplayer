@@ -17,7 +17,6 @@ public class Level1Controller : NetworkBehaviour
 
     // variáveis sobre os jogadores
     private List<LevelPlayerModel> _levelPlayers = new();
-    //private NetworkVariable<List<LevelPlayerModel>> _levelPlayers = new NetworkVariable<List<LevelPlayerModel>>();
 
     // variáveis sobre os prefabs específicos dos jogadores
     [SerializeField] private GameObject _player1Level1Prefab;

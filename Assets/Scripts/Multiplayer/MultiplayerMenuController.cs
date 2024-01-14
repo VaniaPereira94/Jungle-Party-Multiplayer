@@ -24,7 +24,6 @@ public class MultiplayerMenuController : MonoBehaviour
 
     [Header("UI - Join Lobby")]
     [SerializeField] private GameObject _joinLobbyPanel;
-    [SerializeField] private GameObject _joinPrivateLobbyPopup;
 
     private float _refreshLobbiesTimer = 5f;
     [SerializeField] private Button _refreshButton;
@@ -36,8 +35,6 @@ public class MultiplayerMenuController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
     [SerializeField] private Button _setReadyPlayerButton;
     [SerializeField] private Button _startGameButton;
-    [SerializeField] private Button _previousMapButton;
-    [SerializeField] private Button _nextMapButton;
     [SerializeField] private Image _mapCoverImage;
     [SerializeField] private MapListScriptable _mapListScriptable;
     private int _currentMapIndex = 0;
@@ -60,8 +57,6 @@ public class MultiplayerMenuController : MonoBehaviour
     {
         _refreshButton.onClick.RemoveAllListeners();
         _setReadyPlayerButton.onClick.RemoveAllListeners();
-        _previousMapButton.onClick.RemoveAllListeners();
-        _nextMapButton.onClick.RemoveAllListeners();
         _startGameButton.onClick.RemoveAllListeners();
 
         MultiplayerController.Instance.OnLobbyListChanged -= OnLobbyListChanged;
@@ -81,7 +76,8 @@ public class MultiplayerMenuController : MonoBehaviour
 
     private async void InitializeMultiplayer()
     {
-        if (AuthController.Instance.CurrentPlayerId == null) {
+        if (AuthController.Instance.CurrentPlayerId == null)
+        {
             await AuthController.Instance.Connect();
             await AuthController.Instance.AuthenticateAnonymous();
         };
@@ -119,8 +115,6 @@ public class MultiplayerMenuController : MonoBehaviour
             {
                 _startGameButton.gameObject.SetActive(false);
 
-                _previousMapButton.onClick.AddListener(OnPreviousMapClicked);
-                _nextMapButton.onClick.AddListener(OnNextMapClicked);
                 _startGameButton.onClick.AddListener(OnStartGameClicked);
                 LobbyGameEvents.OnLobbyReady += OnLobbyReadyClicked;
 
@@ -143,24 +137,6 @@ public class MultiplayerMenuController : MonoBehaviour
         _joinLobbyPanel.SetActive(false);
     }
 
-    public void OpenAuthentication()
-    {
-        _joinLobbyPanel.SetActive(false);
-        _joinPrivateLobbyPopup.SetActive(true);
-    }
-
-    public void CloseAuthentication()
-    {
-        _joinLobbyPanel.SetActive(true);
-        _joinPrivateLobbyPopup.SetActive(false);
-    }
-
-    public async void JoinPrivateLobby()
-    {
-        //string lobbyCode = _privateLobbyCodeInput.text;
-        //await LobbyController.Instance.JoinPrivateLobby(lobbyCode);
-    }
-
     public async void JoinPublicLobby()
     {
         string lobbyCode = "";
@@ -181,40 +157,8 @@ public class MultiplayerMenuController : MonoBehaviour
             OpenGameLobby();
             _gameLobbyCodeText.text = MultiplayerController.Instance.GetLobbyCode();
 
-            _previousMapButton.gameObject.SetActive(false);
-            _nextMapButton.gameObject.SetActive(false);
             _startGameButton.gameObject.SetActive(false);
         }
-    }
-
-    public async void OnPreviousMapClicked()
-    {
-        if (_currentMapIndex - 1 > 0)
-        {
-            _currentMapIndex--;
-        }
-        else
-        {
-            _currentMapIndex = 0;
-        }
-
-        UpdateMapUI();
-        await MultiplayerController.Instance.SetMap(_currentMapIndex, _mapListScriptable.Maps[_currentMapIndex].SceneName);
-    }
-
-    public async void OnNextMapClicked()
-    {
-        if (_currentMapIndex + 1 < _mapListScriptable.Maps.Count - 1)
-        {
-            _currentMapIndex++;
-        }
-        else
-        {
-            _currentMapIndex = _mapListScriptable.Maps.Count - 1;
-        }
-
-        UpdateMapUI();
-        await MultiplayerController.Instance.SetMap(_currentMapIndex, _mapListScriptable.Maps[_currentMapIndex].SceneName);
     }
 
     private void UpdateMapUI()
@@ -309,5 +253,4 @@ public class MultiplayerMenuController : MonoBehaviour
     {
         Debug.LogError(message);
     }
-
 }

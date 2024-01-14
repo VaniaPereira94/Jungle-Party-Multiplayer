@@ -38,7 +38,7 @@ public class PauseMenuController : MonoBehaviour
 
         LobbyController.Instance.LeaveLobby();
 
-        string sceneName = "MultiplayerMenuScene";
+        string sceneName = "MainMenuScene";
         SceneManager.LoadScene(sceneName);
     }
 

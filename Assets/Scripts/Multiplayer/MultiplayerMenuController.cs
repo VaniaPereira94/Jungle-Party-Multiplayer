@@ -26,9 +26,7 @@ public class MultiplayerMenuController : MonoBehaviour
     [SerializeField] private GameObject _joinLobbyPanel;
 
     private float _refreshLobbiesTimer = 5f;
-    [SerializeField] private Button _refreshButton;
     [SerializeField] private Transform _lobbiesContainer;
-    [SerializeField] private Transform _lobbySingleTemplate;
 
     [Header("UI - Game Lobby")]
     [SerializeField] private GameObject _gameLobbyPanel;
@@ -44,22 +42,16 @@ public class MultiplayerMenuController : MonoBehaviour
 
     private void OnEnable()
     {
-        _lobbySingleTemplate.gameObject.SetActive(false);
-
-        _refreshButton.onClick.AddListener(OnRefreshClicked);
         _setReadyPlayerButton.onClick.AddListener(OnSetReadyPlayerClicked);
 
-        MultiplayerController.Instance.OnLobbyListChanged += OnLobbyListChanged;
         LobbyGameEvents.OnLobbyUpdated += OnLobbyUpdated;
     }
 
     private void OnDisable()
     {
-        _refreshButton.onClick.RemoveAllListeners();
         _setReadyPlayerButton.onClick.RemoveAllListeners();
         _startGameButton.onClick.RemoveAllListeners();
 
-        MultiplayerController.Instance.OnLobbyListChanged -= OnLobbyListChanged;
         LobbyGameEvents.OnLobbyReady -= OnLobbyReadyClicked;
         LobbyGameEvents.OnLobbyUpdated -= OnLobbyUpdated;
     }
@@ -67,11 +59,6 @@ public class MultiplayerMenuController : MonoBehaviour
     private void Start()
     {
         InitializeMultiplayer();
-    }
-
-    private void Update()
-    {
-        //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
     }
 
     private async void InitializeMultiplayer()
@@ -126,8 +113,9 @@ public class MultiplayerMenuController : MonoBehaviour
     public void OpenJoinLobby()
     {
         _menuPanel.SetActive(false);
-        LobbyController.Instance.ListPublicLobbies();
         _joinLobbyPanel.SetActive(true);
+
+        //await _lobbyController.ListPublicLobbies();
     }
 
     public void CloseJoinLobby()
@@ -174,44 +162,6 @@ public class MultiplayerMenuController : MonoBehaviour
     private void OnRefreshClicked()
     {
         MultiplayerController.Instance.RefreshLobbies();
-    }
-
-    private void HandleRefreshLobbyList()
-    {
-        if (UnityServices.State == ServicesInitializationState.Initialized && AuthenticationService.Instance.IsSignedIn)
-        {
-            _refreshLobbiesTimer -= Time.deltaTime;
-            if (_refreshLobbiesTimer < 0f)
-            {
-                float refreshLobbyListTimerMax = 5f;
-                _refreshLobbiesTimer = refreshLobbyListTimerMax;
-
-                MultiplayerController.Instance.RefreshLobbies();
-            }
-        }
-    }
-
-    private void OnLobbyListChanged(object sender, MultiplayerController.OnLobbyListChangedEventArgs e)
-    {
-        UpdateLobbyList(e.lobbyList);
-    }
-
-    private void UpdateLobbyList(List<Lobby> lobbyList)
-    {
-        foreach (Transform child in _lobbiesContainer)
-        {
-            if (child == _lobbySingleTemplate) continue;
-
-            //Destroy(child.gameObject);
-        }
-
-        foreach (Lobby lobby in lobbyList)
-        {
-            Transform lobbySingleTransform = Instantiate(_lobbySingleTemplate, _lobbiesContainer);
-            lobbySingleTransform.gameObject.SetActive(true);
-            LobbyListSingleUI lobbyListSingleUI = lobbySingleTransform.GetComponent<LobbyListSingleUI>();
-            lobbyListSingleUI.UpdateLobby(lobby);
-        }
     }
 
     public async void OnSetReadyPlayerClicked()

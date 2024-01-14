@@ -14,19 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1Scene.unity
     guid: 2144b1b4f6d25f64ab692299bf08a9c2
-  - enabled: 0
-    path: Assets/Scenes/Level2Scene.unity
-    guid: 5a9307ec44890b449bbb2865c3512f24
-  - enabled: 0
-    path: Assets/Scenes/Level3Scene.unity
-    guid: d77123ce551074f4da7820cef28477b5
-  - enabled: 0
-    path: Assets/Scenes/Level4Scene.unity
-    guid: 768fc004d22ed434885c77b28f475c44
-  - enabled: 0
-    path: Assets/Scenes/FinalScene.unity
-    guid: e38ca1ca9d8fe0e4b89781240b64935a
-  - enabled: 0
-    path: Assets/MultiplayerTutorial/LobbyTutorial_Done.unity
-    guid: be8200a558cfff84b8ce074fa6e33558
   m_configObjects: {}

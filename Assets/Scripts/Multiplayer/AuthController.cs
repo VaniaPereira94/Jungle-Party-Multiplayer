@@ -46,8 +46,6 @@ public class AuthController : SingletonMonoBehaviour<AuthController>
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             CurrentPlayerId = AuthenticationService.Instance.PlayerId;
-            TextMeshProUGUI _labelPlayerId = GameObject.Find("aaaaaabcd").GetComponent<TextMeshProUGUI>();
-            _labelPlayerId.text = CurrentPlayerId;
             Debug.Log("Utilizador anónimo autenticado com sucesso!" + " Player ID: " + CurrentPlayerId);
         }
         catch (AuthenticationException exception)

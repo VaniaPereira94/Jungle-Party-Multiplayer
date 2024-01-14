@@ -43,21 +43,4 @@ public class MultiplayerGameUI : MonoBehaviour
     //        }
     //    }
     //}
-
-    private ILevelController GetCurrentLevelController()
-    {
-        // obtém o tipo da classe do LevelController atual
-        string levelControllerClassName = "Level" + GameController.Instance.CurrentLevelID + "Controller";
-        Type levelControllerType = Type.GetType(levelControllerClassName);
-
-        if (levelControllerType != null)
-        {
-            MonoBehaviour currentLevelController = _levelController;
-            return currentLevelController as ILevelController;
-        }
-        else
-        {
-            return null;
-        }
-    }
 }

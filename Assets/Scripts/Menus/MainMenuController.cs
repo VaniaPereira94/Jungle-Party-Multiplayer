@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 /// <summary>
 /// Trata das interações do utilizador com o menu principal.
 /// </summary>
@@ -13,16 +14,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject _controls;
     [SerializeField] private GameObject _credits;
 
-    // referência para o controlador de jogo
-    private GameController _game;
-
 
     /* MÉTODOS */
-
-    void Start()
-    {
-        _game = GameController.Instance;
-    }
 
     public void Play()
     {

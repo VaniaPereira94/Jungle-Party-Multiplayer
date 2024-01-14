@@ -20,8 +20,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void Pause()
     {
-        TimerController.Freeze();
-
         _buttonPause.SetActive(false);
         _menuPause.SetActive(true);
         _BackgroundMusicController.GetComponent<AudioSource>().Pause();
@@ -29,8 +27,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void Resume()
     {
-        TimerController.Unfreeze();
-
         _buttonPause.SetActive(true);
         _menuPause.SetActive(false);
         _BackgroundMusicController.GetComponent<AudioSource>().Play();
@@ -38,7 +34,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void Quit()
     {
-        TimerController.Unfreeze();
         _menuPause.SetActive(false);
 
         LobbyController.Instance.LeaveLobby();

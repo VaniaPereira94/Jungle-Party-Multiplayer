@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -85,11 +86,11 @@ public class PlayerController : NetworkBehaviour
 
         if (IsServer && IsOwner)
         {
-            SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 73f), "Player1", _tigerPlayer1MaterialName);
+            SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 73f), "Player1", 1, _tigerPlayer1MaterialName);
         }
         else if (!IsServer && IsOwner)
         {
-            SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 81.83f), "Player2", _tigerPlayer2MaterialName);
+            SetInitialPlayerServerRPC(new Vector3(49.95f, 6f, 81.83f), "Player2", 2, _tigerPlayer2MaterialName);
         }
     }
 
@@ -149,16 +150,17 @@ public class PlayerController : NetworkBehaviour
     /* MÉTODOS DE SINCRONIZAÇÃO */
 
     [ServerRpc]
-    private void SetInitialPlayerServerRPC(Vector3 position, string tagName, string tigerMaterialPath)
+    private void SetInitialPlayerServerRPC(Vector3 position, string tagName, int id, string tigerMaterialPath)
     {
-        SetInitialPlayerClientRPC(position, tagName, tigerMaterialPath);
+        SetInitialPlayerClientRPC(position, tagName, id, tigerMaterialPath);
     }
 
     [ClientRpc]
-    private void SetInitialPlayerClientRPC(Vector3 position, string tagName, string tigerMaterialPath)
+    private void SetInitialPlayerClientRPC(Vector3 position, string tagName, int id, string tigerMaterialPath)
     {
         transform.position = position;
         tag = tagName;
+        _playerID = id;
 
         GameObject tigerMesh = transform.Find("Tiger Mesh").gameObject;
         if (tigerMesh != null)
@@ -174,9 +176,7 @@ public class PlayerController : NetworkBehaviour
             //skinnedMeshRenderer.materials = mats;
         }
 
-        Level1Controller.Instance.CreateLevelPlayer(_playerID - 1);
-        Level1Controller.Instance.SetPlayerObject(this.gameObject, _playerID - 1);
-        Level1Controller.Instance.AddActionToPlayer(_playerID - 1);
+        AddActionToPlayer();
     }
 
     [ServerRpc]
@@ -243,7 +243,7 @@ public class PlayerController : NetworkBehaviour
 
     /* MÉTODOS DO PLAYERCONTROLLER */
 
-    void AddActionToPlayer()
+    private void AddActionToPlayer()
     {
         _kickAction = this.gameObject.AddComponent<KickAction>();
         SetAction(_kickAction, Level1Controller.Instance);
@@ -363,6 +363,12 @@ public class PlayerController : NetworkBehaviour
     public void Unfreeze()
     {
         _isFrozen = false;
+    }
+
+    public void StopMoveAnimation()
+    {
+        _walkAction.Exit();
+        _isWalking = false;
     }
 
     int GenerateEffect()

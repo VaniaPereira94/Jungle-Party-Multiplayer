@@ -48,7 +48,10 @@ public class SuccessAction : MonoBehaviour, IPlayerAction
 
     public void Enter()
     {
-        _animator.SetBool("isSuccess", true);
+        if (_animator != null)
+        {
+            _animator.SetBool("isSuccess", true);
+        }
     }
 
     public void Exit()

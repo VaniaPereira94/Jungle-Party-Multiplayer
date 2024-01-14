@@ -45,7 +45,10 @@ public class FailureAction : MonoBehaviour, IPlayerAction
 
     public void Enter()
     {
-        _animator.SetBool("isFailure", true);
+        if (_animator != null)
+        {
+            _animator.SetBool("isFailure", true);
+        }
     }
 
     public void Exit()

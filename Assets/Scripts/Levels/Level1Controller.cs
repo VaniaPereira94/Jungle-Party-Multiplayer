@@ -15,20 +15,17 @@ public class Level1Controller : NetworkBehaviour
     // para guardar uma instância única desta classe
     private static Level1Controller _instance;
 
-    // variáveis sobre os jogadores
-    private List<LevelPlayerModel> _levelPlayers = new();
-
     // variáveis sobre os prefabs específicos dos jogadores
-    [SerializeField] private GameObject _player1Level1Prefab;
-    [SerializeField] private GameObject _player2Level1Prefab;
+    [SerializeField] private GameObject _player1Prefab;
+    [SerializeField] private GameObject _player2Prefab;
 
     // para os objetos do nível - bola
     [SerializeField] private GameObject _ballPrefab;
     [SerializeField] private GameObject _ballObject;
     private BallController _ballController;
 
-    // para para o som de marcar golo
-    private AudioSource _audioSource;
+    // para o som de marcar golo
+    private AudioSource _goalAudioSource;
 
     // para os objetos do nível - balizas
     [SerializeField] private GameObject _goal1Prefab;
@@ -39,6 +36,7 @@ public class Level1Controller : NetworkBehaviour
     private GoalController _goal2Controller;
 
     private bool _gameStarted = false;
+    private bool _gameFinished = false;
 
     // para os objetos do nível - power ups
     private readonly List<GameObject> _powerUps = new();
@@ -46,6 +44,10 @@ public class Level1Controller : NetworkBehaviour
 
     // para definir a ação dos jogadores neste nível
     private KickAction _kickAction;
+
+    // referencia para as ações quando termina o nivel
+    private SuccessAction _successAction;
+    private FailureAction _failureAction;
 
     // referência do controlador do relógio
     private TimerController _timerController;
@@ -98,11 +100,17 @@ public class Level1Controller : NetworkBehaviour
         _goal1Controller = _goal1Object.GetComponent<GoalController>();
         _goal2Controller = _goal2Object.GetComponent<GoalController>();
 
-        _audioSource = GetComponent<AudioSource>();
+        _goalAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        // quando o jogo terminou
+        if (_gameFinished)
+        {
+            return;
+        }
+
         // quando o jogo ainda não iniciou
         if (!_gameStarted && IsAllPlayersSpawned())
         {
@@ -135,16 +143,22 @@ public class Level1Controller : NetworkBehaviour
                 // congela para sempre
                 FreezePlayers(-1);
 
-                string finishedLevelText = "";
-                foreach (LevelPlayerModel levelPlayer in _levelPlayers)
-                {
-                    finishedLevelText += "Jogador " + levelPlayer.ID + ": " + levelPlayer.LevelScore + "\n";
-                }
+                int player1ID = GetPlayer1InScene().GetComponent<PlayerController>().PlayerID;
+                int player1Score = GetPlayer1InScene().GetComponent<PlayerController>().Score;
+                string finishedLevelText = "Jogador " + player1ID.ToString() + ": " + player1Score.ToString() + "\n";
+
+                int player2ID = GetPlayer2InScene().GetComponent<PlayerController>().PlayerID;
+                int player2Score = GetPlayer2InScene().GetComponent<PlayerController>().Score;
+                finishedLevelText += "Jogador " + player2ID.ToString() + ": " + player2Score.ToString() + "\n";
 
                 _finishedLevelPanel.SetActive(true);
                 _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
+                FinishLevel(player1Score, player2Score);
+
                 _buttonPause.SetActive(false);
+
+                _gameFinished = true;
             }
             // senão iniciar outra ronda
             else
@@ -196,13 +210,20 @@ public class Level1Controller : NetworkBehaviour
                 _finishedLevelPanel.SetActive(true);
                 _finishedLevelDescription.GetComponent<Text>().text = finishedLevelText;
 
+                FinishLevel(player1Score, player2Score);
+
                 _buttonPause.SetActive(false);
+
+                _gameFinished = true;
             }
             // senão - iniciar outra ronda
             else
             {
                 float freezingTime = 5f;
                 FreezePlayers(freezingTime);
+
+                GetPlayer1InScene().GetComponent<PlayerController>().StopMoveAnimation();
+                GetPlayer2InScene().GetComponent<PlayerController>().StopMoveAnimation();
 
                 _roundController.NextRound();
                 _roundController.DisplayNextRoundIntro();
@@ -239,55 +260,6 @@ public class Level1Controller : NetworkBehaviour
         int zValue = rnd.Next(71, 84);
 
         Instantiate(_powerUp, new Vector3(xValue, _powerUp.transform.position.y, zValue), Quaternion.identity);
-    }
-
-    private void CreatePlayersDataForLevel()
-    {
-        LevelPlayerModel levelPlayer1 = new(1, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
-        LevelPlayerModel levelPlayer2 = new(2, 0, _player2Level1Prefab.transform.position, _player2Level1Prefab.transform.rotation);
-        //LevelPlayerModel levelPlayer1 = new(_gameController.GamePlayers[0].ID, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
-        //LevelPlayerModel levelPlayer2 = new(_gameController.GamePlayers[1].ID, 0, _player2Level1Prefab.transform.position, _player2Level1Prefab.transform.rotation);
-
-        _levelPlayers.Add(levelPlayer1);
-        _levelPlayers.Add(levelPlayer2);
-    }
-
-    public void CreateLevelPlayer(int listIndex)
-    {
-        LevelPlayerModel levelPlayer = new(listIndex + 1, 0, _player1Level1Prefab.transform.position, _player1Level1Prefab.transform.rotation);
-        _levelPlayers.Add(levelPlayer);
-    }
-
-    private void SetPlayersObjects()
-    {
-        _levelPlayers[0].Object = GetPlayer1InScene();
-        _levelPlayers[1].Object = GetPlayer2InScene();
-    }
-
-    public void SetPlayerObject(GameObject player, int listIndex)
-    {
-        _levelPlayers[listIndex].Object = player;
-    }
-
-    /// <summary>
-    /// Adiciona o script da ação a cada um dos objetos dos jogadores, para definir essa ação ao personagem.
-    /// </summary>
-    public void AddActionToPlayer(int listIndex)
-    {
-        _kickAction = _levelPlayers[listIndex].Object.AddComponent<KickAction>();
-        _levelPlayers[listIndex].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
-    }
-
-    /// <summary>
-    /// Adiciona o script da ação a cada um dos objetos dos jogadores, para definir essa ação ao personagem.
-    /// </summary>
-    private void AddActionToPlayers()
-    {
-        _kickAction = _levelPlayers[0].Object.AddComponent<KickAction>();
-        _levelPlayers[0].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
-
-        _kickAction = _levelPlayers[1].Object.AddComponent<KickAction>();
-        _levelPlayers[1].Object.GetComponent<PlayerController>().SetAction(_kickAction, this);
     }
 
     private GameObject GetPlayer1InScene()
@@ -411,8 +383,10 @@ public class Level1Controller : NetworkBehaviour
 
     private void SetInitialPositions()
     {
-        GetPlayer1InScene().transform.position = _player1Level1Prefab.transform.position;
-        GetPlayer2InScene().transform.position = _player2Level1Prefab.transform.position;
+        GetPlayer1InScene().transform.position = _player1Prefab.transform.position;
+        GetPlayer1InScene().transform.rotation = _player1Prefab.transform.rotation;
+        GetPlayer2InScene().transform.position = _player2Prefab.transform.position;
+        GetPlayer2InScene().transform.rotation = _player2Prefab.transform.rotation;
 
         _ballObject.transform.position = _ballPrefab.transform.position;
         _ballObject.transform.rotation = _ballPrefab.transform.rotation;
@@ -435,6 +409,60 @@ public class Level1Controller : NetworkBehaviour
 
     public void PlayGoalSound()
     {
-        _audioSource.Play();
+        _goalAudioSource.Play();
+    }
+
+    private void FinishLevel(int player1Score, int player2Score)
+    {
+        GameObject backgroundMusicObject = GameObject.Find("BackgroundMusicController");
+        AudioSource backgroundMusicAudioSource = backgroundMusicObject.GetComponent<AudioSource>();
+        backgroundMusicAudioSource.Stop();
+        backgroundMusicAudioSource.clip = (AudioClip)Resources.Load("finish-level");
+        backgroundMusicAudioSource.Play();
+
+        GameObject player1Object = GetPlayer1InScene();
+        GameObject player2Object = GetPlayer2InScene();
+
+        player1Object.transform.position = new Vector3(43f, 6f, 73f);
+        player1Object.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        player2Object.transform.position = new Vector3(57f, 6f, 73f);
+        player2Object.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
+
+        player1Object.GetComponent<PlayerController>().StopMoveAnimation();
+        player2Object.GetComponent<PlayerController>().StopMoveAnimation();
+
+        Destroy(player1Object.GetComponent<KickAction>());
+        Destroy(player1Object.GetComponent<WalkAction>());
+
+        Destroy(player2Object.GetComponent<KickAction>());
+        Destroy(player2Object.GetComponent<WalkAction>());
+
+        // se empatarem
+        if (player1Score == player2Score)
+        {
+            _failureAction = player1Object.AddComponent<FailureAction>();
+            player1Object.GetComponent<PlayerController>().SetAction(_failureAction, this);
+
+            _failureAction = player2Object.AddComponent<FailureAction>();
+            player2Object.GetComponent<PlayerController>().SetAction(_failureAction, this);
+        }
+        // se jogador 1 ganhou
+        else if (player1Score > player2Score)
+        {
+            _successAction = player1Object.AddComponent<SuccessAction>();
+            player1Object.GetComponent<PlayerController>().SetAction(_successAction, this);
+
+            _failureAction = player2Object.AddComponent<FailureAction>();
+            player2Object.GetComponent<PlayerController>().SetAction(_failureAction, this);
+        }
+        // se jogador 2 ganhou
+        else
+        {
+            _failureAction = player1Object.AddComponent<FailureAction>();
+            player1Object.GetComponent<PlayerController>().SetAction(_failureAction, this);
+
+            _successAction = player2Object.AddComponent<SuccessAction>();
+            player2Object.GetComponent<PlayerController>().SetAction(_successAction, this);
+        }
     }
 }

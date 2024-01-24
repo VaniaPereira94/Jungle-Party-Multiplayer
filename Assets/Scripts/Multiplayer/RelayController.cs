@@ -98,7 +98,7 @@ public class RelayController : SingletonMonoBehaviour<RelayController>
         }
         catch (LobbyServiceException exception)
         {
-            MultiplayerMenuController.ShowError(exception.Message);
+            Debug.LogError(exception.Message);
             return false;
         }
     }

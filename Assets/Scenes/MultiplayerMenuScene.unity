@@ -1135,7 +1135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 572, y: -336.40005}
+  m_AnchoredPosition: {x: 484, y: -309}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626672525
@@ -1864,7 +1864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -160}
+  m_AnchoredPosition: {x: 0, y: -145}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1105109566
@@ -2122,8 +2122,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1990752608}
-  - {fileID: 1105109565}
   - {fileID: 1795178545}
+  - {fileID: 1105109565}
   m_Father: {fileID: 1903694378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2179,8 +2179,6 @@ MonoBehaviour:
   _publicLobbyCodeInput: {fileID: 1430327015}
   _createLobbyPanel: {fileID: 1198570638}
   _joinLobbyPanel: {fileID: 2075428162}
-  _refreshButton: {fileID: 0}
-  _lobbiesContainer: {fileID: 0}
   _gameLobbyPanel: {fileID: 1619409910}
   _gameLobbyCodeText: {fileID: 510117633}
   _setReadyPlayerButton: {fileID: 483095022}
@@ -3921,7 +3919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 29}
   m_SizeDelta: {x: 260, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795178546

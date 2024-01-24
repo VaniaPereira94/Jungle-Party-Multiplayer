@@ -1,15 +1,10 @@
-using lobbyTutorial;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 /// <summary>
-/// Trata das intera��es do utilizador com o menu de multiplayer.
+/// Trata das interações do utilizador com o menu de multiplayer.
 /// </summary>
 public class MultiplayerMenuController : MonoBehaviour
 {
@@ -25,9 +20,6 @@ public class MultiplayerMenuController : MonoBehaviour
     [Header("UI - Join Lobby")]
     [SerializeField] private GameObject _joinLobbyPanel;
 
-    private float _refreshLobbiesTimer = 5f;
-    [SerializeField] private Transform _lobbiesContainer;
-
     [Header("UI - Game Lobby")]
     [SerializeField] private GameObject _gameLobbyPanel;
     [SerializeField] private TextMeshProUGUI _gameLobbyCodeText;
@@ -38,7 +30,7 @@ public class MultiplayerMenuController : MonoBehaviour
     private int _currentMapIndex = 0;
 
 
-    /* M�TODOS */
+    /* MÉTODOS */
 
     private void OnEnable()
     {
@@ -82,13 +74,6 @@ public class MultiplayerMenuController : MonoBehaviour
         _createLobbyPanel.SetActive(false);
     }
 
-    public async void CreatePrivateLobby()
-    {
-        string lobbyName = "abcde";
-        await LobbyController.Instance.CreatePrivateLobby(lobbyName);
-        OpenGameLobby();
-    }
-
     public async void CreatePublicLobby()
     {
         bool isSuccess = await MultiplayerController.Instance.CreatePublicLobby();
@@ -114,8 +99,6 @@ public class MultiplayerMenuController : MonoBehaviour
     {
         _menuPanel.SetActive(false);
         _joinLobbyPanel.SetActive(true);
-
-        //await _lobbyController.ListPublicLobbies();
     }
 
     public void CloseJoinLobby()
@@ -159,11 +142,6 @@ public class MultiplayerMenuController : MonoBehaviour
         UpdateMapUI();
     }
 
-    private void OnRefreshClicked()
-    {
-        MultiplayerController.Instance.RefreshLobbies();
-    }
-
     public async void OnSetReadyPlayerClicked()
     {
         bool isSuccess = await MultiplayerController.Instance.SetPlayerReady();
@@ -196,10 +174,5 @@ public class MultiplayerMenuController : MonoBehaviour
         _createLobbyPanel.SetActive(false);
         _joinLobbyPanel.SetActive(false);
         _menuPanel.SetActive(true);
-    }
-
-    public static void ShowError(string message)
-    {
-        Debug.LogError(message);
     }
 }

@@ -14,25 +14,17 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
 
     private Lobby _currentLobby;
 
-    private string _gameCode;
-
     private Coroutine _hearthbeatLobbyCoroutine;
     private Coroutine _refreshLobbyCoroutine;
 
-    private MenuUI _menuUI;
-
     public event EventHandler OnLeftLobby;
 
-    /* M�TODOS */
+
+    /* MÉTODOS */
 
     public string GetLobbyCode()
     {
         return _currentLobby?.LobbyCode;
-    }
-
-    public string GetGameCode()
-    {
-        return _gameCode;
     }
 
     public string GetHostId()
@@ -52,24 +44,6 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         return playerData;
     }
 
-    public async Task CreatePrivateLobby(string lobbyName)
-    {
-        try
-        {
-            CreateLobbyOptions options = new CreateLobbyOptions();
-            options.IsPrivate = true;
-            //options.Player = GetPlayer();
-
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, options);
-
-            Debug.Log("Sala privada criada! " + lobby.Id + " - " + lobby.Name + " - " + lobby.MaxPlayers + " - " + lobby.LobbyCode);
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
-
     public async Task<bool> CreatePublicLobby(string lobbyName, int maxPlayers, Dictionary<string, string> playerData, Dictionary<string, string> lobbyData)
     {
         try
@@ -81,7 +55,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
                 Data = SerializeLobbyData(lobbyData),
                 IsPrivate = false,
                 Player = player
-                
+
             };
 
             _currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
@@ -89,7 +63,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
             _hearthbeatLobbyCoroutine = StartCoroutine(HearthbeatLobbyCorroutine(_currentLobby.Id, 6f));
             _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
 
-            Debug.Log("Sala p�blica criada! " + _currentLobby.Id + " - " + _currentLobby.Name + " - " + _currentLobby.MaxPlayers + " - " + _currentLobby.LobbyCode);
+            Debug.Log("Sala pública criada! " + _currentLobby.Id + " - " + _currentLobby.Name + " - " + _currentLobby.MaxPlayers + " - " + _currentLobby.LobbyCode);
             return true;
         }
         catch (LobbyServiceException exception)
@@ -146,7 +120,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         }
     }
 
-        private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
+    private IEnumerator HearthbeatLobbyCorroutine(string lobbyId, float waitTimeSeconds)
     {
         while (true)
         {
@@ -173,23 +147,6 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
         }
     }
 
-    public async Task JoinPrivateLobby(string lobbyCode)
-    {
-        try
-        {
-            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
-            _currentLobby = lobby;
-
-            Debug.Log("Entrou na sala privada!");
-
-            //ListPlayersOfLobby(_joinedLobby);
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
-
     public async Task<bool> JoinPublicLobby(string lobbyCode, Dictionary<string, string> playerData)
     {
         try
@@ -204,9 +161,8 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
             _currentLobby = lobby;
             _refreshLobbyCoroutine = StartCoroutine(RefreshLobbyCorroutine(_currentLobby.Id, 1f));
 
-            Debug.Log("Entrou na sala p�blica! - " + _currentLobby.LobbyCode);
+            Debug.Log("Entrou na sala pública! - " + _currentLobby.LobbyCode);
 
-            //ListPlayersOfLobby(_joinedLobby);
             return true;
         }
         catch (LobbyServiceException exception)
@@ -214,38 +170,6 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
             Debug.LogError(exception.Message);
             return false;
         }
-    }
-
-    public async Task ListPublicLobbies()
-    {
-        try
-        {
-            // filtros para a procura e ordem das lobbies
-            QueryLobbiesOptions options = new QueryLobbiesOptions();
-            options.Filters = new List<QueryFilter>()
-                {
-                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT),
-                };
-            options.Order = new List<QueryOrder>()
-                {
-                    new QueryOrder(false, QueryOrder.FieldOptions.Created)
-                };
-
-            QueryResponse response = await Lobbies.Instance.QueryLobbiesAsync();
-
-            Debug.Log("Salas encontradas: " + response.Results.Count);
-
-            MenuUI.Instance.SetLobbyListUI(response.Results);
-        }
-        catch (LobbyServiceException exception)
-        {
-            Debug.LogError(exception.Message);
-        }
-    }
-
-    public void ListPlayersOfLobby(Lobby lobby)
-    {
-        _menuUI.SetLobbyDashboard(lobby);
     }
 
     public async Task<bool> UpdatePlayerData(string playerId, Dictionary<string, string> data, string allocationId = default, string connectionData = default)
@@ -305,7 +229,7 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
                 await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, _currentLobby.Players[1].Id);
                 _currentLobby.Players.RemoveAt(1);
             }
-            
+
         }
         catch (LobbyServiceException e)
         {
@@ -315,13 +239,13 @@ public class LobbyController : SingletonMonoBehaviour<LobbyController>
 
     public async void LeaveLobby()
     {
-        try 
+        try
         {
             await LobbyService.Instance.RemovePlayerAsync(_currentLobby.Id, AuthenticationService.Instance.PlayerId);
             _currentLobby.Players.RemoveAt(0);
             LobbyEvents.OnLobbyUpdated(_currentLobby);
             _currentLobby = null;
-            
+
             OnLeftLobby?.Invoke(this, EventArgs.Empty);
             StopAllCoroutines();
         }

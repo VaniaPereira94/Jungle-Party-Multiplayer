@@ -10,7 +10,7 @@ Jungle Party é um jogo desenvolvida em ambiente desktop com Unity.
 
 ## 💡 Pré-Requisitos
 
-Para comerçar a usar o software localmente na sua máquina, basta instalar o [Unity](https://unity.com/pt/download). Foi utilizada a versão ```2021.3.27f1```, caso queira a versão exata pode encontrá-la [aqui](https://unity.com/pt/releases/editor/archive).
+Para comerçar a usar o software localmente na sua máquina, basta instalar o [Unity](https://unity.com/pt/download). Foi utilizada a versão ```2022.3.10f1```, caso queira a versão exata pode encontrá-la [aqui](https://unity.com/pt/releases/editor/archive).
 
 ## ⚙️ Instalação
 

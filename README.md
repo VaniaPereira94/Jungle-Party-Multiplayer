@@ -4,9 +4,9 @@
 
 Um jogo de computador 3D multiplayer do género party games, para ser jogado online. É formado por 4 níveis, onde dois jogadores terão de disputar entre si em diferentes minijogos, de forma a determinar um vencedor.
 
-Jungle Party é um jogo desenvolvida em ambiente desktop com Unity.
+Jungle Party é um jogo desenvolvido em ambiente desktop com Unity.
 
-> Esta não é um jogo oficializada no mercado, foi construida no âmbito académico de forma aumentar as nossas capacidades técnicas e interpessoais.
+> Esta não é um jogo oficializado no mercado, foi construida no âmbito académico de forma aumentar as nossas capacidades técnicas e interpessoais.
 
 ## 💡 Pré-Requisitos
 
